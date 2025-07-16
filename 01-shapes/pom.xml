@@ -9,7 +9,6 @@
   </parent>
 
   <artifactId>01-shapes</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>01-shapes</name>
 
 </project>
