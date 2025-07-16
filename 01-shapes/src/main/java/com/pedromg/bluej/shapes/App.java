@@ -1,10 +1,10 @@
 package com.pedromg.bluej.shapes;
 
-/**
- * Hello world!
- */
+import com.pedromg.bluej.shapes.ui.MainFrame;
+
 public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        MainFrame mainFrame = new MainFrame();
+        mainFrame.open();
     }
 }
