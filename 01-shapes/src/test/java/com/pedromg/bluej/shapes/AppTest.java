@@ -1,4 +1,4 @@
-package com.pedromg.bluej;
+package com.pedromg.bluej.shapes;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
