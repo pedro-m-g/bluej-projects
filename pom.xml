@@ -14,7 +14,7 @@
   <scm>
     <url>https://github.com/pedro-m-g/bluej-projects</url>
     <connection>scm:git:https://github.com/pedro-m-g/bluej-projects.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/pedro-m-g/bluej-projects.git</developerConnection>
+    <developerConnection>scm:git:https://github.com/pedro-m-g/bluej-projects.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
