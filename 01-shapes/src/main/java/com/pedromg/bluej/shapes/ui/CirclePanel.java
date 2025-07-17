@@ -29,7 +29,7 @@ public class CirclePanel extends JPanel {
                 circle.getDiameterInPixels()));
     }
 
-    /****
+    /**
      * Renders the associated circle onto the panel with anti-aliasing and the circle's color.
      *
      * @param g the Graphics context used for painting
