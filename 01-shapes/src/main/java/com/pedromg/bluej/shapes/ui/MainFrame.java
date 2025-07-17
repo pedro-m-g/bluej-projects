@@ -16,6 +16,9 @@ public class MainFrame {
 
   private JFrame frame;
 
+  /**
+   * Initializes the main application window with predefined title, size, minimum size, and close behavior.
+   */
   public MainFrame() {
     frame = new JFrame(TITLE);
     frame.setSize(WIDTH, HEIGHT);
@@ -25,6 +28,9 @@ public class MainFrame {
     frame.setMinimumSize(new DimensionUIResource(MIN_WIDTH, MIN_HEIGHT));
   }
 
+  /**
+   * Displays the main application window by making the frame visible.
+   */
   public void open() {
     frame.setVisible(true);
   }
