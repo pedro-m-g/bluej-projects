@@ -11,6 +11,12 @@ public class CirclePanel extends JPanel {
 
     private final Circle circle;
 
+    /**
+     * Constructs a CirclePanel to display the specified Circle.
+     *
+     * @param circle the Circle to be rendered; must not be null
+     * @throws IllegalArgumentException if the provided Circle is null
+     */
     public CirclePanel(Circle circle) {
         if (circle == null) {
             throw new IllegalArgumentException("Circle cannot be null");
@@ -23,6 +29,11 @@ public class CirclePanel extends JPanel {
                 circle.getDiameterInPixels()));
     }
 
+    /**
+     * Paints the panel by rendering the associated circle with anti-aliased edges and the circle's color.
+     *
+     * @param g the Graphics context used for painting
+     */
     @Override
     protected void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);

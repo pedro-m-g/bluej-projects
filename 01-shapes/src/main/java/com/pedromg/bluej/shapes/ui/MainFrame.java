@@ -20,9 +20,9 @@ public class MainFrame {
   private JFrame frame;
 
   /**
-   * Constructs the main application window with the specified title, initial size, minimum size, and close operation.
+   * Initializes the main application window with a title, size, minimum size, centered position, and a flow layout.
    *
-   * The window is centered on the screen and is resizable.
+   * The window is configured to exit the application on close and is resizable.
    */
   public MainFrame() {
     frame = new JFrame(TITLE);
@@ -35,12 +35,18 @@ public class MainFrame {
   }
 
   /**
-   * Displays the main application window by making the frame visible.
+   * Makes the main application window visible to the user.
    */
   public void open() {
     frame.setVisible(true);
   }
 
+  /**
+   * Adds the specified JPanel to the main application window.
+   *
+   * @param panel the JPanel to add; must not be null
+   * @throws IllegalArgumentException if the panel is null
+   */
   public void add(JPanel panel) {
     if (panel == null) {
       throw new IllegalArgumentException("Panel cannot be null");
