@@ -1,10 +1,27 @@
 package com.pedromg.bluej.shapes;
 
-/**
- * Hello world!
- */
+import java.util.logging.Logger;
+
+import com.pedromg.bluej.shapes.ui.MainFrame;
+
 public class App {
+
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+
+    /**
+     * Launches the application by creating and opening the main user interface window.
+     *
+     * If an exception occurs during startup, logs a severe error message and prints the stack trace.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        try {
+            MainFrame mainFrame = new MainFrame();
+            mainFrame.open();
+        } catch (Exception e) {
+            LOGGER.severe("An error occurred while starting the application: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
