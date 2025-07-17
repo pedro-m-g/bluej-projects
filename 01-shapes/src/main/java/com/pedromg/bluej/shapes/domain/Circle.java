@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 public class Circle implements Serializable {
 
+  public static final long serialVersionUID = 1L;
+
   private int radiusInPixels;
   private Color color;
 
@@ -62,7 +64,7 @@ public class Circle implements Serializable {
   @Override
   public String toString() {
     return String.format(
-      "Circle [radiusInPixels=%d, color=%s]",
+      "Circle[radiusInPixels=%d, color=%s]",
       radiusInPixels,
       color);
   }

@@ -4,7 +4,8 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import com.pedromg.bluej.demo.CircleDemo;
+import com.pedromg.bluej.shapes.demo.CircleDemo;
+import com.pedromg.bluej.shapes.demo.SquareDemo;
 import com.pedromg.bluej.shapes.ui.MainFrame;
 
 public class App {
@@ -26,6 +27,9 @@ public class App {
 
                 CircleDemo circleDemo = new CircleDemo();
                 circleDemo.run(mainFrame);
+
+                SquareDemo squareDemo = new SquareDemo();
+                squareDemo.run(mainFrame);
             } catch (Exception e) {
                 LOGGER.severe("An error occurred while starting the application: " + e.getMessage());
                 e.printStackTrace();

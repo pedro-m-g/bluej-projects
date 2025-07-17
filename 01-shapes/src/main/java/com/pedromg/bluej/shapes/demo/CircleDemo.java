@@ -1,4 +1,4 @@
-package com.pedromg.bluej.demo;
+package com.pedromg.bluej.shapes.demo;
 
 import java.awt.Color;
 
@@ -18,8 +18,8 @@ public class CircleDemo {
     if (mainFrame == null) {
       throw new IllegalArgumentException("MainFrame cannot be null");
     }
-    
-    Circle circle = new Circle(150, Color.RED);
+
+    Circle circle = new Circle(100, Color.RED);
     CirclePanel circlePanel = new CirclePanel(circle);
     mainFrame.add(circlePanel);
   }
