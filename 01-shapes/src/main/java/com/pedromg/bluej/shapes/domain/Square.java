@@ -11,13 +11,11 @@ public class Square implements Serializable {
   private final Color color;
 
   /**
-   * Constructs a square with the specified side length and color.
+   * Creates a new square with the given side length and color.
    *
-   * @param lengthInPixels the length of each side of the square, in pixels; must
-   *                       be positive
-   * @param color          the color of the square; must not be null
-   * @throws IllegalArgumentException if {@code lengthInPixels} is not positive or
-   *                                  {@code color} is null
+   * @param lengthInPixels the length of each side of the square in pixels; must be positive
+   * @param color the color of the square; must not be null
+   * @throws IllegalArgumentException if {@code lengthInPixels} is not positive or {@code color} is null
    */
   public Square(int lengthInPixels, Color color) {
     if (lengthInPixels <= 0) {
@@ -31,14 +29,29 @@ public class Square implements Serializable {
     this.color = color;
   }
 
+  /**
+   * Returns the length of each side of the square in pixels.
+   *
+   * @return the side length of the square in pixels
+   */
   public int getLengthInPixels() {
     return lengthInPixels;
   }
 
+  /**
+   * Returns the color of the square.
+   *
+   * @return the color of the square
+   */
   public Color getColor() {
     return color;
   }
 
+  /**
+   * Returns a string representation of the square, including its side length and color.
+   *
+   * @return a formatted string describing the square's length in pixels and color
+   */
   @Override
   public String toString() {
     return String.format(
