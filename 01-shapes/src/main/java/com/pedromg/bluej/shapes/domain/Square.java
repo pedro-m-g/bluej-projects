@@ -16,7 +16,7 @@ public class Square implements Serializable {
    * @param lengthInPixels the length of each side of the square, in pixels; must
    *                       be positive
    * @param color          the color of the square; must not be null
-   * @throws IllegalArgumentException if {@code sideLength} is not positive or
+   * @throws IllegalArgumentException if {@code lengthInPixels} is not positive or
    *                                  {@code color} is null
    */
   public Square(int lengthInPixels, Color color) {
@@ -42,7 +42,7 @@ public class Square implements Serializable {
   @Override
   public String toString() {
     return String.format(
-        "Square[sideLength=%d, color=%s]",
+        "Square[lengthInPixels=%d, color=%s]",
         lengthInPixels,
         color);
   }
