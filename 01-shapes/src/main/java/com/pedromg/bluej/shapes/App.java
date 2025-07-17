@@ -13,7 +13,7 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     /**
-     * Application entry point that initializes and displays the main user interface window, then runs the circle demonstration.
+     * Application entry point that initializes and displays the main user interface window, then runs both the circle and square demonstrations.
      *
      * Schedules UI initialization and demo execution on the Swing event dispatch thread. Logs and prints the stack trace if an exception occurs during startup.
      *

@@ -57,9 +57,9 @@ public class Circle implements Serializable {
   }
 
   /**
-   * Returns a string representation of the circle, including its radius and color.
+   * Returns a string representation of the circle, including its radius and color in the format "Circle[radiusInPixels=..., color=...]".
    *
-   * @return a string in the format "Circle [radiusInPixels=..., color=...]"
+   * @return a string describing the circle's radius and color
    */
   @Override
   public String toString() {

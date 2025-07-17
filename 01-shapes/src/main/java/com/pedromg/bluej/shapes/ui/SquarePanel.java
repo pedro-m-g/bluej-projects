@@ -13,6 +13,12 @@ public class SquarePanel extends JPanel {
 
   private final Square square;
 
+  /**
+   * Constructs a SquarePanel to visually represent the specified Square.
+   *
+   * @param square the Square to be displayed; must not be null
+   * @throws IllegalArgumentException if the provided square is null
+   */
   public SquarePanel(Square square) {
     if (square == null) {
       throw new IllegalArgumentException("Square cannot be null");
@@ -25,6 +31,13 @@ public class SquarePanel extends JPanel {
             square.getLengthInPixels()));
   }
 
+  /**
+   * Paints the panel by rendering the associated square with its color and size.
+   *
+   * This method fills the panel with a square whose color and side length are determined by the associated {@code Square} object.
+   *
+   * @param g the {@code Graphics} context in which to paint
+   */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
