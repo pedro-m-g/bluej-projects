@@ -9,6 +9,13 @@ public class Circle implements Serializable {
   private Color color;
 
   public Circle(int radiusInPixels, Color color) {
+    if (radiusInPixels <= 0) {
+      throw new IllegalArgumentException("Radius must be greater than zero");
+    }
+    if (color == null) {
+      throw new IllegalArgumentException("Color cannot be null");
+    }
+
     this.radiusInPixels = radiusInPixels;
     this.color = color;
   }
@@ -27,10 +34,10 @@ public class Circle implements Serializable {
 
   @Override
   public String toString() {
-    return "Circle {" +
-        ", radiusInPixels=" + radiusInPixels +
-        ", color=" + color +
-        '}';
+    return String.format(
+      "Circle [radiusInPixels=%d, color=%s]",
+      radiusInPixels,
+      color);
   }
 
 }

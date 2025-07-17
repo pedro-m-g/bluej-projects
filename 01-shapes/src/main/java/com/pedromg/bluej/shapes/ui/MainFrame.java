@@ -42,6 +42,10 @@ public class MainFrame {
   }
 
   public void add(JPanel panel) {
+    if (panel == null) {
+      throw new IllegalArgumentException("Panel cannot be null");
+    }
+    
     frame.add(panel);
     frame.revalidate();
     frame.repaint();
