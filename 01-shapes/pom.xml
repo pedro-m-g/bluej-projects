@@ -25,8 +25,7 @@
                 <goal>shade</goal>
               </goals>
               <configuration>
-                <shadedArtifactAttached>true</shadedArtifactAttached>
-                <shadedClassifierName>01-shapes</shadedClassifierName>
+                <minimizeJar>true</minimizeJar>
                 <transformers>
                   <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                     <mainClass>com.pedromg.bluej.shapes.App</mainClass>
