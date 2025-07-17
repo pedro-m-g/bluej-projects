@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
+import com.pedromg.bluej.demo.CircleDemo;
 import com.pedromg.bluej.shapes.ui.MainFrame;
 
 public class App {
@@ -11,9 +12,9 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     /**
-     * Entry point for the application; initializes and displays the main user interface window on the Swing event dispatch thread.
+     * Application entry point that initializes and displays the main user interface window, then runs the circle demonstration.
      *
-     * If an exception occurs during UI initialization, logs a severe error and prints the stack trace.
+     * Schedules UI initialization and demo execution on the Swing event dispatch thread. Logs and prints the stack trace if an exception occurs during startup.
      *
      * @param args command-line arguments (not used)
      */
@@ -22,6 +23,9 @@ public class App {
             try {
                 MainFrame mainFrame = new MainFrame();
                 mainFrame.open();
+
+                CircleDemo circleDemo = new CircleDemo();
+                circleDemo.run(mainFrame);
             } catch (Exception e) {
                 LOGGER.severe("An error occurred while starting the application: " + e.getMessage());
                 e.printStackTrace();
