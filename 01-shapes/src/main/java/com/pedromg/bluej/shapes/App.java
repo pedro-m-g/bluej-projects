@@ -11,9 +11,9 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     /**
-     * Launches the application by creating and opening the main user interface window.
+     * Entry point for the application; initializes and displays the main user interface window on the Swing event dispatch thread.
      *
-     * If an exception occurs during startup, logs a severe error message and prints the stack trace.
+     * If an exception occurs during UI initialization, logs a severe error and prints the stack trace.
      *
      * @param args command-line arguments (not used)
      */
