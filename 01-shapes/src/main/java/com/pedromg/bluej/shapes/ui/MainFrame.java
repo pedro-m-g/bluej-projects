@@ -1,8 +1,8 @@
 package com.pedromg.bluej.shapes.ui;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.DimensionUIResource;
 
 public class MainFrame {
 
@@ -17,7 +17,9 @@ public class MainFrame {
   private JFrame frame;
 
   /**
-   * Initializes the main application window with predefined title, size, minimum size, and close behavior.
+   * Constructs the main application window with the specified title, initial size, minimum size, and close operation.
+   *
+   * The window is centered on the screen and is resizable.
    */
   public MainFrame() {
     frame = new JFrame(TITLE);
@@ -25,7 +27,7 @@ public class MainFrame {
     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     frame.setLocationRelativeTo(null); // Center the frame on the screen
     frame.setResizable(true);
-    frame.setMinimumSize(new DimensionUIResource(MIN_WIDTH, MIN_HEIGHT));
+    frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
   }
 
   /**
