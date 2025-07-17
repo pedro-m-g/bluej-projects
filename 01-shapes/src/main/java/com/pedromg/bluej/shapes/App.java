@@ -2,6 +2,8 @@ package com.pedromg.bluej.shapes;
 
 import java.util.logging.Logger;
 
+import javax.swing.SwingUtilities;
+
 import com.pedromg.bluej.shapes.ui.MainFrame;
 
 public class App {
@@ -16,12 +18,14 @@ public class App {
      * @param args command-line arguments (not used)
      */
     public static void main(String[] args) {
-        try {
-            MainFrame mainFrame = new MainFrame();
-            mainFrame.open();
-        } catch (Exception e) {
-            LOGGER.severe("An error occurred while starting the application: " + e.getMessage());
-            e.printStackTrace();
-        }
+        SwingUtilities.invokeLater(() -> {
+            try {
+                MainFrame mainFrame = new MainFrame();
+                mainFrame.open();
+            } catch (Exception e) {
+                LOGGER.severe("An error occurred while starting the application: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
     }
 }
