@@ -1,7 +1,10 @@
 package com.pedromg.bluej.shapes.ui;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 public class MainFrame {
@@ -28,6 +31,7 @@ public class MainFrame {
     frame.setLocationRelativeTo(null); // Center the frame on the screen
     frame.setResizable(true);
     frame.setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+    frame.setLayout(new FlowLayout());
   }
 
   /**
@@ -35,6 +39,12 @@ public class MainFrame {
    */
   public void open() {
     frame.setVisible(true);
+  }
+
+  public void add(JPanel panel) {
+    frame.add(panel);
+    frame.revalidate();
+    frame.repaint();
   }
 
 }
