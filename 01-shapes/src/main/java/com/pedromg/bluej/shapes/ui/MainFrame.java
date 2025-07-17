@@ -17,7 +17,9 @@ public class MainFrame {
   private JFrame frame;
 
   /**
-   * Initializes the main application window with predefined title, size, minimum size, and close behavior.
+   * Constructs the main application window with the specified title, initial size, minimum size, and close operation.
+   *
+   * The window is centered on the screen and is resizable.
    */
   public MainFrame() {
     frame = new JFrame(TITLE);
