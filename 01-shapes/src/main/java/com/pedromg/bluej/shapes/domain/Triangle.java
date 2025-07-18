@@ -52,7 +52,7 @@ public class Triangle implements Serializable {
    * @see <a href="https://en.wikipedia.org/wiki/Equilateral_triangle#Height">Height of an equilateral triangle</a>
    */
   public int getHeightInPixels() {
-    return (int) (Math.sqrt(3) / 2 * lengthInPixels);
+    return (int) Math.round(Math.sqrt(3) / 2 * lengthInPixels);
   }
 
   /**
