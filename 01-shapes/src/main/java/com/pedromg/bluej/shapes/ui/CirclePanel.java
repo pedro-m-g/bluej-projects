@@ -1,6 +1,7 @@
 package com.pedromg.bluej.shapes.ui;
 
 import com.pedromg.bluej.shapes.domain.Circle;
+
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -25,6 +26,9 @@ public class CirclePanel extends JPanel {
         this.circle = circle;
     }
 
+    /**
+     * Returns the preferred size of the panel based on the circle's diameter.
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(
