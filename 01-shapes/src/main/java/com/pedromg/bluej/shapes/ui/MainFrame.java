@@ -11,11 +11,11 @@ public class MainFrame {
 
   private static final String TITLE = "Shapes Application";
 
-  private static final int WIDTH = 800;
-  private static final int HEIGHT = 600;
+  private static final int WIDTH = 400;
+  private static final int HEIGHT = 720;
 
   private static final int MIN_WIDTH = 400;
-  private static final int MIN_HEIGHT = 300;
+  private static final int MIN_HEIGHT = 720;
 
   private JFrame frame;
 
@@ -51,7 +51,7 @@ public class MainFrame {
     if (panel == null) {
       throw new IllegalArgumentException("Panel cannot be null");
     }
-    
+
     frame.add(panel);
     frame.revalidate();
     frame.repaint();

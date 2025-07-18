@@ -25,10 +25,13 @@ public class SquarePanel extends JPanel {
     }
 
     this.square = square;
-    setPreferredSize(
-        new Dimension(
-            square.getLengthInPixels(),
-            square.getLengthInPixels()));
+  }
+
+  @Override
+  public Dimension getPreferredSize() {
+    return new Dimension(
+        square.getLengthInPixels(),
+        square.getLengthInPixels());
   }
 
   /**

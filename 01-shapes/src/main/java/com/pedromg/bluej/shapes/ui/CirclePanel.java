@@ -23,10 +23,13 @@ public class CirclePanel extends JPanel {
         }
 
         this.circle = circle;
-        setPreferredSize(
-            new Dimension(
-                circle.getDiameterInPixels(),
-                circle.getDiameterInPixels()));
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(
+            circle.getDiameterInPixels(),
+            circle.getDiameterInPixels());
     }
 
     /**
