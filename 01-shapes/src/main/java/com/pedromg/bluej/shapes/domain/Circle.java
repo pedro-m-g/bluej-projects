@@ -2,6 +2,7 @@ package com.pedromg.bluej.shapes.domain;
 
 import java.awt.Color;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Circle implements Serializable {
 
@@ -15,15 +16,13 @@ public class Circle implements Serializable {
    *
    * @param radiusInPixels the radius of the circle in pixels; must be greater than zero
    * @param color the color of the circle; must not be null
-   * @throws IllegalArgumentException if radiusInPixels is not greater than zero or if color is null
+   * 
+   * @throws IllegalArgumentException if radiusInPixels is not greater than zero
+   * @throws NullPointerException if color is null
    */
   public Circle(int radiusInPixels, Color color) {
-    if (radiusInPixels <= 0) {
-      throw new IllegalArgumentException("Radius must be greater than zero");
-    }
-    if (color == null) {
-      throw new IllegalArgumentException("Color cannot be null");
-    }
+    Validation.positiveNumber(radiusInPixels, "Radius");
+    Objects.requireNonNull(color, "Color must not be null");
 
     this.radiusInPixels = radiusInPixels;
     this.color = color;

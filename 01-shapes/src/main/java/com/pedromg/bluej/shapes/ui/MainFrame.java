@@ -2,6 +2,7 @@ package com.pedromg.bluej.shapes.ui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.Objects;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -45,12 +46,11 @@ public class MainFrame {
    * Adds the specified JPanel to the main application window.
    *
    * @param panel the JPanel to add; must not be null
-   * @throws IllegalArgumentException if the panel is null
+   * 
+   * @throws NullPointerException if the panel is null
    */
   public void add(JPanel panel) {
-    if (panel == null) {
-      throw new IllegalArgumentException("Panel cannot be null");
-    }
+    Objects.requireNonNull(panel, "Panel cannot be null");
 
     frame.add(panel);
     frame.revalidate();

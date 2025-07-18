@@ -5,6 +5,7 @@ import com.pedromg.bluej.shapes.domain.Circle;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.util.Objects;
 
 import javax.swing.JPanel;
 
@@ -16,12 +17,11 @@ public class CirclePanel extends JPanel {
      * Constructs a CirclePanel to display the specified Circle.
      *
      * @param circle the Circle to be rendered; must not be null
-     * @throws IllegalArgumentException if the provided Circle is null
+     *
+     * @throws NullPointerExceptin if the provided Circle is null
      */
     public CirclePanel(Circle circle) {
-        if (circle == null) {
-            throw new IllegalArgumentException("Circle cannot be null");
-        }
+        Objects.requireNonNull(circle, "Circle must not be null");
 
         this.circle = circle;
     }

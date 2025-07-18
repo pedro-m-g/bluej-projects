@@ -5,6 +5,7 @@ import com.pedromg.bluej.shapes.domain.Triangle;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.Objects;
 
 import javax.swing.JPanel;
 
@@ -12,10 +13,15 @@ public class TrianglePanel extends JPanel {
 
   private final Triangle triangle;
 
+  /**
+   * Constructs a TrianglePanel with the specified triangle.
+   *
+   * @param triangle the Triangle object to be displayed in the panel
+   * 
+   * @throws NullPointerException if the triangle is null
+   */
   public TrianglePanel(Triangle triangle) {
-    if (triangle == null) {
-      throw new IllegalArgumentException("Triangle cannot be null");
-    }
+    Objects.requireNonNull(triangle, "Triangle cannot be null");
 
     this.triangle = triangle;
   }

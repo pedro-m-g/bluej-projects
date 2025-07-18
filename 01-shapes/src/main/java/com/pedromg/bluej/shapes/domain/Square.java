@@ -2,6 +2,7 @@ package com.pedromg.bluej.shapes.domain;
 
 import java.awt.Color;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Square implements Serializable {
 
@@ -15,15 +16,13 @@ public class Square implements Serializable {
    *
    * @param lengthInPixels the length of each side of the square in pixels; must be positive
    * @param color the color of the square; must not be null
-   * @throws IllegalArgumentException if {@code lengthInPixels} is not positive or {@code color} is null
+   *
+   * @throws IllegalArgumentException if {@code lengthInPixels} is not positive
+   * @throws NullPointerException if {@code color} is null
    */
   public Square(int lengthInPixels, Color color) {
-    if (lengthInPixels <= 0) {
-      throw new IllegalArgumentException("Side length must be positive");
-    }
-    if (color == null) {
-      throw new IllegalArgumentException("Color cannot be null");
-    }
+    Validation.positiveNumber(lengthInPixels, "Side length");
+    Objects.requireNonNull(color, "Color must not be null");
 
     this.lengthInPixels = lengthInPixels;
     this.color = color;
