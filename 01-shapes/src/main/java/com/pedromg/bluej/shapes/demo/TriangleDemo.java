@@ -7,7 +7,7 @@ import com.pedromg.bluej.shapes.domain.Triangle;
 import com.pedromg.bluej.shapes.ui.MainFrame;
 import com.pedromg.bluej.shapes.ui.TrianglePanel;
 
-public class TriangleDemo {
+public class TriangleDemo implements Demo {
 
   /**
    * Displays a yellow triangle in the specified main application frame.

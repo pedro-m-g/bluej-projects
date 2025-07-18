@@ -6,13 +6,13 @@ import com.pedromg.bluej.shapes.domain.Square;
 import com.pedromg.bluej.shapes.ui.MainFrame;
 import com.pedromg.bluej.shapes.ui.SquarePanel;
 
-public class SquareDemo {
+public class SquareDemo implements Demo {
 
   /**
    * Displays a blue square in the specified main application frame.
    *
    * @param mainFrame the main application frame to which the blue square panel will be added; must not be null
-   * 
+   *
    * @throws NullPointerException if {@code mainFrame} is null
    */
   public void run(MainFrame mainFrame) {

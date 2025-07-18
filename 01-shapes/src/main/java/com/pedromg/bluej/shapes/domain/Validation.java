@@ -20,4 +20,33 @@ public class Validation {
     }
   }
 
+  /**
+   * Validates that the given string is not blank.
+   *
+   * @param text the string to validate
+   * @param name the name of the parameter for error messages
+   *
+   * @throws IllegalArgumentException if the string is blank
+   */
+  public static void notBlank(String text, String name) {
+    if (text == null || text.trim().isEmpty()) {
+      throw new IllegalArgumentException(name + " cannot be blank");
+    }
+  }
+
+  /**
+   * Validates that the given number is at least a specified minimum value.
+   *
+   * @param number the number to validate
+   * @param min the minimum value
+   * @param name the name of the parameter for error messages
+   *
+   * @throws IllegalArgumentException if the number is less than the minimum value
+   */
+  public static void atLeast(int number, int min, String name) {
+    if (number < min) {
+      throw new IllegalArgumentException(name + " must be at least " + min);
+    }
+  }
+
 }
