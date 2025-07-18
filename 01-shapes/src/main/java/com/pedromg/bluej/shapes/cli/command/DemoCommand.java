@@ -1,12 +1,24 @@
 package com.pedromg.bluej.shapes.cli.command;
 
+import java.util.Map;
+
 import com.pedromg.bluej.shapes.demo.CircleDemo;
+import com.pedromg.bluej.shapes.demo.Demo;
 import com.pedromg.bluej.shapes.demo.SquareDemo;
 import com.pedromg.bluej.shapes.demo.TriangleDemo;
 import com.pedromg.bluej.shapes.domain.Validation;
 import com.pedromg.bluej.shapes.ui.MainFrame;
 
-public class DemoCommand {
+public class DemoCommand implements Command {
+
+  private static final String USAGE_MESSAGE = "Usage: java -jar 01-shapes.jar demo <shape>";
+  private static final String UNKNOWN_SHAPE_MESSAGE_FORMAT = "Unknown shape: %s. Available shapes: %s";
+
+  private static final Map<String, Demo> DEMOS = Map.of(
+    "circle", new CircleDemo(),
+    "square", new SquareDemo(),
+    "triangle", new TriangleDemo()
+  );
 
   /**
    * Executes the demo command with the specified shape.
@@ -17,23 +29,22 @@ public class DemoCommand {
    * @throws IllegalArgumentException if the shape is not recognized or if the arguments are invalid
    */
   public void execute(String[] args) {
-    String shape = getShape(args);
+    try {
+      String shape = getShape(args);
 
-    if ("circle".equalsIgnoreCase(shape)) {
+      if (!DEMOS.containsKey(shape)) {
+        throw new IllegalArgumentException(
+          String.format(
+            UNKNOWN_SHAPE_MESSAGE_FORMAT,
+            shape,
+            DEMOS.keySet()));
+      }
+
       MainFrame mainFrame = new MainFrame();
       mainFrame.open();
-      new CircleDemo().run(mainFrame);
-    } else if ("square".equalsIgnoreCase(shape)) {
-      MainFrame mainFrame = new MainFrame();
-      mainFrame.open();
-      new SquareDemo().run(mainFrame);
-    } else if ("triangle".equalsIgnoreCase(shape)) {
-      MainFrame mainFrame = new MainFrame();
-      mainFrame.open();
-      new TriangleDemo().run(mainFrame);
-    } else {
-      throw new IllegalArgumentException(
-        "Unknown shape: " + shape + ". Available shapes: circle, square, triangle.");
+      DEMOS.get(shape.toLowerCase()).run(mainFrame);
+    } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
     }
   }
 
@@ -51,9 +62,9 @@ public class DemoCommand {
     try {
       Validation.atLeast(args.length, 2, "Command line arguments length");
       Validation.notBlank(args[1], "Shape");
-      return args[1];
+      return args[1].toLowerCase();
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Usage: java -jar 01-shapes.jar demo <shape>");
+      throw new IllegalArgumentException(USAGE_MESSAGE, e);
     }
   }
 

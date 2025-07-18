@@ -12,9 +12,10 @@ import com.pedromg.bluej.shapes.cli.CommandLineRunner;
 public class App {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    private static final Level LOG_LEVEL = Level.WARNING;
 
     /**
-     * Application entry point that initializes and displays the mainuser interface window.
+     * Application entry point that initializes and displays the main user interface window.
      *
      * Schedules UI initialization and demo execution on the Swing event dispatch thread.
      * Logs and prints the stack trace if an exception occurs during startup.
@@ -37,7 +38,10 @@ public class App {
             CommandLineRunner commandLineRunner = new CommandLineRunner();
             commandLineRunner.run(args);
         } catch (Exception e) {
-            LOGGER.severe(e.getMessage());
+            LOGGER.log(
+                Level.SEVERE,
+                "An error occurred during application startup",
+                e);
         }
     }
 
@@ -46,10 +50,10 @@ public class App {
      */
     private static void setUpLogging() {
         Locale.setDefault(Locale.ENGLISH);
-        
+
         Handler[] handlers = Logger.getLogger("").getHandlers();
         for (Handler handler : handlers) {
-            handler.setLevel(Level.ALL);
+            handler.setLevel(LOG_LEVEL);
         }
     }
 

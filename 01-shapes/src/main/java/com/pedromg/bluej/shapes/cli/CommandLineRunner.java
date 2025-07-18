@@ -1,14 +1,22 @@
 package com.pedromg.bluej.shapes.cli;
 
+import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Logger;
 
+import com.pedromg.bluej.shapes.cli.command.Command;
 import com.pedromg.bluej.shapes.cli.command.DemoCommand;
+import com.pedromg.bluej.shapes.cli.command.HelpCommand;
 import com.pedromg.bluej.shapes.domain.Validation;
 
 public class CommandLineRunner {
 
-  private static final Logger LOGGER = Logger.getLogger(CommandLineRunner.class.getName());
+  private static final String USAGE_MESSAGE = "Usage: java -jar 01-shapes.jar <action> [<args>]";
+  private static final String UNKNOWN_ACTION_MESSAGE_FORMAT = "Unknown action: %s. Available actions: %s";
+
+  private static final Map<String, Command> COMMAND_PALETTE = Map.of(
+    "help", new HelpCommand(),
+    "demo", new DemoCommand()
+  );
 
   /**
    * Runs the command line application.
@@ -18,20 +26,21 @@ public class CommandLineRunner {
    *             the action.
    */
   public void run(String[] args) {
-    String action = getAction(args);
+    try {
+      String action = getAction(args);
 
-    if ("help".equalsIgnoreCase(action)) {
-      LOGGER.info("Usage: java -jar 01-shapes.jar <action> [<args>]");
-      LOGGER.info("Available actions: help, demo");
-    } else if ("demo".equalsIgnoreCase(action)) {
-      LOGGER.info("Running demo...");
-      DemoCommand demoCommand = new DemoCommand();
-      demoCommand.execute(args);
-    } else {
-      throw new IllegalArgumentException(
-        String.format(
-          "Unknown action: %s. Available actions: help, demo",
-          action));
+      if (!COMMAND_PALETTE.containsKey(action)) {
+        throw new IllegalArgumentException(
+            String.format(
+                UNKNOWN_ACTION_MESSAGE_FORMAT,
+                action,
+                COMMAND_PALETTE.keySet()));
+      }
+
+      Command command = COMMAND_PALETTE.get(action);
+      command.execute(args);
+    } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
     }
   }
 
@@ -47,13 +56,13 @@ public class CommandLineRunner {
   private String getAction(String[] args) {
     try {
       Objects.requireNonNull(args, "Command line arguments must not be null");
-      Validation.positiveNumber(args.length, "Command line arguments length");
+      Validation.atLeast(args.length, 1, "Command line arguments length");
 
       String action = args[0];
       Validation.notBlank(action, "Action");
-      return action;
+      return action.toLowerCase();
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("Usage: java -jar 01-shapes.jar <action> [<args>]");
+      throw new IllegalArgumentException(USAGE_MESSAGE, e);
     }
   }
 
