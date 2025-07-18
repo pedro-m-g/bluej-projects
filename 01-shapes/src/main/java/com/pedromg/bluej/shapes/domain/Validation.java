@@ -7,7 +7,7 @@ public class Validation {
   }
 
   /**
-   * Validates that the given radius is greater than zero.
+   * Validates that the given number is greater than zero.
    *
    * @param number the number to validate
    * @param name the name of the parameter for error messages

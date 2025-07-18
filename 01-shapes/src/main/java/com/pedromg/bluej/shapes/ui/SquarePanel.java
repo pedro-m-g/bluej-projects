@@ -19,7 +19,7 @@ public class SquarePanel extends JPanel {
    *
    * @param square the Square to be displayed; must not be null
    *
-   * @throws NullPointerExceptin if the provided square is null
+   * @throws NullPointerException if the provided square is null
    */
   public SquarePanel(Square square) {
     Objects.requireNonNull(square, "Square must not be null");

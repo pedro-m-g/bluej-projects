@@ -18,7 +18,7 @@ public class CirclePanel extends JPanel {
      *
      * @param circle the Circle to be rendered; must not be null
      *
-     * @throws NullPointerExceptin if the provided Circle is null
+     * @throws NullPointerException if the provided Circle is null
      */
     public CirclePanel(Circle circle) {
         Objects.requireNonNull(circle, "Circle must not be null");
