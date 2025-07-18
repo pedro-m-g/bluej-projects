@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import com.pedromg.bluej.shapes.cli.CommandLineRunner;
+import com.pedromg.bluej.shapes.cli.CommandRunner;
 
 public class App {
 
@@ -15,9 +15,11 @@ public class App {
     private static final Level LOG_LEVEL = Level.WARNING;
 
     /**
-     * Application entry point that initializes and displays the main user interface window.
+     * Application entry point that initializes and displays the main user interface
+     * window.
      *
-     * Schedules UI initialization and demo execution on the Swing event dispatch thread.
+     * Schedules UI initialization and demo execution on the Swing event dispatch
+     * thread.
      * Logs and prints the stack trace if an exception occurs during startup.
      *
      * @param args command-line arguments
@@ -27,7 +29,8 @@ public class App {
     }
 
     /**
-     * Runs the application by setting up logging and executing the command line runner.
+     * Runs the application by setting up logging and executing the command line
+     * runner.
      *
      * @param args command-line arguments
      */
@@ -35,8 +38,7 @@ public class App {
         try {
             setUpLogging();
             LOGGER.info("Starting the application...");
-            CommandLineRunner commandLineRunner = new CommandLineRunner();
-            commandLineRunner.run(args);
+            new CommandRunner().run(args);
         } catch (Exception e) {
             LOGGER.log(
                 Level.SEVERE,

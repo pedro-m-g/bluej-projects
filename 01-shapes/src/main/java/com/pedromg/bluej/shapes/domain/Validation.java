@@ -49,4 +49,17 @@ public class Validation {
     }
   }
 
+  /**
+   * Valdiates that the given value is exactly the expected
+   *
+   * @param value the value to evaluate
+   * @param expected the expected value
+   * @param name name of the parameter, for error formatting
+   */
+  public static <T> void exactly(T number, T expected, String name) {
+    if (number != expected) {
+      throw new IllegalArgumentException(name + " must be exactly " + expected);
+    }
+  }
+
 }
