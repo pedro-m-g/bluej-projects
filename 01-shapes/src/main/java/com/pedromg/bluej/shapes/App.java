@@ -14,14 +14,9 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     /**
-     * Application entry point that initializes and displays the mainuser interface window,
-     * then runs these demos:
-     * - CircleDemo
-     * - SquareDemo
-     * - TriangleDemo
+     * Launches the application, initializes the main user interface window, and runs the CircleDemo, SquareDemo, and TriangleDemo in sequence.
      *
-     * Schedules UI initialization and demo execution on the Swing event dispatch thread.
-     * Logs and prints the stack trace if an exception occurs during startup.
+     * Schedules all UI initialization and demo execution on the Swing event dispatch thread. If an exception occurs during startup, logs the error and prints the stack trace.
      *
      * @param args command-line arguments (not used)
      */

@@ -14,11 +14,10 @@ public class TrianglePanel extends JPanel {
   private final Triangle triangle;
 
   /**
-   * Constructs a TrianglePanel with the specified triangle.
+   * Creates a panel that displays the given triangle.
    *
-   * @param triangle the Triangle object to be displayed in the panel
-   * 
-   * @throws NullPointerException if the triangle is null
+   * @param triangle the Triangle to render; must not be null
+   * @throws NullPointerException if {@code triangle} is null
    */
   public TrianglePanel(Triangle triangle) {
     Objects.requireNonNull(triangle, "Triangle cannot be null");
@@ -27,7 +26,9 @@ public class TrianglePanel extends JPanel {
   }
 
   /**
-   * Returns the preferred size of the panel based on the triangle's side length.
+   * Returns the preferred size of this panel, using the triangle's side length as width and its height as height in pixels.
+   *
+   * @return a Dimension representing the preferred size for displaying the triangle
    */
   @Override
   public Dimension getPreferredSize() {
@@ -37,17 +38,11 @@ public class TrianglePanel extends JPanel {
   }
 
   /**
-   * Draws an equilateral triangle.
+   * Renders the associated equilateral triangle onto the panel.
    *
-   * The triangle is drawn with its base at the bottom and its apex pointing
-   * upwards.
-   * The vertices are calculated based on the side length and height.
-   * The points are:
-   * - Bottom left: (0, height)
-   * - Top: (sideLength / 2, 0)
-   * - Bottom right: (sideLength, height)
+   * The triangle is filled with its configured color, with the base aligned to the bottom of the panel and the apex pointing upward. The triangle's size and position are determined by its side length and height in pixels.
    *
-   * @param g the Graphics object used for drawing
+   * @param g the Graphics context used for painting
    */
   @Override
   protected void paintComponent(Graphics g) {

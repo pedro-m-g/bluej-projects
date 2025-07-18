@@ -14,11 +14,10 @@ public class CirclePanel extends JPanel {
     private final Circle circle;
 
     /**
-     * Constructs a CirclePanel to display the specified Circle.
+     * Creates a panel that displays the given Circle.
      *
-     * @param circle the Circle to be rendered; must not be null
-     *
-     * @throws NullPointerExceptin if the provided Circle is null
+     * @param circle the Circle to render; must not be null
+     * @throws NullPointerException if the provided Circle is null
      */
     public CirclePanel(Circle circle) {
         Objects.requireNonNull(circle, "Circle must not be null");
@@ -27,7 +26,9 @@ public class CirclePanel extends JPanel {
     }
 
     /**
-     * Returns the preferred size of the panel based on the circle's diameter.
+     * Returns the preferred size of this panel, with both width and height set to the circle's diameter in pixels.
+     *
+     * @return a {@code Dimension} where width and height equal the diameter of the circle in pixels
      */
     @Override
     public Dimension getPreferredSize() {

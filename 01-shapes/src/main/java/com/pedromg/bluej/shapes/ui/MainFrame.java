@@ -43,10 +43,9 @@ public class MainFrame {
   }
 
   /**
-   * Adds the specified JPanel to the main application window.
+   * Adds a non-null JPanel to the main application window and updates the UI.
    *
    * @param panel the JPanel to add; must not be null
-   * 
    * @throws NullPointerException if the panel is null
    */
   public void add(JPanel panel) {

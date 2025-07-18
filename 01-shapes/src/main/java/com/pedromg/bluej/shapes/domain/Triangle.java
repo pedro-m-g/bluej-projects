@@ -14,11 +14,10 @@ public class Triangle implements Serializable {
   private final Color color;
 
   /**
-   * Creates a new triangle with the given side length and color.
-   * 
-   * @param lengthInPixels the length of each side of the triangle in pixels; must be positive
-   * @param color  the color of the triangle; must not be null
+   * Constructs an equilateral triangle with the specified side length and color.
    *
+   * @param lengthInPixels the length of each side of the triangle in pixels; must be positive
+   * @param color the color of the triangle; must not be null
    * @throws IllegalArgumentException if {@code lengthInPixels} is not positive
    * @throws NullPointerException if {@code color} is null
    */
@@ -31,25 +30,26 @@ public class Triangle implements Serializable {
   }
 
   /**
-   * Returns the length of each side of the triangle in pixels.
+   * Returns the side length of the triangle in pixels.
    *
-   * @return the side length of the triangle in pixels
+   * @return the length of each side in pixels
    */
   public int getLengthInPixels() {
     return lengthInPixels;
   }
 
   /**
-   * Returns the color of the triangle.
+   * Returns the color of this triangle.
    *
-   * @return the color of the triangle
+   * @return the color assigned to this triangle
    */
   public Color getColor() {
     return color;
   }
 
   /**
-   * Returns the height of the triangle in pixels, calculated using the formula for an equilateral triangle.
+   * Calculates and returns the height of the equilateral triangle in pixels, rounding up to the nearest integer.
+   *
    * @return the height of the triangle in pixels
    * @see <a href="https://en.wikipedia.org/wiki/Equilateral_triangle#Height">Height of an equilateral triangle</a>
    */
@@ -58,9 +58,9 @@ public class Triangle implements Serializable {
   }
 
   /**
-   * Returns a string representation of the triangle, including its side length and color.
+   * Returns a formatted string describing the triangle's side length in pixels and its color.
    *
-   * @return a formatted string describing the triangle's length in pixels and color
+   * @return a string representation of the triangle
    */
   @Override
   public String toString() {

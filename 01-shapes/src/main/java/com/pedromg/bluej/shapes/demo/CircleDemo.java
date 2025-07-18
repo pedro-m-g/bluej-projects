@@ -9,11 +9,10 @@ import com.pedromg.bluej.shapes.ui.MainFrame;
 
 public class CircleDemo {
 
-  /**
-   * Displays a red circle with a radius of 100 in the specified main application frame.
+  /****
+   * Adds a panel displaying a red circle with a radius of 100 to the specified main application frame.
    *
    * @param mainFrame the main application frame to which the circle panel will be added; must not be null
-   * 
    * @throws NullPointerException if {@code mainFrame} is null
    */
   public void run(MainFrame mainFrame) {

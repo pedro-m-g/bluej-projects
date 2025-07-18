@@ -11,13 +11,12 @@ public class Circle implements Serializable {
   private int radiusInPixels;
   private Color color;
 
-  /**
-   * Constructs a new Circle with the specified radius and color.
+  /****
+   * Creates a Circle with the given radius and color.
    *
-   * @param radiusInPixels the radius of the circle in pixels; must be greater than zero
+   * @param radiusInPixels the radius of the circle in pixels; must be positive
    * @param color the color of the circle; must not be null
-   * 
-   * @throws IllegalArgumentException if radiusInPixels is not greater than zero
+   * @throws IllegalArgumentException if radiusInPixels is not positive
    * @throws NullPointerException if color is null
    */
   public Circle(int radiusInPixels, Color color) {

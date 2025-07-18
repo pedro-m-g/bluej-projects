@@ -12,11 +12,10 @@ public class Square implements Serializable {
   private final Color color;
 
   /**
-   * Creates a new square with the given side length and color.
+   * Constructs a square with the specified side length and color.
    *
    * @param lengthInPixels the length of each side of the square in pixels; must be positive
    * @param color the color of the square; must not be null
-   *
    * @throws IllegalArgumentException if {@code lengthInPixels} is not positive
    * @throws NullPointerException if {@code color} is null
    */

@@ -9,11 +9,10 @@ import com.pedromg.bluej.shapes.ui.TrianglePanel;
 
 public class TriangleDemo {
 
-  /**
-   * Displays a yellow triangle in the specified main application frame.
+  /****
+   * Adds a panel displaying a yellow triangle to the specified main application frame.
    *
    * @param mainFrame the main application frame to which the yellow triangle panel will be added; must not be null
-   *
    * @throws NullPointerException if {@code mainFrame} is null
    */
   public void run(MainFrame mainFrame) {

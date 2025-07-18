@@ -15,11 +15,10 @@ public class SquarePanel extends JPanel {
   private final Square square;
 
   /**
-   * Constructs a SquarePanel to visually represent the specified Square.
+   * Constructs a SquarePanel that displays the given Square.
    *
    * @param square the Square to be displayed; must not be null
-   *
-   * @throws NullPointerExceptin if the provided square is null
+   * @throws NullPointerException if the provided square is null
    */
   public SquarePanel(Square square) {
     Objects.requireNonNull(square, "Square must not be null");
@@ -28,7 +27,9 @@ public class SquarePanel extends JPanel {
   }
 
   /**
-   * Returns the preferred size of the panel, which is determined by the square's side length.
+   * Returns the preferred size of this panel based on the side length of the associated square.
+   *
+   * @return a Dimension with width and height equal to the square's side length in pixels
    */
   @Override
   public Dimension getPreferredSize() {
