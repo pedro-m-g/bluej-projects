@@ -7,17 +7,20 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import com.pedromg.bluej.shapes.cli.CommandLineRunner;
+import com.pedromg.bluej.shapes.cli.CommandParser;
+import com.pedromg.bluej.shapes.cli.CommandRequest;
+import com.pedromg.bluej.shapes.cli.CommandRunner;
 
 public class App {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
-    private static final Level LOG_LEVEL = Level.WARNING;
 
     /**
-     * Application entry point that initializes and displays the main user interface window.
+     * Application entry point that initializes and displays the main user interface
+     * window.
      *
-     * Schedules UI initialization and demo execution on the Swing event dispatch thread.
+     * Schedules UI initialization and demo execution on the Swing event dispatch
+     * thread.
      * Logs and prints the stack trace if an exception occurs during startup.
      *
      * @param args command-line arguments
@@ -27,16 +30,19 @@ public class App {
     }
 
     /**
-     * Runs the application by setting up logging and executing the command line runner.
+     * Runs the application by setting up logging and executing the command line
+     * runner.
      *
      * @param args command-line arguments
      */
     private static void run(String[] args) {
         try {
-            setUpLogging();
+            CommandParser parser = new CommandParser();
+            CommandRequest request = parser.parse(args);
+
+            configureLogging(request);
             LOGGER.info("Starting the application...");
-            CommandLineRunner commandLineRunner = new CommandLineRunner();
-            commandLineRunner.run(args);
+            new CommandRunner().run(request);
         } catch (Exception e) {
             LOGGER.log(
                 Level.SEVERE,
@@ -46,14 +52,19 @@ public class App {
     }
 
     /**
-     * Sets up logging configuration to ensure all log messages are captured.
+     * Configures logging based on request flags
+     *
+     * @param request the command line request
      */
-    private static void setUpLogging() {
+    private static void configureLogging(CommandRequest request) {
         Locale.setDefault(Locale.ENGLISH);
+        Level logLevel = request.hasFlag("verbose")
+            ? Level.ALL
+            : Level.WARNING;
 
         Handler[] handlers = Logger.getLogger("").getHandlers();
         for (Handler handler : handlers) {
-            handler.setLevel(LOG_LEVEL);
+            handler.setLevel(logLevel);
         }
     }
 
