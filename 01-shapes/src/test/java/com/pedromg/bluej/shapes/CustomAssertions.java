@@ -12,7 +12,7 @@ public class CustomAssertions {
    * Asserts the scoped code throws the expected exception
    *
    * @param expectedException the expected exception
-   * @param scope the code that is exprected to throw the given exception
+   * @param scope the code that is expected to throw the given exception
    */
   public static void assertExceptionThrown(
       Class<? extends Exception> expectedException,
@@ -42,9 +42,7 @@ public class CustomAssertions {
     Collection<T> actualItems) {
 
       assertEquals(expectedItems.size(), actualItems.size());
-      for (T expectedItem : expectedItems) {
-        assertTrue(actualItems.contains(expectedItem));
-      }
+      assertTrue(actualItems.containsAll(expectedItems));
   }
 
   /**
@@ -53,7 +51,7 @@ public class CustomAssertions {
    * @param collection the collection to evaluate
    */
   public static void assertCollectionEmpty(Collection<?> collection) {
-    assertEquals(0, collection.size());
+    assertTrue(collection.isEmpty());
   }
 
 }

@@ -24,10 +24,6 @@ class ValidationTest {
         IllegalArgumentException.class,
         () -> Validation.exactly(10, 20, "value"));
 
-    assertExceptionThrown(
-        IllegalArgumentException.class,
-        () -> Validation.exactly(10, 20, "value"));
-
     // Negative test
     Validation.exactly(10, 10, "value");
 

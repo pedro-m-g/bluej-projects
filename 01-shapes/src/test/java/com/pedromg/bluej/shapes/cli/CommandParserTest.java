@@ -66,7 +66,7 @@ class CommandParserTest {
     // When parsing the command
     CommandRequest request = parser.parse(args);
 
-    // Then the request should be created with actino=demo, params=[square], flags=[verbose]
+    // Then the request should be created with action=demo, params=[square], flags=[verbose]
     assertEquals("demo", request.action());
     assertCollectionEquals(List.of("square"), request.params());
     assertCollectionEquals(List.of("verbose"), request.flags());
