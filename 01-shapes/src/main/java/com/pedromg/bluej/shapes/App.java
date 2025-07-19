@@ -43,6 +43,8 @@ public class App {
             configureLogging(request);
             LOGGER.info("Starting the application...");
             new CommandRunner().run(request);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
         } catch (Exception e) {
             LOGGER.log(
                 Level.SEVERE,
