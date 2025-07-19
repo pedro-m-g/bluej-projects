@@ -23,9 +23,7 @@ public class DemoCommand implements Command {
   /**
    * Executes the demo command with the specified shape.
    *
-   * @param args Command line arguments where the first argument is the command
-   *             and the second argument is the shape to demo (circle, square,
-   *             triangle).
+   * @param request command line request containing <shape> param
    *
    * @throws IllegalArgumentException if the shape is not recognized or if the
    *                                  arguments are invalid

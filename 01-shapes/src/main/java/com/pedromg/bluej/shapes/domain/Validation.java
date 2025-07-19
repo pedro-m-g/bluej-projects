@@ -1,5 +1,7 @@
 package com.pedromg.bluej.shapes.domain;
 
+import java.util.Objects;
+
 public class Validation {
 
   private Validation() {
@@ -50,14 +52,14 @@ public class Validation {
   }
 
   /**
-   * Valdiates that the given value is exactly the expected
+   * Validates that the given value is exactly the expected
    *
    * @param value the value to evaluate
    * @param expected the expected value
    * @param name name of the parameter, for error formatting
    */
-  public static <T> void exactly(T number, T expected, String name) {
-    if (number != expected) {
+  public static <T> void exactly(T value, T expected, String name) {
+    if (!Objects.equals(value, expected)) {
       throw new IllegalArgumentException(name + " must be exactly " + expected);
     }
   }

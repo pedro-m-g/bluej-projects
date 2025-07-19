@@ -7,12 +7,13 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
+import com.pedromg.bluej.shapes.cli.CommandParser;
+import com.pedromg.bluej.shapes.cli.CommandRequest;
 import com.pedromg.bluej.shapes.cli.CommandRunner;
 
 public class App {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
-    private static final Level LOG_LEVEL = Level.WARNING;
 
     /**
      * Application entry point that initializes and displays the main user interface
@@ -36,9 +37,12 @@ public class App {
      */
     private static void run(String[] args) {
         try {
-            setUpLogging();
+            CommandParser parser = new CommandParser();
+            CommandRequest request = parser.parse(args);
+
+            configureLogging(request);
             LOGGER.info("Starting the application...");
-            new CommandRunner().run(args);
+            new CommandRunner().run(request);
         } catch (Exception e) {
             LOGGER.log(
                 Level.SEVERE,
@@ -48,14 +52,19 @@ public class App {
     }
 
     /**
-     * Sets up logging configuration to ensure all log messages are captured.
+     * Configures logging based on request flags
+     *
+     * @param request the command line request
      */
-    private static void setUpLogging() {
+    private static void configureLogging(CommandRequest request) {
         Locale.setDefault(Locale.ENGLISH);
+        Level logLevel = request.hasFlag("verbose")
+            ? Level.ALL
+            : Level.WARNING;
 
         Handler[] handlers = Logger.getLogger("").getHandlers();
         for (Handler handler : handlers) {
-            handler.setLevel(LOG_LEVEL);
+            handler.setLevel(logLevel);
         }
     }
 

@@ -11,6 +11,12 @@ public class CommandParser {
 
   private static final String USAGE_MESSAGE = "Usage: java -jar 01-shapes.jar <action> [<args>]";
 
+  /**
+   * Parses the given args into a CommandRequest instance
+   *
+   * @param args the original command line arguments
+   * @return the parse command request
+   */
   public CommandRequest parse(String[] args) {
     try {
       Validation.atLeast(
@@ -31,7 +37,7 @@ public class CommandParser {
     for (String arg : arguments) {
       if (arg.startsWith("--")) {
         flags.add(arg.substring(2));
-      } else if (!arg.equals(action)) {
+      } else {
         params.add(arg);
       }
     }

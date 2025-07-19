@@ -17,14 +17,10 @@ public class CommandRunner {
   /**
    * Runs the command line application.
    *
-   * @param args Command line arguments where the first argument is the action
-   *             (e.g., "help", "demo") and the subsequent arguments depend on
-   *             the action.
+   * @param request the command line request
    */
-  public void run(String[] args) {
+  public void run(CommandRequest request) {
     try {
-      CommandParser commandParser = new CommandParser();
-      CommandRequest request = commandParser.parse(args);
       String action = request.action().toLowerCase();
 
       if (!COMMAND_PALETTE.containsKey(action)) {

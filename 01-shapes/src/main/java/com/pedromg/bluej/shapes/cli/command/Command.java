@@ -7,7 +7,7 @@ public interface Command {
   /**
    * Executes the command with the provided arguments.
    *
-   * @param request the request parsed from command line arguments
+   * @param request command line request
    */
   void execute(CommandRequest request);
 

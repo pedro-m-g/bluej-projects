@@ -7,7 +7,7 @@ public class HelpCommand implements Command {
   /**
    * Displays the help message for the CLI commands.
    *
-   * @param request request parsed from commannd line arguments (unused)
+   * @param request command line request (unused)
    */
   @Override
   public void execute(CommandRequest request) {
