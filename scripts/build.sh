@@ -14,7 +14,4 @@ if [ -z "$MODULE" ]; then
 fi
 
 echo "[build] Compiling module: $MODULE"
-if ! mvn clean package; then
-  echo "[build] Build failed ❌" >&2
-  exit 1
-fi
+exec mvn -pl "$MODULE" clean package

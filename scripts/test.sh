@@ -14,7 +14,4 @@ if [ -z "$MODULE" ]; then
 fi
 
 echo "[test] Testing module $MODULE..."
-if ! mvn -pl "$MODULE" test; then
-  echo "[test] Build failed ❌" >&2
-  exit 1
-fi
+exec mvn -pl "$MODULE" test

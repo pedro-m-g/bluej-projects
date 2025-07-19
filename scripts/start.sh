@@ -16,7 +16,4 @@ fi
 shift
 
 echo "[start] Running module: $MODULE with args: $*"
-if ! mvn -pl "$MODULE" exec:java -Dexec.args="$*"; then
-  echo "[start] Build failed ❌" >&2
-  exit 1
-fi
+exec mvn -pl "$MODULE" exec:java -Dexec.args="$*"
