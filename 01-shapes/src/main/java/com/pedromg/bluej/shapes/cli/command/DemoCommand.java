@@ -55,7 +55,7 @@ public class DemoCommand implements Command {
         request.params().get(0),
         "Shape");
     } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException(USAGE_MESSAGE);
+      throw new IllegalArgumentException(USAGE_MESSAGE, e);
     }
   }
 
