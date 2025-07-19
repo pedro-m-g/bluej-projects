@@ -8,7 +8,7 @@ MODULE="${1:-}"
 
 # Ensure a module was supplied
 if [ -z "$MODULE" ]; then
-	echo "[build] Error: No module specified."
+	echo "[test] Error: No module specified."
 	echo "Usage: $0 <module>"
 	exit 1
 fi
