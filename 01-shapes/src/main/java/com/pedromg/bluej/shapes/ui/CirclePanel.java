@@ -32,12 +32,13 @@ public class CirclePanel extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(
-            circle.getDiameterInPixels(),
-            circle.getDiameterInPixels());
+                circle.diameterInPixels(),
+                circle.diameterInPixels());
     }
 
     /**
-     * Renders the associated circle onto the panel with anti-aliasing and the circle's color.
+     * Renders the associated circle onto the panel with anti-aliasing and the
+     * circle's color.
      *
      * @param g the Graphics context used for painting
      */
@@ -46,14 +47,14 @@ public class CirclePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(
-            RenderingHints.KEY_ANTIALIASING,
-            RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setColor(circle.getColor());
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(circle.color());
         g.fillOval(
-            0,
-            0,
-            circle.getDiameterInPixels(),
-            circle.getDiameterInPixels());
+                0,
+                0,
+                circle.diameterInPixels(),
+                circle.diameterInPixels());
     }
 
 }

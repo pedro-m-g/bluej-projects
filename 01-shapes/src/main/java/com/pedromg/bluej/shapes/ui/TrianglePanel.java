@@ -17,7 +17,7 @@ public class TrianglePanel extends JPanel {
    * Constructs a TrianglePanel with the specified triangle.
    *
    * @param triangle the Triangle object to be displayed in the panel
-   * 
+   *
    * @throws NullPointerException if the triangle is null
    */
   public TrianglePanel(Triangle triangle) {
@@ -32,8 +32,8 @@ public class TrianglePanel extends JPanel {
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(
-        triangle.getLengthInPixels(),
-        triangle.getHeightInPixels());
+        triangle.lengthInPixels(),
+        triangle.heightInPixels());
   }
 
   /**
@@ -58,13 +58,13 @@ public class TrianglePanel extends JPanel {
         java.awt.RenderingHints.KEY_ANTIALIASING,
         java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
 
-    int sideLength = triangle.getLengthInPixels();
-    int height = (triangle.getHeightInPixels());
+    int sideLength = triangle.lengthInPixels();
+    int height = (triangle.heightInPixels());
 
-    int[] xPoints = {0, sideLength / 2, sideLength};
-    int[] yPoints = {height, 0, height};
+    int[] xPoints = { 0, sideLength / 2, sideLength };
+    int[] yPoints = { height, 0, height };
 
-    g2d.setColor(triangle.getColor());
+    g2d.setColor(triangle.color());
     g2d.fillPolygon(xPoints, yPoints, 3);
   }
 

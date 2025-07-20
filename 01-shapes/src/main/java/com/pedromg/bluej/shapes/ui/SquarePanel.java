@@ -28,19 +28,21 @@ public class SquarePanel extends JPanel {
   }
 
   /**
-   * Returns the preferred size of the panel, which is determined by the square's side length.
+   * Returns the preferred size of the panel, which is determined by the square's
+   * side length.
    */
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(
-        square.getLengthInPixels(),
-        square.getLengthInPixels());
+        square.lengthInPixels(),
+        square.lengthInPixels());
   }
 
   /**
    * Paints the panel by rendering the associated square with its color and size.
    *
-   * This method fills the panel with a square whose color and side length are determined by the associated {@code Square} object.
+   * This method fills the panel with a square whose color and side length are
+   * determined by the associated {@code Square} object.
    *
    * @param g the {@code Graphics} context in which to paint
    */
@@ -52,9 +54,9 @@ public class SquarePanel extends JPanel {
     g2d.setRenderingHint(
         RenderingHints.KEY_ANTIALIASING,
         RenderingHints.VALUE_ANTIALIAS_ON);
-    g2d.setColor(square.getColor());
+    g2d.setColor(square.color());
 
-    int sideLength = square.getLengthInPixels();
+    int sideLength = square.lengthInPixels();
     g2d.fillRect(0, 0, sideLength, sideLength);
   }
 
