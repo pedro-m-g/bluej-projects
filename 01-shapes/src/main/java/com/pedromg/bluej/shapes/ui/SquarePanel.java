@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public class SquarePanel extends JPanel {
 
-  private final transient Square square;
+  private final Square square;
 
   /**
    * Constructs a SquarePanel to visually represent the specified Square.

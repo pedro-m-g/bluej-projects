@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public class TrianglePanel extends JPanel {
 
-  private final transient Triangle triangle;
+  private final Triangle triangle;
 
   /**
    * Constructs a TrianglePanel with the specified triangle.

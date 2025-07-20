@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public class CirclePanel extends JPanel {
 
-    private final transient Circle circle;
+    private final Circle circle;
 
     /**
      * Constructs a CirclePanel to display the specified Circle.
