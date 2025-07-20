@@ -5,4 +5,4 @@ set -euo pipefail
 cd "$(dirname "$0")/.." || exit 1
 
 echo "[build] Compiling full project..."
-exec mvn clean package
+exec mvn -B clean package

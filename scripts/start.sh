@@ -16,4 +16,4 @@ fi
 shift
 
 echo "[start] Running module: $MODULE with args: $*"
-exec mvn -pl "$MODULE" exec:java -Dexec.args="$*"
+exec mvn -B -pl "$MODULE" exec:java -Dexec.args="$*"

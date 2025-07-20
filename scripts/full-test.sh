@@ -5,4 +5,4 @@ set -euo pipefail
 cd "$(dirname "$0")/.." || exit 1
 
 echo "[test] Testing full project..."
-exec mvn test
+exec mvn -B test

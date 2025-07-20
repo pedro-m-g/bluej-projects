@@ -14,4 +14,4 @@ if [ -z "$MODULE" ]; then
 fi
 
 echo "[build] Compiling module: $MODULE"
-exec mvn -pl "$MODULE" -am clean package
+exec mvn -B -pl "$MODULE" -am clean package

@@ -14,4 +14,4 @@ if [ -z "$MODULE" ]; then
 fi
 
 echo "[test] Testing module $MODULE..."
-exec mvn -pl "$MODULE" test
+exec mvn -B -pl "$MODULE" test
