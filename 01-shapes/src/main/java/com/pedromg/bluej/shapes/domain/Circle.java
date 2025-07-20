@@ -3,9 +3,7 @@ package com.pedromg.bluej.shapes.domain;
 import java.awt.Color;
 import java.util.Objects;
 
-public record Circle(
-    int radiusInPixels,
-    Color color) {
+public record Circle(int radiusInPixels, Color color) {
 
   /**
    * Constructs a new Circle with the specified radius and color.
