@@ -1,10 +1,6 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.command;
 
 import java.util.Map;
-
-import com.pedromg.bluej.shapes.cli.command.Command;
-import com.pedromg.bluej.shapes.cli.command.DemoCommand;
-import com.pedromg.bluej.shapes.cli.command.HelpCommand;
 
 public class CommandRunner {
 

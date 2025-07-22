@@ -1,4 +1,4 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.command;
 
 import java.util.List;
 import java.util.Set;

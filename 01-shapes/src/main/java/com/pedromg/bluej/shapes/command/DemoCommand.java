@@ -1,8 +1,7 @@
-package com.pedromg.bluej.shapes.cli.command;
+package com.pedromg.bluej.shapes.command;
 
 import java.util.Map;
 
-import com.pedromg.bluej.shapes.cli.CommandRequest;
 import com.pedromg.bluej.shapes.demo.CircleDemo;
 import com.pedromg.bluej.shapes.demo.Demo;
 import com.pedromg.bluej.shapes.demo.SquareDemo;
