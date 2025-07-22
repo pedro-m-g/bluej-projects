@@ -1,6 +1,4 @@
-package com.pedromg.bluej.shapes.cli.command;
-
-import com.pedromg.bluej.shapes.cli.CommandRequest;
+package com.pedromg.bluej.shapes.command;
 
 public class HelpCommand implements Command {
 

@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import com.pedromg.bluej.shapes.cli.CommandParser;
-import com.pedromg.bluej.shapes.cli.CommandRequest;
-import com.pedromg.bluej.shapes.cli.CommandRunner;
+import com.pedromg.bluej.shapes.command.CommandRequest;
+import com.pedromg.bluej.shapes.command.CommandRunner;
+import com.pedromg.bluej.shapes.parser.CommandParser;
 
 public class App {
 

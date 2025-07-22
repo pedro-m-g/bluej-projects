@@ -1,10 +1,11 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.parser;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.domain.Validation;
 
 public class CommandParser {

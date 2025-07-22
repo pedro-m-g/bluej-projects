@@ -1,10 +1,12 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import com.pedromg.bluej.shapes.command.CommandRequest;
 
 import static com.pedromg.bluej.shapes.CustomAssertions.assertCollectionEmpty;
 import static com.pedromg.bluej.shapes.CustomAssertions.assertCollectionEquals;
