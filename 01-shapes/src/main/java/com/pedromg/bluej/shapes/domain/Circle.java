@@ -3,6 +3,8 @@ package com.pedromg.bluej.shapes.domain;
 import java.awt.Color;
 import java.util.Objects;
 
+import com.pedromg.bluej.shapes.validation.PositiveNumberRule;
+
 public record Circle(int radiusInPixels, Color color) {
 
   /**
@@ -16,7 +18,9 @@ public record Circle(int radiusInPixels, Color color) {
    * @throws NullPointerException     if color is null
    */
   public Circle {
-    Validation.positiveNumber(radiusInPixels, "Radius");
+    PositiveNumberRule.validate(
+        radiusInPixels,
+        "Radius must be a positive number");
     Objects.requireNonNull(color, "Color must not be null");
   }
 

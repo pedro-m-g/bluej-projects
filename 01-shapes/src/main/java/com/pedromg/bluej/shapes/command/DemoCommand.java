@@ -6,8 +6,9 @@ import com.pedromg.bluej.shapes.demo.CircleDemo;
 import com.pedromg.bluej.shapes.demo.Demo;
 import com.pedromg.bluej.shapes.demo.SquareDemo;
 import com.pedromg.bluej.shapes.demo.TriangleDemo;
-import com.pedromg.bluej.shapes.domain.Validation;
 import com.pedromg.bluej.shapes.ui.MainFrame;
+import com.pedromg.bluej.shapes.validation.CollectionSizeRule;
+import com.pedromg.bluej.shapes.validation.NotBlankRule;
 
 public class DemoCommand implements Command {
 
@@ -45,17 +46,10 @@ public class DemoCommand implements Command {
   }
 
   private void validateRequest(CommandRequest request) {
-    try {
-      Validation.exactly(
-        request.params().size(),
-        1,
-        "Arguments count");
-      Validation.notBlank(
-        request.params().get(0),
-        "Shape");
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException(USAGE_MESSAGE, e);
-    }
+    CollectionSizeRule.validate(
+        request.params(), 1, USAGE_MESSAGE);
+    NotBlankRule.validate(
+        request.params().get(0), USAGE_MESSAGE);
   }
 
 }

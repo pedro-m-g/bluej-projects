@@ -1,16 +1,15 @@
 package com.pedromg.bluej.shapes.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import com.pedromg.bluej.shapes.command.CommandRequest;
-
-import static com.pedromg.bluej.shapes.CustomAssertions.assertCollectionEmpty;
-import static com.pedromg.bluej.shapes.CustomAssertions.assertCollectionEquals;
-import static com.pedromg.bluej.shapes.CustomAssertions.assertExceptionThrown;
 
 class CommandParserTest {
 
@@ -25,8 +24,8 @@ class CommandParserTest {
 
     // Then the request should be created with action=help, params=[], flags=[]
     assertEquals("help", request.action());
-    assertCollectionEmpty(request.params());
-    assertCollectionEmpty(request.flags());
+    assertTrue(request.params().isEmpty());
+    assertTrue(request.flags().isEmpty());
   }
 
   @Test
@@ -38,10 +37,11 @@ class CommandParserTest {
     // When parsing the command
     CommandRequest request = parser.parse(args);
 
-    // Then the request should be created with action=demo, params=[circle], flags=[]
+    // Then the request should be created with action=demo, params=[circle],
+    // flags=[]
     assertEquals("demo", request.action());
-    assertCollectionEquals(List.of("circle"), request.params());
-    assertCollectionEmpty(request.flags());
+    assertEquals(List.of("circle"), request.params());
+    assertTrue(request.flags().isEmpty());
   }
 
   @Test
@@ -53,10 +53,11 @@ class CommandParserTest {
     // When parsing the command
     CommandRequest request = parser.parse(args);
 
-    // Then the request should be created with action=demo, params=[square], flags=[verbose]
+    // Then the request should be created with action=demo, params=[square],
+    // flags=[verbose]
     assertEquals("demo", request.action());
-    assertCollectionEquals(List.of("square"), request.params());
-    assertCollectionEquals(List.of("verbose"),request.flags());
+    assertIterableEquals(List.of("square"), request.params());
+    assertIterableEquals(List.of("verbose"), request.flags());
   }
 
   @Test
@@ -68,10 +69,11 @@ class CommandParserTest {
     // When parsing the command
     CommandRequest request = parser.parse(args);
 
-    // Then the request should be created with action=demo, params=[square], flags=[verbose]
+    // Then the request should be created with action=demo, params=[square],
+    // flags=[verbose]
     assertEquals("demo", request.action());
-    assertCollectionEquals(List.of("square"), request.params());
-    assertCollectionEquals(List.of("verbose"), request.flags());
+    assertIterableEquals(List.of("square"), request.params());
+    assertIterableEquals(List.of("verbose"), request.flags());
   }
 
   @Test
@@ -83,26 +85,25 @@ class CommandParserTest {
     // When parsing the command
     CommandRequest request = parser.parse(args);
 
-    // Then the request should be created with action=demo, params=[triangle, demo], flags=[]
+    // Then the request should be created with action=demo, params=[triangle, demo],
+    // flags=[]
     assertEquals("demo", request.action());
-    assertCollectionEquals(
-      List.of("triangle", "demo"),
-      request.params());
-    assertCollectionEmpty(request.flags());
+    assertEquals(
+        List.of("triangle", "demo"),
+        request.params());
+    assertTrue(request.flags().isEmpty());
   }
 
   @Test
   void testEmptyCommand() {
-    assertExceptionThrown(
-      IllegalArgumentException.class,
-      () -> {
-        // Given an empty command
-        CommandParser parser = new CommandParser();
-        String[] args = {};
+    // Given an empty command
+    CommandParser parser = new CommandParser();
+    String[] args = {};
 
-        // When parsing the command, it should throw an exception
-        parser.parse(args);
-      });
+    // When parsing the command, it should throw an exception
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> parser.parse(args));
   }
 
 }
