@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.pedromg.bluej.shapes.command.CommandRequest;
-import com.pedromg.bluej.shapes.domain.Validation;
+import com.pedromg.bluej.shapes.validation.MinArrayLengthRule;
 
 public class CommandParser {
 
@@ -19,19 +19,12 @@ public class CommandParser {
    * @return the parse command request
    */
   public CommandRequest parse(String[] args) {
-    try {
-      Validation.atLeast(
-        args.length,
-        1,
-        "Arguments count");
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException(USAGE_MESSAGE, e);
-    }
+    MinArrayLengthRule.validate(
+        args, 1, USAGE_MESSAGE);
 
     String action = args[0];
-
     List<String> arguments = List.of(args)
-      .subList(1, args.length);
+        .subList(1, args.length);
 
     List<String> params = new ArrayList<>(arguments.size());
     Set<String> flags = new LinkedHashSet<>(arguments.size());

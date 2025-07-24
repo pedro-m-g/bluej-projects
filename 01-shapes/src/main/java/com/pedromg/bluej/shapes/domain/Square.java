@@ -3,6 +3,8 @@ package com.pedromg.bluej.shapes.domain;
 import java.awt.Color;
 import java.util.Objects;
 
+import com.pedromg.bluej.shapes.validation.PositiveNumberRule;
+
 public record Square(int lengthInPixels, Color color) {
 
   /**
@@ -16,7 +18,9 @@ public record Square(int lengthInPixels, Color color) {
    * @throws NullPointerException     if {@code color} is null
    */
   public Square {
-    Validation.positiveNumber(lengthInPixels, "Side length");
+    PositiveNumberRule.validate(
+        lengthInPixels,
+        "Side length must be a positive number");
     Objects.requireNonNull(color, "Color must not be null");
   }
 
