@@ -15,7 +15,7 @@ public class PreConditions {
 
   /**
    * Adds a precondition, which is valid only if {@code preCondition}
-   * doesn't thrwo an Exception.
+   * doesn't throw an Exception.
    *
    * @param preCondition the code that might throw an exception
    * @param message      the error message
@@ -25,7 +25,6 @@ public class PreConditions {
   public static PreConditions require(
       Runnable preCondition,
       String message) {
-    //
     return new PreConditions().and(preCondition, message);
   }
 
@@ -41,13 +40,27 @@ public class PreConditions {
   public static PreConditions require(
       boolean preCondition,
       String message) {
-    //
     return new PreConditions().and(preCondition, message);
   }
 
   /**
    * Adds a precondition, which is valid only if {@code preCondition}
-   * doesn't thrwo an Exception.
+   * evaluates to false.
+   *
+   * @param preCondition the assertion to test
+   * @param message      the error message
+   *
+   * @return this object for method chaining
+   */
+  public static PreConditions requireNot(
+      boolean preCondition,
+      String message) {
+    return require(!preCondition, message);
+  }
+
+  /**
+   * Adds a precondition, which is valid only if {@code preCondition}
+   * doesn't throw an Exception.
    *
    * @param preCondition the code that might throw an exception
    * @param message      the error message
@@ -57,7 +70,6 @@ public class PreConditions {
   public PreConditions and(
       Runnable preCondition,
       String message) {
-    //
     requirements.add(preCondition);
     messages.add(message);
     return this;
@@ -75,14 +87,32 @@ public class PreConditions {
   public PreConditions and(
       boolean preCondition,
       String message) {
-    //
-    requirements.add(() -> {
-      if (!preCondition) {
+    if (preCondition) {
+      requirements.add(() -> {
         throw new IllegalArgumentException(message);
-      }
-    });
+      });
+    } else {
+      requirements.add(() -> {
+        /* Do nothing */
+      });
+    }
     messages.add(message);
     return this;
+  }
+
+  /**
+   * Adds a precondition, which is valid only if {@code preCondition}
+   * evaluates to false.
+   *
+   * @param preCondition the assertion to test
+   * @param message      the error message
+   *
+   * @return this object for method chaining
+   */
+  public PreConditions andNot(
+      boolean preCondition,
+      String message) {
+    return and(!preCondition, message);
   }
 
   /**

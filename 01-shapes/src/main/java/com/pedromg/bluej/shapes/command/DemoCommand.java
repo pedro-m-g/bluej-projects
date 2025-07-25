@@ -33,8 +33,8 @@ public class DemoCommand implements Command {
     List<String> params = request.params();
     PreConditions
         .require(params.size() == 1, USAGE_MESSAGE)
-        .and(params.get(0) != null, USAGE_MESSAGE)
-        .and(params.get(0).trim().isEmpty(), USAGE_MESSAGE)
+        .andNot(params.get(0) == null, USAGE_MESSAGE)
+        .andNot(params.get(0).isBlank(), USAGE_MESSAGE)
         .check();
 
     String shape = params.get(0).toLowerCase();
