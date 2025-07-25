@@ -3,7 +3,8 @@ package com.pedromg.bluej.shapes.command;
 import java.util.List;
 import java.util.Set;
 
-import com.pedromg.bluej.shapes.validation.NotBlankRule;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
 public record CommandRequest(
         String action,
@@ -15,11 +16,16 @@ public record CommandRequest(
      *
      * @param flagName the flag to check
      *
+     * @throws PreConditionsException if the {@code flagName} is blank or null
+     *
      * @return true only if the flag is present
      */
     public boolean hasFlag(String flagName) {
-        NotBlankRule.validate(
-                flagName, "Flag name can not be blank");
+        PreConditions
+                .require(flagName != null, "Flag name must not be null")
+                .and(flagName.trim().isEmpty(), "Flag name must not be blank")
+                .check();
+
         return flags.contains(flagName.toLowerCase());
     }
 
