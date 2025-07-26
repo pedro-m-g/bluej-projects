@@ -7,8 +7,8 @@ public interface Demo {
   /**
    * Runs the demo for the specific shape.
    *
-   * @param mainFrame The main frame where the demo will be displayed.
+   * @param canvas the canvas to draw on
    */
-  void execute(Canvas mainFrame);
+  void execute(Canvas canvas);
 
 }

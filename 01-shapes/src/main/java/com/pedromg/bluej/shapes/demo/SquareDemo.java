@@ -4,17 +4,18 @@ import java.awt.Color;
 
 import com.pedromg.bluej.shapes.domain.Square;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
 import com.pedromg.bluej.shapes.ui.SquarePanel;
 
 public class SquareDemo implements Demo {
 
   /**
-   * Displays a blue square in the specified main application frame.
+   * Displays a blue square in the specified canvas.
    *
    * @param canvas the canvas to draw the square; must not be null
    *
-   * @throws NullPointerException if {@code mainFrame} is null
+   * @throws PreConditionsException if {@code canvas} is null
    */
   public void execute(Canvas canvas) {
     PreConditions
