@@ -30,7 +30,9 @@ OLD_PS1=$PS1
 
 # List available modules
 list() {
-  ls -d */ | grep "^[0-9][0-9]-" | sed 's/\///'
+  for d in [0-9][0-9]-*/ ; do
+    [[ -d "$d" && -f "$d/pom.xml" ]] && printf '%s\n' "${d%/}"
+  done
 }
 
 # Select a module to work on
@@ -77,7 +79,7 @@ _choose_completion() {
   opts=$(list)
 
   if [ ${COMP_CWORD} -eq 1 ]; then
-    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    mapfile -t COMPREPLY < <(compgen -W "${opts}" -- "${cur}")
   fi
 
   return 0
@@ -95,7 +97,7 @@ current() {
 # Help function
 help() {
     cat <<'EOF'
-Usage: source dev-console.sh
+Usage: source dev-tool.sh
 
 Commands:
   list         List available modules.
