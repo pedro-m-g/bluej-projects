@@ -19,7 +19,7 @@ public class CircleDemo implements Demo {
    */
   public void execute(Canvas canvas) {
     PreConditions
-        .requireNot(canvas == null, "canvas must not be null")
+        .requireNonNull(canvas, "canvas must not be null")
         .check();
 
     Circle circle = new Circle(100, Color.RED);

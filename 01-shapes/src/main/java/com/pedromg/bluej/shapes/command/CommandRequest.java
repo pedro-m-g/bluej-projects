@@ -22,7 +22,7 @@ public record CommandRequest(
      */
     public boolean hasFlag(String flagName) {
         PreConditions
-                .requireNot(flagName == null, "Flag name must not be null")
+                .requireNonNull(flagName, "Flag name must not be null")
                 .andNot(flagName.trim().isEmpty(), "Flag name must not be blank")
                 .check();
 

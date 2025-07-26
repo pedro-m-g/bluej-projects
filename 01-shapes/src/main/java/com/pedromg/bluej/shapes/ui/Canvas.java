@@ -47,7 +47,7 @@ public class Canvas {
   }
 
   /**
-   * Draws the specified {@code JPanel} into this camvas.
+   * Draws the specified {@code JPanel} into this canvas.
    *
    * @param panel the JPanel to add; must not be null
    *
@@ -55,7 +55,7 @@ public class Canvas {
    */
   public void draw(JPanel panel) {
     PreConditions
-        .requireNot(panel == null, "panel must not be null")
+        .requireNonNull(panel, "panel must not be null")
         .check();
 
     window.add(panel);

@@ -19,7 +19,7 @@ public class TriangleDemo implements Demo {
    */
   public void execute(Canvas canvas) {
     PreConditions
-        .requireNot(canvas == null, "canvas must not be null")
+        .requireNonNull(canvas, "canvas must not be null")
         .check();
 
     Triangle triangle = new Triangle(200, Color.YELLOW);
