@@ -1,27 +1,30 @@
 package com.pedromg.bluej.shapes.demo;
 
 import java.awt.Color;
-import java.util.Objects;
 
 import com.pedromg.bluej.shapes.domain.Circle;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.CirclePanel;
-import com.pedromg.bluej.shapes.ui.MainFrame;
+import com.pedromg.bluej.shapes.ui.Canvas;
 
 public class CircleDemo implements Demo {
 
   /**
-   * Displays a red circle with a radius of 100 in the specified main application frame.
+   * Displays a red circle with a radius of 100 in the specified canvas.
    *
-   * @param mainFrame the main application frame to which the circle panel will be added; must not be null
+   * @param canvas the canvas to draw the circle
    *
-   * @throws NullPointerException if {@code mainFrame} is null
+   * @throws PreConditionsException if {@code canvas} is null
    */
-  public void run(MainFrame mainFrame) {
-    Objects.requireNonNull(mainFrame, "MainFrame cannot be null");
+  public void execute(Canvas canvas) {
+    PreConditions
+        .requireNot(canvas == null, "canvas must not be null")
+        .check();
 
     Circle circle = new Circle(100, Color.RED);
     CirclePanel circlePanel = new CirclePanel(circle);
-    mainFrame.add(circlePanel);
+    canvas.draw(circlePanel);
   }
 
 }

@@ -1,6 +1,6 @@
 package com.pedromg.bluej.shapes.demo;
 
-import com.pedromg.bluej.shapes.ui.MainFrame;
+import com.pedromg.bluej.shapes.ui.Canvas;
 
 public interface Demo {
 
@@ -9,6 +9,6 @@ public interface Demo {
    *
    * @param mainFrame The main frame where the demo will be displayed.
    */
-  void run(MainFrame mainFrame);
+  void execute(Canvas mainFrame);
 
 }
