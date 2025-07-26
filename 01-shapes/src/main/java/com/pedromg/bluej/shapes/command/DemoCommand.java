@@ -9,7 +9,7 @@ import com.pedromg.bluej.shapes.demo.SquareDemo;
 import com.pedromg.bluej.shapes.demo.TriangleDemo;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
-import com.pedromg.bluej.shapes.ui.MainFrame;
+import com.pedromg.bluej.shapes.ui.Canvas;
 
 public class DemoCommand implements Command {
 
@@ -46,9 +46,9 @@ public class DemoCommand implements Command {
               DEMOS.keySet()));
     }
 
-    MainFrame mainFrame = new MainFrame();
-    mainFrame.open();
-    DEMOS.get(shape).run(mainFrame);
+    Canvas canvas = new Canvas();
+    canvas.show();
+    DEMOS.get(shape).execute(canvas);
   }
 
 }
