@@ -12,30 +12,31 @@ I created these exercises for personal joy 🎈 — to rediscover and refresh pr
 | 📂 Directory  | 📝 Description                      |
 | :------------ | :----------------------------------- |
 | `01-shapes/`  | 🟦 Module for the "Shapes" exercise |
-| `scripts/`    | 🛠 Dev scripts for build/run/test    |
+| `dev-tool.sh` | 🛠 Dev scripts for build & run       |
 
 ---
 
 ## 🧰 Scripts
 
-All scripts are runnable from anywhere — they automatically position themselves at the project root 🪄
-
-| 🚀 Script                                 | 💡 What it does                             |
-| :---------------------------------------- | :------------------------------------------ |
-| `./scripts/full-build.sh`                 | 🧱 Compiles all the modules                 |
-| `./scripts/full-test.sh`                  | 🧪 Runs all tests across modules            |
-| `./scripts/build.sh <module>`             | 🔨 Compiles just the specified `<module>`   |
-| `./scripts/test.sh <module>`              | ✔️  Runs tests for the specified `<module>` |
-| `./scripts/start.sh <module> [<args>]`    | ▶️  Executes the given module with args     |
+You can access project scripts with `source dev-tool.sh` 🪄
 
 ---
 
 🌟 Example usage:
 
 ```bash
-./scripts/build.sh 01-shapes
-./scripts/start.sh 01-shapes demo square --verbose
-./scripts/test.sh 01-shapes
+source-dev-tool.sh
+# Lists modules in this project
+$ `list`
+# Selects 01-shape module in the nexts commands (supports autocomplete)
+$ `choose 01-shapes`
+# Runs a build on 01-shapes module
+$ `build`
+# Starts 01-shapes module with args = "demo circle"
+$ `start demo circle`
+# Exit dev-tool.sh
+$ `exit`
+# Back to usual console
 ```
 
 Happy coding! ✨🐢🧑‍💻
