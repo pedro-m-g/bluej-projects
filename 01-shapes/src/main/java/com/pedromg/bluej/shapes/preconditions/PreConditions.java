@@ -87,7 +87,7 @@ public class PreConditions {
   public PreConditions and(
       boolean preCondition,
       String message) {
-    if (preCondition) {
+    if (!preCondition) {
       requirements.add(() -> {
         throw new IllegalArgumentException(message);
       });

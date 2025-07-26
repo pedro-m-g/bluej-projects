@@ -22,8 +22,8 @@ public record CommandRequest(
      */
     public boolean hasFlag(String flagName) {
         PreConditions
-                .require(flagName != null, "Flag name must not be null")
-                .and(flagName.trim().isEmpty(), "Flag name must not be blank")
+                .requireNot(flagName == null, "Flag name must not be null")
+                .andNot(flagName.trim().isEmpty(), "Flag name must not be blank")
                 .check();
 
         return flags.contains(flagName.toLowerCase());

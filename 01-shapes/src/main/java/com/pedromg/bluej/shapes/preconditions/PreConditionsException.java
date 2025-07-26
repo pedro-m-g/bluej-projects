@@ -13,8 +13,14 @@ public class PreConditionsException extends IllegalArgumentException {
    */
   public PreConditionsException(List<String> violations) {
     super("Preconditions failed: "
-        + String.join(",", violations));
-    this.violations = violations;
+        + String.join(
+            ",",
+            violations == null ? List.of() : violations));
+    if (violations == null || violations.isEmpty()) {
+      throw new IllegalArgumentException(
+          "Violations list must not be null or empty");
+    }
+    this.violations = List.copyOf(violations);
   }
 
   /**
@@ -23,7 +29,7 @@ public class PreConditionsException extends IllegalArgumentException {
    * @return violations
    */
   public List<String> violations() {
-    return violations;
+    return List.copyOf(violations);
   }
 
 }
