@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import com.pedromg.bluej.shapes.command.CommandRequest;
-import com.pedromg.bluej.shapes.validation.MinArrayLengthRule;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
 public class CommandParser {
 
@@ -16,11 +17,15 @@ public class CommandParser {
    * Parses the given args into a CommandRequest instance
    *
    * @param args the original command line arguments
+   *
+   * @throws PreConditionsException if <action> argument is missing
+   *
    * @return the parse command request
    */
   public CommandRequest parse(String[] args) {
-    MinArrayLengthRule.validate(
-        args, 1, USAGE_MESSAGE);
+    PreConditions
+        .require(args.length >= 1, USAGE_MESSAGE)
+        .check();
 
     String action = args[0];
     List<String> arguments = List.of(args)

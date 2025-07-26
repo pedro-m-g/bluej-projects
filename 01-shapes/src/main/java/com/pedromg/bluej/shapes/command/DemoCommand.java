@@ -1,14 +1,15 @@
 package com.pedromg.bluej.shapes.command;
 
+import java.util.List;
 import java.util.Map;
 
 import com.pedromg.bluej.shapes.demo.CircleDemo;
 import com.pedromg.bluej.shapes.demo.Demo;
 import com.pedromg.bluej.shapes.demo.SquareDemo;
 import com.pedromg.bluej.shapes.demo.TriangleDemo;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.MainFrame;
-import com.pedromg.bluej.shapes.validation.CollectionSizeRule;
-import com.pedromg.bluej.shapes.validation.NotBlankRule;
 
 public class DemoCommand implements Command {
 
@@ -25,13 +26,18 @@ public class DemoCommand implements Command {
    *
    * @param request command line request containing <shape> param
    *
-   * @throws IllegalArgumentException if the shape is not recognized or if the
-   *                                  arguments are invalid
+   * @throws PreConditionsException if the shape is not recognized or if the
+   *                                arguments are invalid
    */
   public void execute(CommandRequest request) {
-    validateRequest(request);
+    List<String> params = request.params();
+    PreConditions
+        .require(params.size() == 1, USAGE_MESSAGE)
+        .andNot(params.get(0) == null, USAGE_MESSAGE)
+        .andNot(params.get(0).isBlank(), USAGE_MESSAGE)
+        .check();
 
-    String shape = request.params().get(0).toLowerCase();
+    String shape = params.get(0).toLowerCase();
     if (!DEMOS.containsKey(shape)) {
       throw new IllegalArgumentException(
           String.format(
@@ -43,13 +49,6 @@ public class DemoCommand implements Command {
     MainFrame mainFrame = new MainFrame();
     mainFrame.open();
     DEMOS.get(shape).run(mainFrame);
-  }
-
-  private void validateRequest(CommandRequest request) {
-    CollectionSizeRule.validate(
-        request.params(), 1, USAGE_MESSAGE);
-    NotBlankRule.validate(
-        request.params().get(0), USAGE_MESSAGE);
   }
 
 }
