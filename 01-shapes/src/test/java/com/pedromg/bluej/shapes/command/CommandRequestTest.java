@@ -178,7 +178,7 @@ class CommandRequestTest {
     return Stream.of(
         Arguments.of(Set.of("verbose"), "verbose", true),
         Arguments.of(Set.of(), "verbose", false),
-        Arguments.of(Set.of("verbose", "ervbose", false)));
+        Arguments.of(Set.of("verbose"), "ervbose", false));
   }
 
 }
