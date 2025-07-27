@@ -106,8 +106,7 @@ public class PreConditions {
    */
   public PreConditions and(boolean preCondition, String message) {
     if (!preCondition) {
-      throw new PreConditionsException(
-          message, new IllegalArgumentException(message));
+      throw new PreConditionsException(message);
     }
     return this;
   }
