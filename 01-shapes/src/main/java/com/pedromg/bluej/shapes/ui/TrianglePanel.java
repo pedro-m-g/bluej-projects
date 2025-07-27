@@ -1,11 +1,12 @@
 package com.pedromg.bluej.shapes.ui;
 
 import com.pedromg.bluej.shapes.domain.Triangle;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Objects;
 
 import javax.swing.JPanel;
 
@@ -18,10 +19,11 @@ public class TrianglePanel extends JPanel {
    *
    * @param triangle the Triangle object to be displayed in the panel
    *
-   * @throws NullPointerException if the triangle is null
+   * @throws PreConditionsException if the triangle is null
    */
   public TrianglePanel(Triangle triangle) {
-    Objects.requireNonNull(triangle, "Triangle cannot be null");
+    PreConditions
+        .requireNonNull(triangle, "triangle must not be null");
 
     this.triangle = triangle;
   }

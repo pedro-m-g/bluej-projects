@@ -19,8 +19,7 @@ public class SquareDemo implements Demo {
    */
   public void execute(Canvas canvas) {
     PreConditions
-        .requireNonNull(canvas, "canvas must not be null")
-        .check();
+        .requireNonNull(canvas, "canvas must not be null");
 
     Square square = new Square(200, Color.BLUE);
     SquarePanel squarePanel = new SquarePanel(square);

@@ -33,9 +33,8 @@ public class DemoCommand implements Command {
     List<String> params = request.params();
     PreConditions
         .require(params.size() == 1, USAGE_MESSAGE)
-        .andNot(params.get(0) == null, USAGE_MESSAGE)
-        .andNot(params.get(0).isBlank(), USAGE_MESSAGE)
-        .check();
+        .andNonNull(params.get(0), USAGE_MESSAGE)
+        .andNot(params.get(0).isBlank(), USAGE_MESSAGE);
 
     String shape = params.get(0).toLowerCase();
     if (!DEMOS.containsKey(shape)) {
