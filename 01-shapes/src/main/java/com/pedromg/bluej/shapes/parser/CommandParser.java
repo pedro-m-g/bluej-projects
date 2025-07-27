@@ -1,13 +1,12 @@
 package com.pedromg.bluej.shapes.parser;
 
+import com.pedromg.bluej.shapes.command.CLIRequest;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.pedromg.bluej.shapes.command.CLIRequest;
-import com.pedromg.bluej.shapes.preconditions.PreConditions;
-import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
 public class CommandParser {
 
@@ -17,18 +16,14 @@ public class CommandParser {
    * Parses the given args into a CommandRequest instance
    *
    * @param args the original command line arguments
-   *
    * @throws PreConditionsException if <action> argument is missing
-   *
    * @return the parse command request
    */
   public CLIRequest parse(String[] args) {
-    PreConditions
-        .require(args.length >= 1, USAGE_MESSAGE);
+    PreConditions.require(args.length >= 1, USAGE_MESSAGE);
 
     String action = args[0];
-    List<String> arguments = List.of(args)
-        .subList(1, args.length);
+    List<String> arguments = List.of(args).subList(1, args.length);
 
     List<String> params = new ArrayList<>(arguments.size());
     Set<String> flags = new LinkedHashSet<>(arguments.size());
@@ -42,5 +37,4 @@ public class CommandParser {
 
     return new CLIRequest(action, params, flags);
   }
-
 }

@@ -12,5 +12,4 @@ public class CommandNotFoundException extends IllegalArgumentException {
   public String command() {
     return command;
   }
-
 }

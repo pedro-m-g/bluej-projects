@@ -28,5 +28,4 @@ public class CLICommandHandler implements CommandHandler {
   public String helpMessage() {
     return "App entry point";
   }
-
 }

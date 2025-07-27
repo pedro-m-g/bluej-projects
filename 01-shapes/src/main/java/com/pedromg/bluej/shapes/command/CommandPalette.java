@@ -1,9 +1,8 @@
 package com.pedromg.bluej.shapes.command;
 
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import com.pedromg.bluej.shapes.preconditions.PreConditions;
 
 public class CommandPalette {
 
@@ -11,8 +10,7 @@ public class CommandPalette {
   private final Map<String, CommandHandler> handlers;
 
   public CommandPalette(String ussageMessage) {
-    PreConditions
-        .requireNonNull(ussageMessage, "usageMessage must not be null")
+    PreConditions.requireNotNull(ussageMessage, "usageMessage must not be null")
         .andNot(ussageMessage.isBlank(), "ussageMessage must not be blank");
 
     this.ussageMessage = ussageMessage;
@@ -25,18 +23,16 @@ public class CommandPalette {
   }
 
   public CommandPalette add(String name, CommandHandler handler) {
-    PreConditions
-        .requireNonNull(name, "name must not be null")
+    PreConditions.requireNotNull(name, "name must not be null")
         .andNot(name.isBlank(), "name must not be blank")
-        .andNonNull(handler, "handler must not be null");
+        .andNotNull(handler, "handler must not be null");
 
     handlers.put(name, handler);
     return this;
   }
 
   public boolean hasCommand(String name) {
-    PreConditions
-        .requireNonNull(name, "name must not be null")
+    PreConditions.requireNotNull(name, "name must not be null")
         .andNot(name.isBlank(), "name must not be blank");
 
     return handlers.containsKey(name);
@@ -66,5 +62,4 @@ public class CommandPalette {
   private void printHelpEntry(String name, CommandHandler handler) {
     System.out.println("    " + name + ": " + handler.helpMessage());
   }
-
 }
