@@ -11,6 +11,12 @@ public record CommandRequest(
         List<String> params,
         Set<String> flags) {
 
+    public CommandRequest {
+        PreConditions
+                .requireNonNull(action, "action must not be null")
+                .check();
+    }
+
     /**
      * Checks if a flag is present in this request
      *
