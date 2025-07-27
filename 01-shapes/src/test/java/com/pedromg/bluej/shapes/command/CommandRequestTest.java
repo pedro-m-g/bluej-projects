@@ -119,4 +119,66 @@ class CommandRequestTest {
         Arguments.of("        ", "action must not be blank"));
   }
 
+  @Test
+  void shouldFailToConstructWithNullParams() {
+    // Given
+    String action = "demo";
+    List<String> params = null;
+    Set<String> flags = Set.of("verbose");
+
+    // When
+    PreConditionsException exception = assertThrows(
+        PreConditionsException.class,
+        () -> new CommandRequest(
+            action,
+            params,
+            flags));
+
+    // Then
+    assertEquals("params must not be null", exception.getMessage());
+  }
+
+  @Test
+  void shouldFailToConstructWithNullFlags() {
+    // Given
+    String action = "demo";
+    List<String> params = List.of();
+    Set<String> flags = null;
+
+    // When
+    PreConditionsException exception = assertThrows(
+        PreConditionsException.class,
+        () -> new CommandRequest(
+            action,
+            params,
+            flags));
+
+    // Then
+    assertEquals("flags must not be null", exception.getMessage());
+  }
+
+  @ParameterizedTest
+  @MethodSource("flagsProvider")
+  void shouldDetectFlag(
+      Set<String> flags, String flagName, boolean expectedResult) {
+    // Given
+    CommandRequest commandRequest = new CommandRequest(
+        "demo",
+        List.of("circle"),
+        flags);
+
+    // When
+    boolean actualResult = commandRequest.hasFlag(flagName);
+
+    // Then
+    assertEquals(expectedResult, actualResult);
+  }
+
+  static Stream<Arguments> flagsProvider() {
+    return Stream.of(
+        Arguments.of(Set.of("verbose"), "verbose", true),
+        Arguments.of(Set.of(), "verbose", false),
+        Arguments.of(Set.of("verbose", "ervbose", false)));
+  }
+
 }
