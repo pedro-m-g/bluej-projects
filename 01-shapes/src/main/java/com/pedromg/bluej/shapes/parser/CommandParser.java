@@ -24,8 +24,7 @@ public class CommandParser {
    */
   public CommandRequest parse(String[] args) {
     PreConditions
-        .require(args.length >= 1, USAGE_MESSAGE)
-        .check();
+        .require(args.length >= 1, USAGE_MESSAGE);
 
     String action = args[0];
     List<String> arguments = List.of(args)

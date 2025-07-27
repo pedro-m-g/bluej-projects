@@ -23,9 +23,10 @@ public record Triangle(
    */
   public Triangle {
     PreConditions
-        .require(lengthInPixels > 0, "length must be a positive number")
-        .and(color != null, "color must not be null")
-        .check();
+        .require(
+            lengthInPixels > 0,
+            "length must be a positive number")
+        .and(color != null, "color must not be null");
   }
 
   /**

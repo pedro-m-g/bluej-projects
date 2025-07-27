@@ -1,16 +1,9 @@
 package com.pedromg.bluej.shapes.preconditions;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class PreConditions {
 
-  private final List<Runnable> requirements;
-  private final List<String> messages;
-
   private PreConditions() {
-    requirements = new LinkedList<>();
-    messages = new LinkedList<>();
+    /* no-op */
   }
 
   /**
@@ -19,6 +12,8 @@ public class PreConditions {
    *
    * @param preCondition the code that might throw an exception
    * @param message      the error message
+   *
+   * @throws PreConditionsException if the {@code preCondition} throws
    *
    * @return this object, for method chaining
    */
@@ -35,6 +30,8 @@ public class PreConditions {
    * @param preCondition the assertion to test
    * @param message      the error message
    *
+   * @throws PreConditionsException if the {@code preCondition} is false
+   *
    * @return this object for method chaining
    */
   public static PreConditions require(
@@ -50,6 +47,8 @@ public class PreConditions {
    * @param preCondition the assertion to test
    * @param message      the error message
    *
+   * @throws PreConditionsException if the {@code preCondition} is false
+   *
    * @return this object for method chaining
    */
   public static PreConditions requireNot(
@@ -63,6 +62,8 @@ public class PreConditions {
    *
    * @param target  the object to evaluate
    * @param message the error message
+   *
+   * @throws PreConditionsException if the {@code target} is null
    *
    * @return this object for method chaining
    */
@@ -79,12 +80,17 @@ public class PreConditions {
    * @param preCondition the code that might throw an exception
    * @param message      the error message
    *
+   * @throws PreConditionsException if the {@code preCondition} throws
+   *
    * @return this object, for method chaining
    */
   public PreConditions and(Runnable preCondition, String message) {
-    requirements.add(preCondition);
-    messages.add(message);
-    return this;
+    try {
+      preCondition.run();
+      return this;
+    } catch (Exception ex) {
+      throw new PreConditionsException(message, ex);
+    }
   }
 
   /**
@@ -94,19 +100,15 @@ public class PreConditions {
    * @param preCondition the assertion to test
    * @param message      the error message
    *
+   * @throws PreConditionsException if the {@code preCondition} is false
+   *
    * @return this object for method chaining
    */
   public PreConditions and(boolean preCondition, String message) {
     if (!preCondition) {
-      requirements.add(() -> {
-        throw new IllegalArgumentException(message);
-      });
-    } else {
-      requirements.add(() -> {
-        /* Do nothing */
-      });
+      throw new PreConditionsException(
+          message, new IllegalArgumentException(message));
     }
-    messages.add(message);
     return this;
   }
 
@@ -116,6 +118,8 @@ public class PreConditions {
    *
    * @param preCondition the assertion to test
    * @param message      the error message
+   *
+   * @throws PreConditionsException if the {@code preCondition} is true
    *
    * @return this object for method chaining
    */
@@ -129,31 +133,12 @@ public class PreConditions {
    * @param target  the object to evaluate
    * @param message the error message
    *
+   * @throws PreConditionsException if the {@code preCondition} is null
+   *
    * @return this object for method chaining
    */
   public PreConditions andNonNull(Object target, String message) {
     return and(target != null, message);
-  }
-
-  /**
-   * Runs the preConditions defined in this object.
-   */
-  public void check() {
-    if (requirements.isEmpty()) {
-      throw new PreConditionsException(
-          List.of("No requirements defined"));
-    }
-    List<String> violations = new LinkedList<>();
-    for (int index = 0; index < requirements.size(); index++) {
-      try {
-        requirements.get(index).run();
-      } catch (Exception exception) {
-        violations.add(messages.get(index));
-      }
-    }
-    if (!violations.isEmpty()) {
-      throw new PreConditionsException(violations);
-    }
   }
 
 }

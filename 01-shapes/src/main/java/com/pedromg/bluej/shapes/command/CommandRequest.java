@@ -14,7 +14,9 @@ public record CommandRequest(
     public CommandRequest {
         PreConditions
                 .requireNonNull(action, "action must not be null")
-                .check();
+                .andNot(action.isBlank(), "action must not be blank")
+                .andNonNull(params, "params must not be null")
+                .andNonNull(flags, "flags must not be null");
     }
 
     /**
@@ -28,9 +30,11 @@ public record CommandRequest(
      */
     public boolean hasFlag(String flagName) {
         PreConditions
-                .requireNonNull(flagName, "Flag name must not be null")
-                .andNot(flagName.trim().isEmpty(), "Flag name must not be blank")
-                .check();
+                .requireNonNull(
+                        flagName, "Flag name must not be null")
+                .andNot(
+                        flagName.isBlank(),
+                        "Flag name must not be blank");
 
         return flags.contains(flagName.toLowerCase());
     }

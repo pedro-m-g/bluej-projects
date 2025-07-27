@@ -55,8 +55,7 @@ public class Canvas {
    */
   public void draw(JPanel panel) {
     PreConditions
-        .requireNonNull(panel, "panel must not be null")
-        .check();
+        .requireNonNull(panel, "panel must not be null");
 
     window.add(panel);
     window.revalidate();

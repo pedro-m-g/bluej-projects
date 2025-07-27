@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
@@ -88,10 +92,11 @@ class CommandRequestTest {
     assertEquals(flags, request.flags());
   }
 
-  @Test
-  void shouldFailToConstructWithNullAction() {
+  @ParameterizedTest
+  @MethodSource("invalidActionProvider")
+  void shouldFailToConstructWithInvalidAction(
+      String action, String expectedViolation) {
     // Given
-    String action = null;
     List<String> params = List.of();
     Set<String> flags = Set.of("verbose");
 
@@ -104,10 +109,14 @@ class CommandRequestTest {
             flags));
 
     // Then
-    assertEquals(1, exception.violations().size());
-    assertEquals(
-        "action must not be null",
-        exception.violations().get(0));
+    assertEquals(expectedViolation, exception.getMessage());
+  }
+
+  static Stream<Arguments> invalidActionProvider() {
+    return Stream.of(
+        Arguments.of(null, "action must not be null"),
+        Arguments.of("", "action must not be blank"),
+        Arguments.of("        ", "action must not be blank"));
   }
 
 }
