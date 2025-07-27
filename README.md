@@ -12,7 +12,7 @@ I created these exercises for personal joy 🎈 — to rediscover and refresh pr
 | 📂 Directory  | 📝 Description                      |
 | :------------ | :----------------------------------- |
 | `01-shapes/`  | 🟦 Module for the "Shapes" exercise |
-| `dev-tool.sh` | 🛠 Dev scripts for build & run       |
+| `dev-tool.sh` | 🛠 Dev tool for build & run          |
 
 ---
 
@@ -25,17 +25,17 @@ You can access project scripts with `source dev-tool.sh` 🪄
 🌟 Example usage:
 
 ```bash
-source-dev-tool.sh
+source dev-tool.sh
 # Lists modules in this project
-$ `list`
+$ list
 # Selects 01-shape module in the nexts commands (supports autocomplete)
-$ `choose 01-shapes`
+$ choose 01-shapes
 # Runs a build on 01-shapes module
-$ `build`
+$ build
 # Starts 01-shapes module with args = "demo circle"
-$ `start demo circle`
+$ start demo circle
 # Exit dev-tool.sh
-$ `exit`
+$ exit
 # Back to usual console
 ```
 
