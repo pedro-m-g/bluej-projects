@@ -1,19 +1,14 @@
 package com.pedromg.bluej.shapes;
 
-import java.util.Locale;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.swing.SwingUtilities;
 
 import com.pedromg.bluej.shapes.command.CLIRequest;
+import com.pedromg.bluej.shapes.command.CommandPalette;
+import com.pedromg.bluej.shapes.command.DemoCommand;
 import com.pedromg.bluej.shapes.command.CLICommandHandler;
 import com.pedromg.bluej.shapes.parser.CommandParser;
 
 public class App {
-
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     /**
      * Application entry point that initializes and displays the main user interface
@@ -36,38 +31,12 @@ public class App {
      * @param args command-line arguments
      */
     private static void run(String[] args) {
-        try {
-            CommandParser parser = new CommandParser();
-            CLIRequest request = parser.parse(args);
-
-            configureLogging(request);
-            LOGGER.info("Starting the application...");
-            new CLICommandHandler().handle(request);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        } catch (Exception e) {
-            LOGGER.log(
-                    Level.SEVERE,
-                    "An error occurred during application startup",
-                    e);
-        }
-    }
-
-    /**
-     * Configures logging based on request flags
-     *
-     * @param request the command line request
-     */
-    private static void configureLogging(CLIRequest request) {
-        Locale.setDefault(Locale.ENGLISH);
-        Level logLevel = request.hasFlag("verbose")
-                ? Level.ALL
-                : Level.WARNING;
-
-        Handler[] handlers = Logger.getLogger("").getHandlers();
-        for (Handler handler : handlers) {
-            handler.setLevel(logLevel);
-        }
+        CommandParser parser = new CommandParser();
+        CLIRequest request = parser.parse(args);
+        CommandPalette commandPalette = new CommandPalette("start <action>")
+                .add("demo", new DemoCommand());
+        CLICommandHandler cliCommandHandler = new CLICommandHandler(commandPalette);
+        cliCommandHandler.handle(request);
     }
 
 }

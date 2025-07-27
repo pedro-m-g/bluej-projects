@@ -11,7 +11,7 @@ import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
 
-public class DemoCommand implements Command {
+public class DemoCommand implements CommandHandler {
 
   private static final String UNKNOWN_SHAPE_MESSAGE_FORMAT = "Unknown shape: %s. Available shapes: %s";
   private static final String USAGE_MESSAGE = "Usage: java -jar 01-shapes.jar demo <shape>";
@@ -29,7 +29,7 @@ public class DemoCommand implements Command {
    * @throws PreConditionsException if the shape is not recognized or if the
    *                                arguments are invalid
    */
-  public void execute(CLIRequest request) {
+  public void handle(CLIRequest request) {
     List<String> params = request.params();
     PreConditions
         .require(params.size() == 1, USAGE_MESSAGE)
@@ -48,6 +48,13 @@ public class DemoCommand implements Command {
     Canvas canvas = new Canvas();
     canvas.show();
     DEMOS.get(shape).execute(canvas);
+  }
+
+  @Override
+  public String helpMessage() {
+    return String.format(
+        "Runs the requested demo Available demos: %s",
+        DEMOS.keySet());
   }
 
 }
