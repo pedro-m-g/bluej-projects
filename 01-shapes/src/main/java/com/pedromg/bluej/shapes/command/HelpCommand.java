@@ -8,7 +8,7 @@ public class HelpCommand implements Command {
    * @param request command line request (unused)
    */
   @Override
-  public void execute(CommandRequest request) {
+  public void execute(CLIRequest request) {
     System.out.println("Available commands:");
     System.out.println("1. demo <shape> - Run a demo for the specified shape (circle, square, triangle).");
     System.out.println("2. help - Display this help message.");

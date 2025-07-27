@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.pedromg.bluej.shapes.command.CommandRequest;
+import com.pedromg.bluej.shapes.command.CLIRequest;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
@@ -22,7 +22,7 @@ public class CommandParser {
    *
    * @return the parse command request
    */
-  public CommandRequest parse(String[] args) {
+  public CLIRequest parse(String[] args) {
     PreConditions
         .require(args.length >= 1, USAGE_MESSAGE);
 
@@ -40,7 +40,7 @@ public class CommandParser {
       }
     }
 
-    return new CommandRequest(action, params, flags);
+    return new CLIRequest(action, params, flags);
   }
 
 }

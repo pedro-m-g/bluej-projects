@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import com.pedromg.bluej.shapes.command.CommandRequest;
-import com.pedromg.bluej.shapes.command.CommandRunner;
+import com.pedromg.bluej.shapes.command.CLIRequest;
+import com.pedromg.bluej.shapes.command.CLICommandHandler;
 import com.pedromg.bluej.shapes.parser.CommandParser;
 
 public class App {
@@ -38,18 +38,18 @@ public class App {
     private static void run(String[] args) {
         try {
             CommandParser parser = new CommandParser();
-            CommandRequest request = parser.parse(args);
+            CLIRequest request = parser.parse(args);
 
             configureLogging(request);
             LOGGER.info("Starting the application...");
-            new CommandRunner().run(request);
+            new CLICommandHandler().handle(request);
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
             LOGGER.log(
-                Level.SEVERE,
-                "An error occurred during application startup",
-                e);
+                    Level.SEVERE,
+                    "An error occurred during application startup",
+                    e);
         }
     }
 
@@ -58,11 +58,11 @@ public class App {
      *
      * @param request the command line request
      */
-    private static void configureLogging(CommandRequest request) {
+    private static void configureLogging(CLIRequest request) {
         Locale.setDefault(Locale.ENGLISH);
         Level logLevel = request.hasFlag("verbose")
-            ? Level.ALL
-            : Level.WARNING;
+                ? Level.ALL
+                : Level.WARNING;
 
         Handler[] handlers = Logger.getLogger("").getHandlers();
         for (Handler handler : handlers) {

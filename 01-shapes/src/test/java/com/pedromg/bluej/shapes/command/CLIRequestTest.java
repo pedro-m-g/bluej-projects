@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
-class CommandRequestTest {
+class CLIRequestTest {
 
   @Test
   void shouldConstructWithValidSetup() {
@@ -24,7 +24,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    CommandRequest request = new CommandRequest(
+    CLIRequest request = new CLIRequest(
         action,
         params,
         flags);
@@ -43,7 +43,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    CommandRequest request = new CommandRequest(
+    CLIRequest request = new CLIRequest(
         action,
         params,
         flags);
@@ -62,7 +62,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of();
 
     // When
-    CommandRequest request = new CommandRequest(
+    CLIRequest request = new CLIRequest(
         action,
         params,
         flags);
@@ -81,7 +81,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of();
 
     // When
-    CommandRequest request = new CommandRequest(
+    CLIRequest request = new CLIRequest(
         action,
         params,
         flags);
@@ -103,7 +103,7 @@ class CommandRequestTest {
     // When
     PreConditionsException exception = assertThrows(
         PreConditionsException.class,
-        () -> new CommandRequest(
+        () -> new CLIRequest(
             action,
             params,
             flags));
@@ -129,7 +129,7 @@ class CommandRequestTest {
     // When
     PreConditionsException exception = assertThrows(
         PreConditionsException.class,
-        () -> new CommandRequest(
+        () -> new CLIRequest(
             action,
             params,
             flags));
@@ -148,7 +148,7 @@ class CommandRequestTest {
     // When
     PreConditionsException exception = assertThrows(
         PreConditionsException.class,
-        () -> new CommandRequest(
+        () -> new CLIRequest(
             action,
             params,
             flags));
@@ -162,7 +162,7 @@ class CommandRequestTest {
   void shouldDetectFlag(
       Set<String> flags, String flagName, boolean expectedResult) {
     // Given
-    CommandRequest commandRequest = new CommandRequest(
+    CLIRequest commandRequest = new CLIRequest(
         "demo",
         List.of("circle"),
         flags);

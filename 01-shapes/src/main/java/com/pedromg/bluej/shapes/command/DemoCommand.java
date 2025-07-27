@@ -29,7 +29,7 @@ public class DemoCommand implements Command {
    * @throws PreConditionsException if the shape is not recognized or if the
    *                                arguments are invalid
    */
-  public void execute(CommandRequest request) {
+  public void execute(CLIRequest request) {
     List<String> params = request.params();
     PreConditions
         .require(params.size() == 1, USAGE_MESSAGE)

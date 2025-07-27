@@ -7,6 +7,6 @@ public interface Command {
    *
    * @param request command line request
    */
-  void execute(CommandRequest request);
+  void execute(CLIRequest request);
 
 }

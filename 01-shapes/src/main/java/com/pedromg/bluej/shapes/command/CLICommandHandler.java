@@ -2,7 +2,7 @@ package com.pedromg.bluej.shapes.command;
 
 import java.util.Map;
 
-public class CommandRunner {
+public class CLICommandHandler {
 
   private static final String UNKNOWN_ACTION_MESSAGE_FORMAT = "Unknown action: %s. Available actions: %s";
 
@@ -11,11 +11,11 @@ public class CommandRunner {
       "demo", new DemoCommand());
 
   /**
-   * Runs the command line application.
+   * Handles the given CLIRequest
    *
    * @param request the command line request
    */
-  public void run(CommandRequest request) {
+  public void handle(CLIRequest request) {
     try {
       String action = request.action().toLowerCase();
 
