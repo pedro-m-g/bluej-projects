@@ -59,7 +59,7 @@ build() {
     echo "Choose a module first" >&2
     return 1
   fi
-  mvn -pl "$ACTIVE_MODULE" -am install
+  mvn -pl "$ACTIVE_MODULE" -am clean install
 }
 
 # Run the selected module

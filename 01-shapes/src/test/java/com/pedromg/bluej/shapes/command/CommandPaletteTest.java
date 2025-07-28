@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 class CommandPaletteTest {
 
   @Test
-  void shouldThrowWhenConstructingWithNullUssageMessage() {
+  void shouldThrowWhenConstructingWithNullUsageMessage() {
     assertThrows(PreConditionsException.class, () -> new CommandPalette(null));
   }
 
