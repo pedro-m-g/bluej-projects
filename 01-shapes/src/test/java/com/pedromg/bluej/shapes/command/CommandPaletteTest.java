@@ -67,17 +67,4 @@ class CommandPaletteTest {
     // Then
     assertEquals(mockCommandHandler, actualCommandHandler);
   }
-
-  static class MockCommandHandler implements CommandHandler {
-
-    @Override
-    public void handle(CLIRequest request) {
-      /* no-op */
-    }
-
-    @Override
-    public String helpMessage() {
-      return "Mock command";
-    }
-  }
 }
