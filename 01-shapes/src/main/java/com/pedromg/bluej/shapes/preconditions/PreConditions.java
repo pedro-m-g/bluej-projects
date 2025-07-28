@@ -123,7 +123,7 @@ public class PreConditions {
   }
 
   /**
-   * Adds a precondition, which is valid only if {@code target} is not nlank.
+   * Adds a precondition, which is valid only if {@code target} is not blank.
    *
    * @param target the string to evaluate
    * @param message the error message
