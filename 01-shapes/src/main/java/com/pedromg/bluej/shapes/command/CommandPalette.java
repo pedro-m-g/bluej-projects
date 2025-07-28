@@ -6,19 +6,19 @@ import java.util.Map;
 
 public class CommandPalette {
 
-  private final String ussageMessage;
+  private final String usageMessage;
   private final Map<String, CommandHandler> handlers;
 
-  public CommandPalette(String ussageMessage) {
-    PreConditions.requireNotNull(ussageMessage, "usageMessage must not be null")
-        .andNot(ussageMessage.isBlank(), "ussageMessage must not be blank");
+  public CommandPalette(String usageMessage) {
+    PreConditions.requireNotNull(usageMessage, "usageMessage must not be null")
+        .andNot(usageMessage.isBlank(), "usageMessage must not be blank");
 
-    this.ussageMessage = ussageMessage;
+    this.usageMessage = usageMessage;
     this.handlers = new LinkedHashMap<>();
   }
 
   public CommandPalette() {
-    this.ussageMessage = null;
+    this.usageMessage = null;
     this.handlers = new LinkedHashMap<>();
   }
 
@@ -46,8 +46,8 @@ public class CommandPalette {
   }
 
   public void help() {
-    if (ussageMessage != null) {
-      System.out.println("Ussage: " + ussageMessage + "\n");
+    if (usageMessage != null) {
+      System.out.println("Usage: " + usageMessage + "\n");
     }
 
     if (handlers.entrySet().isEmpty()) {
