@@ -20,10 +20,14 @@ public class App {
   }
 
   private static void run(String[] args) {
-    CommandParser parser = new CommandParser();
-    CLIRequest request = parser.parse(args);
-    CommandPalette commandPalette = new CommandPalette("start <action>").add("demo", new DemoCommand());
-    CLICommandHandler cliCommandHandler = new CLICommandHandler(commandPalette);
-    cliCommandHandler.handle(request);
+    try {
+      CommandParser parser = new CommandParser();
+      CLIRequest request = parser.parse(args);
+      CommandPalette commandPalette = new CommandPalette("start <action>").add("demo", new DemoCommand());
+      CLICommandHandler cliCommandHandler = new CLICommandHandler(commandPalette);
+      cliCommandHandler.handle(request);
+    } catch (Exception ex) {
+      System.err.println("Unexpected error: " + ex.getMessage());
+    }
   }
 }
