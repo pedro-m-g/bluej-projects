@@ -18,7 +18,7 @@ public record Triangle(int lengthInPixels, Color color) {
    */
   public Triangle {
     PreConditions.require(lengthInPixels > 0, "length must be a positive number")
-        .and(color != null, "color must not be null");
+        .andNotNull(color, "color must not be null");
   }
 
   /**

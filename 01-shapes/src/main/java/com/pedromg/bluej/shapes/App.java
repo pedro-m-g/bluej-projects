@@ -10,8 +10,7 @@ import javax.swing.SwingUtilities;
 public class App {
 
   /**
-   * Application entry point.
-   * Schedules initialization on the Swing event dispatch thread.
+   * Application entry point. Schedules initialization on the Swing event dispatch thread.
    *
    * @param args command-line arguments
    */
@@ -23,7 +22,8 @@ public class App {
     try {
       CommandParser parser = new CommandParser();
       CLIRequest request = parser.parse(args);
-      CommandPalette commandPalette = new CommandPalette("start <action>").add("demo", new DemoCommand());
+      CommandPalette commandPalette =
+          new CommandPalette("start <action>").add("demo", new DemoCommand());
       CLICommandHandler cliCommandHandler = new CLICommandHandler(commandPalette);
       cliCommandHandler.handle(request);
     } catch (Exception ex) {

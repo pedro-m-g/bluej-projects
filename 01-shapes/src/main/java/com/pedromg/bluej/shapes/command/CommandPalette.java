@@ -55,7 +55,7 @@ public class CommandPalette {
       return;
     }
 
-    System.out.println("Available command:\n");
+    System.out.println("Available commands:\n");
     handlers.entrySet().forEach(entry -> printHelpEntry(entry.getKey(), entry.getValue()));
   }
 

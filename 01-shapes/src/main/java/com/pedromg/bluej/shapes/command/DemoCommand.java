@@ -47,6 +47,6 @@ public class DemoCommand implements CommandHandler {
 
   @Override
   public String helpMessage() {
-    return String.format("Runs the requested demo Available demos: %s", DEMOS.keySet());
+    return String.format("Runs the requested demo. Available demos: %s", DEMOS.keySet());
   }
 }

@@ -15,7 +15,7 @@ public record Circle(int radiusInPixels, Color color) {
    */
   public Circle {
     PreConditions.require(radiusInPixels > 0, "radius must be a positive number")
-        .and(color != null, "color must not be null");
+        .andNotNull(color, "color must not be null");
   }
 
   /**
