@@ -1,10 +1,11 @@
 package com.pedromg.bluej.shapes.ui;
 
 import com.pedromg.bluej.shapes.domain.Circle;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.Objects;
 import javax.swing.JPanel;
 
 public class CirclePanel extends JPanel {
@@ -15,10 +16,10 @@ public class CirclePanel extends JPanel {
    * Constructs a CirclePanel to display the specified Circle.
    *
    * @param circle the Circle to be rendered; must not be null
-   * @throws NullPointerException if the provided Circle is null
+   * @throws PreConditionsException if the provided Circle is null
    */
   public CirclePanel(Circle circle) {
-    Objects.requireNonNull(circle, "Circle must not be null");
+    PreConditions.requireNotNull(circle, "circle must not be null");
 
     this.circle = circle;
   }

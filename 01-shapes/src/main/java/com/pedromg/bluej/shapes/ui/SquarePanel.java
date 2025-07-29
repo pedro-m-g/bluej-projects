@@ -1,6 +1,8 @@
 package com.pedromg.bluej.shapes.ui;
 
 import com.pedromg.bluej.shapes.domain.Square;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -16,9 +18,10 @@ public class SquarePanel extends JPanel {
    * Constructs a SquarePanel to visually represent the specified Square.
    *
    * @param square the Square to be displayed; must not be null
-   * @throws NullPointerException if the provided square is null
+   * @throws PreConditionsException if the provided square is null
    */
   public SquarePanel(Square square) {
+    PreConditions.requireNotNull(square, "square must not be null");
     Objects.requireNonNull(square, "Square must not be null");
 
     this.square = square;
