@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.Objects;
 import javax.swing.JPanel;
 
 public class SquarePanel extends JPanel {
@@ -22,7 +21,6 @@ public class SquarePanel extends JPanel {
    */
   public SquarePanel(Square square) {
     PreConditions.requireNotNull(square, "square must not be null");
-    Objects.requireNonNull(square, "Square must not be null");
 
     this.square = square;
   }
