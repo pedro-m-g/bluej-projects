@@ -3,18 +3,16 @@ package com.pedromg.bluej.shapes.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
-
-class CommandRequestTest {
+class CLIRequestTest {
 
   @Test
   void shouldConstructWithValidSetup() {
@@ -24,10 +22,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    CommandRequest request = new CommandRequest(
-        action,
-        params,
-        flags);
+    CLIRequest request = new CLIRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -43,10 +38,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    CommandRequest request = new CommandRequest(
-        action,
-        params,
-        flags);
+    CLIRequest request = new CLIRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -62,10 +54,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of();
 
     // When
-    CommandRequest request = new CommandRequest(
-        action,
-        params,
-        flags);
+    CLIRequest request = new CLIRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -81,10 +70,7 @@ class CommandRequestTest {
     Set<String> flags = Set.of();
 
     // When
-    CommandRequest request = new CommandRequest(
-        action,
-        params,
-        flags);
+    CLIRequest request = new CLIRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -94,19 +80,14 @@ class CommandRequestTest {
 
   @ParameterizedTest
   @MethodSource("invalidActionProvider")
-  void shouldFailToConstructWithInvalidAction(
-      String action, String expectedViolation) {
+  void shouldFailToConstructWithInvalidAction(String action, String expectedViolation) {
     // Given
     List<String> params = List.of();
     Set<String> flags = Set.of("verbose");
 
     // When
-    PreConditionsException exception = assertThrows(
-        PreConditionsException.class,
-        () -> new CommandRequest(
-            action,
-            params,
-            flags));
+    PreConditionsException exception =
+        assertThrows(PreConditionsException.class, () -> new CLIRequest(action, params, flags));
 
     // Then
     assertEquals(expectedViolation, exception.getMessage());
@@ -114,7 +95,7 @@ class CommandRequestTest {
 
   static Stream<Arguments> invalidActionProvider() {
     return Stream.of(
-        Arguments.of(null, "action must not be null"),
+        Arguments.of(null, "action must not be blank"),
         Arguments.of("", "action must not be blank"),
         Arguments.of("        ", "action must not be blank"));
   }
@@ -127,12 +108,8 @@ class CommandRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    PreConditionsException exception = assertThrows(
-        PreConditionsException.class,
-        () -> new CommandRequest(
-            action,
-            params,
-            flags));
+    PreConditionsException exception =
+        assertThrows(PreConditionsException.class, () -> new CLIRequest(action, params, flags));
 
     // Then
     assertEquals("params must not be null", exception.getMessage());
@@ -146,12 +123,8 @@ class CommandRequestTest {
     Set<String> flags = null;
 
     // When
-    PreConditionsException exception = assertThrows(
-        PreConditionsException.class,
-        () -> new CommandRequest(
-            action,
-            params,
-            flags));
+    PreConditionsException exception =
+        assertThrows(PreConditionsException.class, () -> new CLIRequest(action, params, flags));
 
     // Then
     assertEquals("flags must not be null", exception.getMessage());
@@ -159,13 +132,9 @@ class CommandRequestTest {
 
   @ParameterizedTest
   @MethodSource("flagsProvider")
-  void shouldDetectFlag(
-      Set<String> flags, String flagName, boolean expectedResult) {
+  void shouldDetectFlag(Set<String> flags, String flagName, boolean expectedResult) {
     // Given
-    CommandRequest commandRequest = new CommandRequest(
-        "demo",
-        List.of("circle"),
-        flags);
+    CLIRequest commandRequest = new CLIRequest("demo", List.of("circle"), flags);
 
     // When
     boolean actualResult = commandRequest.hasFlag(flagName);
@@ -180,5 +149,4 @@ class CommandRequestTest {
         Arguments.of(Set.of(), "verbose", false),
         Arguments.of(Set.of("debug"), "verbose", false));
   }
-
 }

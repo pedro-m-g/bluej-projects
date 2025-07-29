@@ -1,73 +1,33 @@
 package com.pedromg.bluej.shapes;
 
-import java.util.Locale;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.SwingUtilities;
-
-import com.pedromg.bluej.shapes.command.CommandRequest;
-import com.pedromg.bluej.shapes.command.CommandRunner;
+import com.pedromg.bluej.shapes.command.CLICommandHandler;
+import com.pedromg.bluej.shapes.command.CLIRequest;
+import com.pedromg.bluej.shapes.command.CommandPalette;
+import com.pedromg.bluej.shapes.command.DemoCommand;
 import com.pedromg.bluej.shapes.parser.CommandParser;
+import javax.swing.SwingUtilities;
 
 public class App {
 
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+  /**
+   * Application entry point. Schedules initialization on the Swing event dispatch thread.
+   *
+   * @param args command-line arguments
+   */
+  public static void main(String[] args) {
+    SwingUtilities.invokeLater(() -> run(args));
+  }
 
-    /**
-     * Application entry point that initializes and displays the main user interface
-     * window.
-     *
-     * Schedules UI initialization and demo execution on the Swing event dispatch
-     * thread.
-     * Logs and prints the stack trace if an exception occurs during startup.
-     *
-     * @param args command-line arguments
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> run(args));
+  private static void run(String[] args) {
+    try {
+      CommandParser parser = new CommandParser();
+      CLIRequest request = parser.parse(args);
+      CommandPalette commandPalette =
+          new CommandPalette("start <action>").add("demo", new DemoCommand());
+      CLICommandHandler cliCommandHandler = new CLICommandHandler(commandPalette);
+      cliCommandHandler.handle(request);
+    } catch (Exception ex) {
+      System.err.println("Unexpected error: " + ex.getMessage());
     }
-
-    /**
-     * Runs the application by setting up logging and executing the command line
-     * runner.
-     *
-     * @param args command-line arguments
-     */
-    private static void run(String[] args) {
-        try {
-            CommandParser parser = new CommandParser();
-            CommandRequest request = parser.parse(args);
-
-            configureLogging(request);
-            LOGGER.info("Starting the application...");
-            new CommandRunner().run(request);
-        } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-        } catch (Exception e) {
-            LOGGER.log(
-                Level.SEVERE,
-                "An error occurred during application startup",
-                e);
-        }
-    }
-
-    /**
-     * Configures logging based on request flags
-     *
-     * @param request the command line request
-     */
-    private static void configureLogging(CommandRequest request) {
-        Locale.setDefault(Locale.ENGLISH);
-        Level logLevel = request.hasFlag("verbose")
-            ? Level.ALL
-            : Level.WARNING;
-
-        Handler[] handlers = Logger.getLogger("").getHandlers();
-        for (Handler handler : handlers) {
-            handler.setLevel(logLevel);
-        }
-    }
-
+  }
 }

@@ -10,5 +10,4 @@ public interface Demo {
    * @param canvas the canvas to draw on
    */
   void execute(Canvas canvas);
-
 }
