@@ -21,9 +21,10 @@ echo "
 # This will make the following commands available:
 #   - list:   List available modules.
 #   - choose: Select a module to work on (with tab-completion).
+#   - back:   Go back to root module.
 #   - build:  Build the selected module.
 #   - start:  Run the selected module.
-#   - help: Show this help message.
+#   - help:   Show this help message.
 
 ACTIVE_MODULE=""
 OLD_PS1=$PS1
@@ -44,12 +45,21 @@ choose() {
 
   if [ -d "$1" ] && [ -f "$1/pom.xml" ]; then
     ACTIVE_MODULE="$1"
-    # Set PS1 to show the active module
-    # No echo, to not pollute the output
-    export PS1="($ACTIVE_MODULE) $ "
+    export PS1="$OLD_PS1[$ACTIVE_MODULE] > "
   else
     echo "Invalid module: $1" >&2
     return 1
+  fi
+}
+
+# Go back to root module
+back() {
+  if [ -z "$ACTIVE_MODULE" ]; then
+    echo "Already at root module"
+  else
+    echo "Exiting module: $ACTIVE_MODULE"
+    unset ACTIVE_MODULE
+    export PS1=$OLD_PS1
   fi
 }
 
@@ -102,6 +112,7 @@ Usage: source dev-tool.sh
 Commands:
   list         List available modules.
   choose <mod> Select a module (e.g., 'choose 01-shapes'). Tab-completion is enabled.
+  back         Go back to root module.
   build        Build the selected module.
   start [args] Run the selected module, passing [args] to the application.
   current      Show the current module.
@@ -113,7 +124,7 @@ EOF
 # Exit the console
 exit() {
     unset ACTIVE_MODULE
-    unset -f list choose build start current help _choose_completion exit
+    unset -f list choose back build start current help _choose_completion exit
     complete -r choose
     export PS1=$OLD_PS1
     echo "Dev tool unloaded"
