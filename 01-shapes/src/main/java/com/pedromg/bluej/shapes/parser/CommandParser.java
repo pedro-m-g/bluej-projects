@@ -1,6 +1,6 @@
 package com.pedromg.bluej.shapes.parser;
 
-import com.pedromg.bluej.shapes.command.CLIRequest;
+import com.pedromg.bluej.shapes.cli.CLIRequest;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.ArrayList;

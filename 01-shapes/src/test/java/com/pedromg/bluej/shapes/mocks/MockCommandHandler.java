@@ -1,6 +1,9 @@
-package com.pedromg.bluej.shapes.command;
+package com.pedromg.bluej.shapes.mocks;
 
-class MockCommandHandler implements CommandHandler {
+import com.pedromg.bluej.shapes.cli.CLIRequest;
+import com.pedromg.bluej.shapes.command.CommandHandler;
+
+public class MockCommandHandler implements CommandHandler {
 
   private int numCalls = 0;
 

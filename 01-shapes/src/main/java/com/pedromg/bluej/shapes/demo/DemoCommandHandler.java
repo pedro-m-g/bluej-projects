@@ -1,16 +1,13 @@
-package com.pedromg.bluej.shapes.command;
+package com.pedromg.bluej.shapes.demo;
 
-import com.pedromg.bluej.shapes.demo.CircleDemo;
-import com.pedromg.bluej.shapes.demo.Demo;
-import com.pedromg.bluej.shapes.demo.DemoNotFoundException;
-import com.pedromg.bluej.shapes.demo.SquareDemo;
-import com.pedromg.bluej.shapes.demo.TriangleDemo;
+import com.pedromg.bluej.shapes.cli.CLIRequest;
+import com.pedromg.bluej.shapes.command.CommandHandler;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
 import java.util.Map;
 
-public class DemoCommand implements CommandHandler {
+public class DemoCommandHandler implements CommandHandler {
 
   private static final String USAGE_MESSAGE = "Usage: start demo <shape>";
 

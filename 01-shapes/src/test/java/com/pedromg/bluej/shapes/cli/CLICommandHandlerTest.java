@@ -1,8 +1,11 @@
-package com.pedromg.bluej.shapes.command;
+package com.pedromg.bluej.shapes.cli;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import com.pedromg.bluej.shapes.command.CommandPalette;
+import com.pedromg.bluej.shapes.mocks.MockCommandHandler;
+import com.pedromg.bluej.shapes.mocks.MockCommandPalette;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.List;
 import java.util.Set;

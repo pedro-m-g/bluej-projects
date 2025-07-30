@@ -1,4 +1,4 @@
-package com.pedromg.bluej.shapes.command;
+package com.pedromg.bluej.shapes.cli;
 
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;

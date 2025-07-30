@@ -1,5 +1,7 @@
-package com.pedromg.bluej.shapes.command;
+package com.pedromg.bluej.shapes.cli;
 
+import com.pedromg.bluej.shapes.command.CommandHandler;
+import com.pedromg.bluej.shapes.command.CommandPalette;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 
 public class CLICommandHandler implements CommandHandler {
