@@ -8,6 +8,9 @@ YELLOW="\033[33m"
 GREEN="\033[32m"
 RESET="\033[0m"
 
+BULLET_ON="\033[1;32m●\033[0m"   # Green
+BULLET_OFF="\033[0;90m○\033[0m"  # Gray
+
 clear
 echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
 echo -e "${GREEN}│${RESET}  ${BOLD}Dev Tools Started${RESET}${GREEN}                           |${RESET}"
@@ -20,7 +23,13 @@ export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\
 # List available modules
 list() {
   for d in [0-9][0-9]-*/ ; do
-    [[ -d "$d" && -f "$d/pom.xml" ]] && printf '%s\n' "${d%/}"
+    [[ -d "$d" && -f "$d/pom.xml" ]] || continue
+    name="${d%/}"
+    if [[ "$name" == "$ACTIVE_MODULE" ]]; then
+      echo -e "  $BULLET_ON $name"
+    else
+      echo -e "  $BULLET_OFF $name"
+    fi
   done
 }
 
@@ -108,6 +117,11 @@ save() {
     git commit
 }
 
+# Shows current git branch
+branch() {
+    git branch --show-current
+}
+
 # Help function
 help() {
     echo -e "${BOLD}${CYAN}Available Commands:${RESET}"
@@ -121,6 +135,7 @@ help() {
     echo -e "  ✅  ${BOLD}verify${RESET}       ${GRAY}Run tests and open results in the browser.${RESET}"
     echo -e "  🚀  ${BOLD}run [args]${RESET}   ${GRAY}Run the selected module, passing [args].${RESET}"
     echo -e "  💾  ${BOLD}save${RESET}         ${GRAY}Commit current changes and open editor.${RESET}"
+    echo -e "  🌿  ${BOLD}branch${RESET}       ${GRAY}Show the current Git branch.${RESET}"
     echo -e "  ❌  ${BOLD}exit${RESET}         ${GRAY}Exit the console.${RESET}"
 }
 
@@ -130,9 +145,9 @@ exit() {
 
     unset ACTIVE_MODULE
     unset OLD_PS1
-    unset -f list choose back build verify run current help _choose_completion exit
+    unset -f list help list choose current back build verify run save branch exit _choose_completion
     complete -r choose
-    
+
     echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
     echo -e "${GREEN}│${RESET}  ${BOLD}Dev Tools Stopped  ${RESET}${GREEN}                         |${RESET}"
     echo -e "${GREEN}└──────────────────────────────────────────────┘${RESET}"
