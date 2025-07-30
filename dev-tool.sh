@@ -1,30 +1,8 @@
 #!/bin/bash
 
 clear
-echo "
-##################################################
-#        _                   _              _    #
-#       | |                 | |            | |   #
-#     __| | _____   ________| |_ ___   ___ | |   #
-#    / _  |/ _ \ \ / /______| __/ _ \ / _ \| |   #
-#   | (_| |  __/\ V /       | || (_) | (_) | |   #
-#    \__,_|\___| \_/         \__\___/ \___/|_|   #
-#                                                #
-##################################################
-"
-
-# --- Dev Tool ---
-#
-# To use, source this script in your shell:
-#   $ source dev-tool.sh
-#
-# This will make the following commands available:
-#   - list:   List available modules.
-#   - choose: Select a module to work on (with tab-completion).
-#   - back:   Go back to root module.
-#   - build:  Build the selected module.
-#   - start:  Run the selected module.
-#   - help:   Show this help message.
+echo "------------------------- [ Dev Tool: Start ] -------------------------"
+echo ""
 
 ACTIVE_MODULE=""
 OLD_PS1=$PS1
@@ -66,14 +44,24 @@ back() {
 # Build the selected module
 build() {
   if [ -z "$ACTIVE_MODULE" ]; then
+    mvn clean install
+  else
+    mvn -pl "$ACTIVE_MODULE" -am clean install
+  fi
+}
+
+# Test the selected module
+verify() {
+  if [ -z "$ACTIVE_MODULE" ]; then
     echo "Choose a module first" >&2
     return 1
   fi
-  mvn -pl "$ACTIVE_MODULE" -am clean install
+  mvn -pl "$ACTIVE_MODULE" surefire-report:report
+  start "$ACTIVE_MODULE/target/site/surefire-report.html"
 }
 
 # Run the selected module
-start() {
+run() {
   if [ -z "$ACTIVE_MODULE" ]; then
     echo "Choose a module first" >&2
     return 1
@@ -104,34 +92,45 @@ current() {
     fi
 }
 
+# Commits current changes and opens editor for commit message
+save() {
+    git add .
+    git commit
+}
+
 # Help function
 help() {
     cat <<'EOF'
-Usage: source dev-tool.sh
-
-Commands:
-  list         List available modules.
-  choose <mod> Select a module (e.g., 'choose 01-shapes'). Tab-completion is enabled.
-  back         Go back to root module.
-  build        Build the selected module.
-  start [args] Run the selected module, passing [args] to the application.
-  current      Show the current module.
-  help         Show this help message.
-  exit         Exit the console.
+Available Commands:
+  help          Show this help message.
+  list          List available modules.
+  choose <mod>  Select a module (e.g., 'choose 01-shapes').
+                Tab-completion is enabled.
+  current       Show the current module.
+  back          Go back to root module.
+  build         Build the project / selected module.
+  verify        Run tests and open results in the browser for the
+                selected module.
+  run [args]    Run the selected module, passing [args] to the
+                application.
+  save          Commits current changes and opens editor for commit
+                message.
+  exit          Exit the console.
 EOF
 }
 
 # Exit the console
 exit() {
     unset ACTIVE_MODULE
-    unset -f list choose back build start current help _choose_completion exit
+    unset -f list choose back build verify run current help _choose_completion exit
     complete -r choose
     export PS1=$OLD_PS1
-    echo "Dev tool unloaded"
+    echo ""
+    echo "-------------------------- [ Dev Tool: Stop ] -------------------------"
 }
 
 
 # Register the completion function for the 'choose' command
 complete -F _choose_completion choose
 
-echo "Dev tool loaded. Type 'help' for commands."
+help
