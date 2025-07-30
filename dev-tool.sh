@@ -1,11 +1,21 @@
 #!/bin/bash
 
+BOLD="\033[1m"
+BLUE="\033[34m"
+CYAN="\033[36m"
+GRAY="\033[90m"
+YELLOW="\033[33m"
+GREEN="\033[32m"
+RESET="\033[0m"
+
 clear
-echo "------------------------- [ Dev Tool: Start ] -------------------------"
-echo ""
+echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
+echo -e "${GREEN}│${RESET}  ${BOLD}Dev Tools Started${RESET}${GREEN}                           |${RESET}"
+echo -e "${GREEN}└──────────────────────────────────────────────┘${RESET}"
 
 ACTIVE_MODULE=""
 OLD_PS1=$PS1
+export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
 
 # List available modules
 list() {
@@ -23,7 +33,7 @@ choose() {
 
   if [ -d "$1" ] && [ -f "$1/pom.xml" ]; then
     ACTIVE_MODULE="$1"
-    export PS1="$OLD_PS1[$ACTIVE_MODULE] > "
+    export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]$ACTIVE_MODULE\[\033[1;36m\]]\[\033[0m\] > "
   else
     echo "Invalid module: $1" >&2
     return 1
@@ -37,7 +47,7 @@ back() {
   else
     echo "Exiting module: $ACTIVE_MODULE"
     unset ACTIVE_MODULE
-    export PS1=$OLD_PS1
+    export PS1="$\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
   fi
 }
 
@@ -100,37 +110,38 @@ save() {
 
 # Help function
 help() {
-    cat <<'EOF'
-Available Commands:
-  help          Show this help message.
-  list          List available modules.
-  choose <mod>  Select a module (e.g., 'choose 01-shapes').
-                Tab-completion is enabled.
-  current       Show the current module.
-  back          Go back to root module.
-  build         Build the project / selected module.
-  verify        Run tests and open results in the browser for the
-                selected module.
-  run [args]    Run the selected module, passing [args] to the
-                application.
-  save          Commits current changes and opens editor for commit
-                message.
-  exit          Exit the console.
-EOF
+    echo -e "${BOLD}${CYAN}Available Commands:${RESET}"
+    echo -e "  🆘  ${BOLD}help${RESET}         ${GRAY}Show this help message.${RESET}"
+    echo -e "  📦  ${BOLD}list${RESET}         ${GRAY}List available modules.${RESET}"
+    echo -e "  🎯  ${BOLD}choose <mod>${RESET} ${GRAY}Select a module (e.g., 'choose 01-shapes').${RESET}"
+    echo -e "                   ${GRAY}Tab-completion is enabled.${RESET}"
+    echo -e "  📍  ${BOLD}current${RESET}      ${GRAY}Show the current module.${RESET}"
+    echo -e "  ⬅️  ${BOLD}back${RESET}         ${GRAY}Go back to root module.${RESET}"
+    echo -e "  🛠️  ${BOLD}build${RESET}        ${GRAY}Build the project / selected module.${RESET}"
+    echo -e "  ✅  ${BOLD}verify${RESET}       ${GRAY}Run tests and open results in the browser.${RESET}"
+    echo -e "  🚀  ${BOLD}run [args]${RESET}   ${GRAY}Run the selected module, passing [args].${RESET}"
+    echo -e "  💾  ${BOLD}save${RESET}         ${GRAY}Commit current changes and open editor.${RESET}"
+    echo -e "  ❌  ${BOLD}exit${RESET}         ${GRAY}Exit the console.${RESET}"
 }
 
 # Exit the console
 exit() {
+    export PS1=$OLD_PS1
+
     unset ACTIVE_MODULE
+    unset OLD_PS1
     unset -f list choose back build verify run current help _choose_completion exit
     complete -r choose
-    export PS1=$OLD_PS1
-    echo ""
-    echo "-------------------------- [ Dev Tool: Stop ] -------------------------"
+    
+    echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
+    echo -e "${GREEN}│${RESET}  ${BOLD}Dev Tools Stopped  ${RESET}${GREEN}                         |${RESET}"
+    echo -e "${GREEN}└──────────────────────────────────────────────┘${RESET}"
 }
 
 
 # Register the completion function for the 'choose' command
 complete -F _choose_completion choose
 
+echo ""
 help
+echo ""
