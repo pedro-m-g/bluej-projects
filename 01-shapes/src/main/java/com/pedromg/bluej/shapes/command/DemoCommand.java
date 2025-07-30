@@ -2,6 +2,7 @@ package com.pedromg.bluej.shapes.command;
 
 import com.pedromg.bluej.shapes.demo.CircleDemo;
 import com.pedromg.bluej.shapes.demo.Demo;
+import com.pedromg.bluej.shapes.demo.DemoNotFoundException;
 import com.pedromg.bluej.shapes.demo.SquareDemo;
 import com.pedromg.bluej.shapes.demo.TriangleDemo;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
@@ -11,9 +12,7 @@ import java.util.Map;
 
 public class DemoCommand implements CommandHandler {
 
-  private static final String UNKNOWN_SHAPE_MESSAGE_FORMAT =
-      "Unknown shape: %s. Available shapes: %s";
-  private static final String USAGE_MESSAGE = "Usage: java -jar 01-shapes.jar demo <shape>";
+  private static final String USAGE_MESSAGE = "Usage: start demo <shape>";
 
   private static final Map<String, Demo> DEMOS =
       Map.of(
@@ -26,15 +25,14 @@ public class DemoCommand implements CommandHandler {
    *
    * @param request command line request containing {@code shape} param
    * @throws PreConditionsException if the arguments are invalid
-   * @throws IllegalArgumentException if the shape is not recognized
+   * @throws DemoNotFoundException if the shape is not recognized
    */
   public void handle(CLIRequest request) {
     validatePreConditions(request);
     String shape = request.params().get(0);
 
     if (!DEMOS.containsKey(shape)) {
-      throw new IllegalArgumentException(
-          String.format(UNKNOWN_SHAPE_MESSAGE_FORMAT, shape, DEMOS.keySet()));
+      throw new DemoNotFoundException(shape, DEMOS.keySet());
     }
 
     Canvas canvas = new Canvas();
