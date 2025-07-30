@@ -7,7 +7,6 @@ import com.pedromg.bluej.shapes.demo.TriangleDemo;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
-import java.util.List;
 import java.util.Map;
 
 public class DemoCommand implements CommandHandler {
@@ -25,16 +24,14 @@ public class DemoCommand implements CommandHandler {
   /**
    * Executes the demo command with the specified shape.
    *
-   * @param request command line request containing <shape> param
-   * @throws PreConditionsException if the shape is not recognized or if the arguments are invalid
+   * @param request command line request containing {@code shape} param
+   * @throws PreConditionsException if the arguments are invalid
+   * @throws IllegalArgumentException if the shape is not recognized
    */
   public void handle(CLIRequest request) {
-    List<String> params = request.params();
-    PreConditions.require(params.size() == 1, USAGE_MESSAGE)
-        .andNotNull(params.get(0), USAGE_MESSAGE)
-        .andNot(params.get(0).isBlank(), USAGE_MESSAGE);
+    validatePreConditions(request);
+    String shape = request.params().get(0);
 
-    String shape = params.get(0).toLowerCase();
     if (!DEMOS.containsKey(shape)) {
       throw new IllegalArgumentException(
           String.format(UNKNOWN_SHAPE_MESSAGE_FORMAT, shape, DEMOS.keySet()));
@@ -48,5 +45,12 @@ public class DemoCommand implements CommandHandler {
   @Override
   public String helpMessage() {
     return String.format("Runs the requested demo. Available demos: %s", DEMOS.keySet());
+  }
+
+  private void validatePreConditions(CLIRequest request) {
+    PreConditions.requireNotNull(request, "request must not be null")
+        .and(request.params().size() == 1, USAGE_MESSAGE)
+        .andNotNull(request.params().get(0), USAGE_MESSAGE)
+        .andNot(request.params().get(0).isBlank(), USAGE_MESSAGE);
   }
 }
