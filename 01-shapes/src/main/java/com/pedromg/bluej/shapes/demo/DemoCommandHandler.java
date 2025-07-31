@@ -5,41 +5,45 @@ import com.pedromg.bluej.shapes.command.CommandHandler;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
-import java.util.Map;
 
 public class DemoCommandHandler implements CommandHandler {
 
   private static final String USAGE_MESSAGE = "Usage: start demo <shape>";
 
-  private static final Map<String, Demo> DEMOS =
-      Map.of(
-          "circle", new CircleDemo(),
-          "square", new SquareDemo(),
-          "triangle", new TriangleDemo());
+  private final DemoCatalog demoCatalog;
 
   /**
-   * Executes the demo command with the specified shape.
+   * Creates a DemoConmandHandler
+   *
+   * @param demoCatalog the demo catalog
+   * @throws PreConditionsException if demoCatalog is null
+   */
+  public DemoCommandHandler(DemoCatalog demoCatalog) {
+    PreConditions.requireNotNull(demoCatalog, "demoCatalog must not be null");
+    this.demoCatalog = demoCatalog;
+  }
+
+  /**
+   * Executes the demo command associated to the specified shape.
    *
    * @param request command line request containing {@code shape} param
    * @throws PreConditionsException if the arguments are invalid
-   * @throws DemoNotFoundException if the shape is not recognized
    */
   public void handle(CLIRequest request) {
     validatePreConditions(request);
-    String shape = request.params().get(0);
 
-    if (!DEMOS.containsKey(shape)) {
-      throw new DemoNotFoundException(shape, DEMOS.keySet());
-    }
+    String shape = request.params().get(0);
+    Demo demo = demoCatalog.find(shape);
 
     Canvas canvas = new Canvas();
     canvas.show();
-    DEMOS.get(shape).execute(canvas);
+    demo.execute(canvas);
   }
 
   @Override
   public String helpMessage() {
-    return String.format("Runs the requested demo. Available demos: %s", DEMOS.keySet());
+    return String.format(
+        "Runs the requested demo. Available demos: %s", demoCatalog.availableDemos());
   }
 
   private void validatePreConditions(CLIRequest request) {

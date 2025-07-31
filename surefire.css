@@ -21,11 +21,12 @@ h2 {
     border: dashed 2px #bcdfff;
     color: #3890DC;
     background-color: initial;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 h2:first-child {
     background-color: #dbebf8;
+    color: #3890DC;
     border: initial;
     font-weight: 800;
     letter-spacing: 0.1ch;
@@ -36,6 +37,7 @@ h3 {
     color: #1a8ff5;
     background-color: #e5efff;
     font-weight: 700;
+    margin: 0;
 }
 
 a {

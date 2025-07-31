@@ -3,7 +3,11 @@ package com.pedromg.bluej.shapes;
 import com.pedromg.bluej.shapes.cli.CLICommandHandler;
 import com.pedromg.bluej.shapes.cli.CLIRequest;
 import com.pedromg.bluej.shapes.command.CommandPalette;
+import com.pedromg.bluej.shapes.demo.CircleDemo;
+import com.pedromg.bluej.shapes.demo.DemoCatalog;
 import com.pedromg.bluej.shapes.demo.DemoCommandHandler;
+import com.pedromg.bluej.shapes.demo.SquareDemo;
+import com.pedromg.bluej.shapes.demo.TriangleDemo;
 import com.pedromg.bluej.shapes.parser.CommandParser;
 import javax.swing.SwingUtilities;
 
@@ -22,8 +26,17 @@ public class App {
     try {
       CommandParser parser = new CommandParser();
       CLIRequest request = parser.parse(args);
+
+      DemoCatalog demoCatalog =
+          new DemoCatalog()
+              .register("circle", new CircleDemo())
+              .register("square", new SquareDemo())
+              .register("triangle", new TriangleDemo());
+      DemoCommandHandler demoCommandHandler = new DemoCommandHandler(demoCatalog);
+
       CommandPalette commandPalette =
-          new CommandPalette("start <action>").add("demo", new DemoCommandHandler());
+          new CommandPalette("start <action>").add("demo", demoCommandHandler);
+
       CLICommandHandler cliCommandHandler = new CLICommandHandler(commandPalette);
       cliCommandHandler.handle(request);
     } catch (Exception ex) {
