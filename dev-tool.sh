@@ -69,6 +69,20 @@ build() {
   fi
 }
 
+_inject_style_into_report() {
+  local html="$1"
+  local css_file="$2"
+  local css_name=$(basename "$css_file")
+
+  cp "$css_file" "$(dirname "$html")/$css_name"
+  awk -v link="<link rel=\"stylesheet\" href=\"$css_name\">" '
+    /<\/head>/ {
+      print link
+    }
+    { print }
+  ' "$html" > "${html}.tmp" && mv "${html}.tmp" "$html"
+}
+
 # Test the selected module
 verify() {
   if [ -z "$ACTIVE_MODULE" ]; then
@@ -76,7 +90,12 @@ verify() {
     return 1
   fi
   mvn -pl "$ACTIVE_MODULE" surefire-report:report
-  start "$ACTIVE_MODULE/target/site/surefire-report.html"
+
+  local html="$ACTIVE_MODULE/target/site/surefire-report.html"
+  local css_file="surefire.css"
+  _inject_style_into_report $html $css_file
+
+  start $html
 }
 
 # Run the selected module
