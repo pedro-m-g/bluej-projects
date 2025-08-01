@@ -92,7 +92,7 @@ report() {
 
   local html="$ACTIVE_MODULE/target/site/surefire-report.html"
   local css_file="surefire.css"
-  _inject_style_into_report $html $css_file
+  _inject_style_into_report "$html" "$css_file"
 
   if command -v xdg-open >/dev/null; then
     xdg-open "$html"
@@ -171,7 +171,7 @@ exit() {
 
     unset ACTIVE_MODULE
     unset OLD_PS1
-    unset -f list help list choose current back build report run save branch exit _choose_completion
+    unset -f help list choose current back build report run save branch exit _choose_completion
     complete -r choose
 
     echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
