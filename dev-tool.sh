@@ -83,7 +83,7 @@ _inject_style_into_report() {
 }
 
 # Test the selected module
-verify() {
+report() {
   if [ -z "$ACTIVE_MODULE" ]; then
     echo "Choose a module first" >&2
     return 1
@@ -150,7 +150,7 @@ help() {
     echo -e "  📍  ${BOLD}current${RESET}      ${GRAY}Show the current module.${RESET}"
     echo -e "  ⬅️  ${BOLD}back${RESET}         ${GRAY}Go back to root module.${RESET}"
     echo -e "  🛠️  ${BOLD}build${RESET}        ${GRAY}Build the project / selected module.${RESET}"
-    echo -e "  ✅  ${BOLD}verify${RESET}       ${GRAY}Run tests and open results in the browser.${RESET}"
+    echo -e "  ✅  ${BOLD}report${RESET}       ${GRAY}Run tests and open results in the browser.${RESET}"
     echo -e "  🚀  ${BOLD}run [args]${RESET}   ${GRAY}Run the selected module, passing [args].${RESET}"
     echo -e "  💾  ${BOLD}save${RESET}         ${GRAY}Commit current changes and open editor.${RESET}"
     echo -e "  🌿  ${BOLD}branch${RESET}       ${GRAY}Show the current Git branch.${RESET}"
@@ -163,7 +163,7 @@ exit() {
 
     unset ACTIVE_MODULE
     unset OLD_PS1
-    unset -f list help list choose current back build verify run save branch exit _choose_completion
+    unset -f list help list choose current back build report run save branch exit _choose_completion
     complete -r choose
 
     echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
