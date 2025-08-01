@@ -70,7 +70,8 @@ build() {
 _inject_style_into_report() {
   local html="$1"
   local css_file="$2"
-  local css_name=$(basename "$css_file")
+  local css_name
+  css_name=$(basename "$css_file")
 
   cp "$css_file" "$(dirname "$html")/$css_name"
   awk -v link="<link rel=\"stylesheet\" href=\"$css_name\">" '
