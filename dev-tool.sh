@@ -73,7 +73,10 @@ _inject_style_into_report() {
   local css_name
   css_name=$(basename "$css_file")
 
-  cp "$css_file" "$(dirname "$html")/$css_name"
+  if [[ -f "$css_file" ]]; then
+    cp "$css_file" "$(dirname "$html")/$css_name"
+  fi
+
   awk -v link="<link rel=\"stylesheet\" href=\"$css_name\">" '
     /<\/head>/ {
       print link
@@ -100,6 +103,8 @@ report() {
     open "$html"
   elif command -v start >/dev/null; then
     start "$html"
+  elif command -v wslview >/dev/null; then
+    wslview "$html"
   else
     echo "✔ Test report generated at: $html"
   fi
