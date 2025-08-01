@@ -1,6 +1,7 @@
 package com.pedromg.bluej.shapes.demo;
 
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +30,6 @@ public class DemoCatalog {
   }
 
   public Set<String> availableDemos() {
-    return catalog.keySet();
+    return Collections.unmodifiableSet(catalog.keySet());
   }
 }
