@@ -27,8 +27,7 @@ _modules_raw() {
 # List available modules
 list() {
   for name in $(_modules_raw); do
-    [[ -d "$d" && -f "$d/pom.xml" ]] || continue
-    name="${d%/}"
+    [[ -d "$name" && -f "$name/pom.xml" ]] || continue
     if [[ "$name" == "$ACTIVE_MODULE" ]]; then
       echo -e "  $BULLET_ON $name"
     else
@@ -137,7 +136,7 @@ _choose_completion() {
   local cur opts
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
-  opts=$(opts=$(_modules_raw))
+  opts=$(_modules_raw)
 
   if [ ${COMP_CWORD} -eq 1 ]; then
     mapfile -t COMPREPLY < <(compgen -W "${opts}" -- "${cur}")
