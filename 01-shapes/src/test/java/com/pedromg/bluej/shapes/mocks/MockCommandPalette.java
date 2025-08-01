@@ -1,4 +1,6 @@
-package com.pedromg.bluej.shapes.command;
+package com.pedromg.bluej.shapes.mocks;
+
+import com.pedromg.bluej.shapes.command.CommandPalette;
 
 public class MockCommandPalette extends CommandPalette {
 

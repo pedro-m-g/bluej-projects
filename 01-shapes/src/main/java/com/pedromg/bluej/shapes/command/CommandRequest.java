@@ -5,9 +5,9 @@ import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.List;
 import java.util.Set;
 
-public record CLIRequest(String action, List<String> params, Set<String> flags) {
+public record CommandRequest(String action, List<String> params, Set<String> flags) {
 
-  public CLIRequest {
+  public CommandRequest {
     PreConditions.requireNotBlank(action, "action must not be blank")
         .andNotNull(params, "params must not be null")
         .andNotNull(flags, "flags must not be null");

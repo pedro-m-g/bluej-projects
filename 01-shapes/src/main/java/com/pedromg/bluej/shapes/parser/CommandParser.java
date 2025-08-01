@@ -1,6 +1,6 @@
 package com.pedromg.bluej.shapes.parser;
 
-import com.pedromg.bluej.shapes.command.CLIRequest;
+import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class CommandParser {
    * @throws PreConditionsException if <action> argument is missing
    * @return the parse command request
    */
-  public CLIRequest parse(String[] args) {
+  public CommandRequest parse(String[] args) {
     PreConditions.require(args.length >= 1, USAGE_MESSAGE);
 
     String action = args[0];
@@ -35,6 +35,6 @@ public class CommandParser {
       }
     }
 
-    return new CLIRequest(action, params, flags);
+    return new CommandRequest(action, params, flags);
   }
 }

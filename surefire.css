@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #4552e8;
+    background-color: #ebedff;
+    border: solid 1px #cdd1ff;
+    padding: 10px 20px;
+}
+
+h2 {
+    padding: 10px 15px;
+    border: dashed 2px #bcdfff;
+    color: #3890DC;
+    background-color: initial;
+    font-weight: 600;
+}
+
+h2:first-child {
+    background-color: #dbebf8;
+    color: #3890DC;
+    border: initial;
+    font-weight: 800;
+    letter-spacing: 0.1ch;
+}
+
+h3 {
+    border: 1px solid #9dd1ff;
+    color: #1a8ff5;
+    background-color: #e5efff;
+    font-weight: 700;
+    margin: 0;
+}
+
+a {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    text-decoration: underline;
+    font-weight: 900;
+    color: #006eba;
+}
+
+a:visited {
+    color: #4552e8;
+}
+
+a:hover {
+    color: #036fc9;
+    text-decoration: none;
+    background-color: #e6f2ff;
+    padding: 2px 4px;
+}
+
+a:active {
+    color: #004f99;
+}
+
+#banner {
+    display: none;
+}
+
+#breadcrumbs {
+    background-color: #397ec0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+#footer {
+    background-color: #397ec0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+#leftColumn {
+    display: none;
+}
+
+#bodyColumn {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.xleft {
+    float: none;
+}
+
+.xright {
+    float: none;
+}
+
+table.bodyTable th {
+    background-color: #397ec0;
+    font-weight: 300;
+    padding: 5px 10px;
+}
+
+#contentBox > section:nth-of-type(2) > table.bodyTable th:first-of-type,
+#contentBox > section:nth-of-type(2) > table.bodyTable td:first-of-type,
+#contentBox > section:nth-of-type(3) > table.bodyTable th:first-of-type,
+#contentBox > section:nth-of-type(3) > table.bodyTable td:first-of-type {
+  text-align: left;
+}
+
+table.bodyTable th:first-child, table.bodyTable td:first-child {
+    text-align: center;
+}
+
+table.bodyTable tr.a {
+    background-color: #b0d9ef;
+}
+
+table.bodyTable tr.b {
+    background-color: #d1e5f3;
+}
+
+table.bodyTable td {
+    color: #1b4674;
+    padding: 5px 10px;
+    font-family: "JetBrains Mono", monospace;
+}

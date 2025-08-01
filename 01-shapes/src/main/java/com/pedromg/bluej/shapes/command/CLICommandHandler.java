@@ -18,7 +18,7 @@ public class CLICommandHandler implements CommandHandler {
    * @param request the command line request
    */
   @Override
-  public void handle(CLIRequest request) {
+  public void handle(CommandRequest request) {
     String action = request.action();
     if (commandPalette.hasCommand(action)) {
       CommandHandler handler = commandPalette.find(action);
