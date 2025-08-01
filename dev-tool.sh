@@ -142,7 +142,7 @@ _choose_completion() {
   local cur opts
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
-  opts=$(_modules_raw)
+  opts="$(_modules_raw)"
 
   if [ ${COMP_CWORD} -eq 1 ]; then
     mapfile -t COMPREPLY < <(compgen -W "${opts}" -- "${cur}")
