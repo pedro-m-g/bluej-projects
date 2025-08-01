@@ -27,7 +27,8 @@ public class DemoCommandHandler implements CommandHandler {
    * Executes the demo command associated to the specified shape.
    *
    * @param request command line request containing {@code shape} param
-   * @throws PreConditionsException if the arguments are invalid
+   * @throws PreConditionsException if the arguments are invalid or the shape param is not in demo
+   *     catalog
    */
   public void handle(CommandRequest request) {
     validatePreConditions(request);
