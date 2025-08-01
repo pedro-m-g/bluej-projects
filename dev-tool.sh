@@ -79,12 +79,14 @@ _inject_style_into_report() {
     cp "$css_file" "$(dirname "$html")/$css_name"
   fi
 
-  awk -v link="<link rel=\"stylesheet\" href=\"$css_name\">" '
-    /<\/head>/ {
-      print link
-    }
-    { print }
-  ' "$html" > "${html}.tmp" && mv "${html}.tmp" "$html"
+  if ! grep -q "$css_name" "$html"; then
+    awk -v link="<link rel=\"stylesheet\" href=\"$css_name\">" '
+      /<\/head>/ {
+        print link
+      }
+      { print }
+    ' "$html" > "${html}.tmp" && mv "${html}.tmp" "$html"
+  fi
 }
 
 # Run tests and open results in the browser
