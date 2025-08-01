@@ -167,7 +167,11 @@ current() {
 # Commits current changes and opens editor for commit message
 save() {
     git add .
-    git commit
+    if ! git diff --cached --quiet; then
+        git commit
+    else
+        echo "Nothing to commit – working tree clean"
+    fi
 }
 
 # Shows current git branch
