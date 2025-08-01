@@ -54,7 +54,7 @@ back() {
   else
     echo "Exiting module: $ACTIVE_MODULE"
     unset ACTIVE_MODULE
-    export PS1="$\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
+    export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
   fi
 }
 
