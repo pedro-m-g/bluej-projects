@@ -82,7 +82,7 @@ _inject_style_into_report() {
   ' "$html" > "${html}.tmp" && mv "${html}.tmp" "$html"
 }
 
-# Test the selected module
+# Run tests and open results in the browser
 report() {
   if [ -z "$ACTIVE_MODULE" ]; then
     echo "Choose a module first" >&2
@@ -94,7 +94,15 @@ report() {
   local css_file="surefire.css"
   _inject_style_into_report $html $css_file
 
-  start $html
+  if command -v xdg-open >/dev/null; then
+    xdg-open "$html"
+  elif command -v open >/dev/null; then
+    open "$html"
+  elif command -v start >/dev/null; then
+    start "$html"
+  else
+    echo "✔ Test report generated at: $html"
+  fi
 }
 
 # Run the selected module
