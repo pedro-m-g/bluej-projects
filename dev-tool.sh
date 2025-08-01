@@ -22,12 +22,16 @@ OLD_PS1=$PS1
 export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
 
 _modules_raw() {
-  # suppress literal pattern when no match
+  # suppress literal pattern when no match – remember prior state
+  local _ng_was_set=false
+  shopt -q nullglob && _ng_was_set=true
   shopt -s nullglob
+
   for d in [0-9][0-9]-*/ ; do
     [[ -d "$d" && -f "$d/pom.xml" ]] && printf '%s\n' "${d%/}"
   done
-  shopt -u nullglob
+
+  $_ng_was_set || shopt -u nullglob
 }
 
 # List available modules
