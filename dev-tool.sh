@@ -121,7 +121,7 @@ report() {
   elif command -v open >/dev/null; then
     open "$html"
   elif command -v start >/dev/null; then
-    start "$html"
+    start "" "$html"
   elif command -v wslview >/dev/null; then
     wslview "$html"
   else
@@ -202,7 +202,9 @@ exit() {
 
     unset ACTIVE_MODULE
     unset OLD_PS1
-    unset -f help list choose current back build report run save branch exit _choose_completion
+    unset -f help list choose current back build report run save branch\
+      exit _choose_completion _modules_raw _inject_style_into_report
+      
     complete -r choose
 
     echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
