@@ -73,6 +73,8 @@ _inject_style_into_report() {
   local css_name
   css_name=$(basename "$css_file")
 
+  [[ -f "$html" ]] || { echo "Report not found: $html" >&2; return; }
+
   if [[ -f "$css_file" ]]; then
     cp "$css_file" "$(dirname "$html")/$css_name"
   fi
@@ -116,7 +118,10 @@ run() {
     echo "Choose a module first" >&2
     return 1
   fi
-  mvn -pl "$ACTIVE_MODULE" exec:java -Dexec.args="$*"
+  # Preserve original argument boundaries
+  local quoted
+  printf -v quoted '%q ' "$@"
+  mvn -pl "$ACTIVE_MODULE" exec:java -Dexec.args="${quoted% }"
 }
 
 # Autocompletion function for 'choose'
