@@ -1,8 +1,8 @@
 package com.pedromg.bluej.shapes;
 
-import com.pedromg.bluej.shapes.cli.CLICommandHandler;
-import com.pedromg.bluej.shapes.cli.CLIRequest;
+import com.pedromg.bluej.shapes.command.CLICommandHandler;
 import com.pedromg.bluej.shapes.command.CommandPalette;
+import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.demo.CircleDemo;
 import com.pedromg.bluej.shapes.demo.DemoCatalog;
 import com.pedromg.bluej.shapes.demo.DemoCommandHandler;
@@ -25,7 +25,7 @@ public class App {
   private static void run(String[] args) {
     try {
       CommandParser parser = new CommandParser();
-      CLIRequest request = parser.parse(args);
+      CommandRequest request = parser.parse(args);
 
       DemoCatalog demoCatalog =
           new DemoCatalog()

@@ -1,7 +1,5 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.command;
 
-import com.pedromg.bluej.shapes.command.CommandHandler;
-import com.pedromg.bluej.shapes.command.CommandPalette;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 
 public class CLICommandHandler implements CommandHandler {
@@ -20,7 +18,7 @@ public class CLICommandHandler implements CommandHandler {
    * @param request the command line request
    */
   @Override
-  public void handle(CLIRequest request) {
+  public void handle(CommandRequest request) {
     String action = request.action();
     if (commandPalette.hasCommand(action)) {
       CommandHandler handler = commandPalette.find(action);

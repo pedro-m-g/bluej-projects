@@ -3,7 +3,7 @@ package com.pedromg.bluej.shapes.demo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.pedromg.bluej.shapes.cli.CLIRequest;
+import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.mocks.MockDemo;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.List;
@@ -30,7 +30,7 @@ class DemoCommandHandlerTest {
   void shouldThrowWhenRequestIsInvalid(List<String> params, Set<String> flags) {
     // Given
     DemoCommandHandler command = new DemoCommandHandler(new DemoCatalog());
-    CLIRequest request = new CLIRequest("demo", params, flags);
+    CommandRequest request = new CommandRequest("demo", params, flags);
 
     // Then
     assertThrows(PreConditionsException.class, () -> command.handle(request));
@@ -48,7 +48,7 @@ class DemoCommandHandlerTest {
     // Given
     DemoCommandHandler command =
         new DemoCommandHandler(new DemoCatalog().register("circle", new MockDemo()));
-    CLIRequest request = new CLIRequest("demo", List.of("pentagon"), Set.of());
+    CommandRequest request = new CommandRequest("demo", List.of("pentagon"), Set.of());
 
     // When
     assertThrows(PreConditionsException.class, () -> command.handle(request));
@@ -60,7 +60,7 @@ class DemoCommandHandlerTest {
     MockDemo mockDemo = new MockDemo();
     DemoCatalog demoCatalog = new DemoCatalog().register("circle", mockDemo);
     DemoCommandHandler handler = new DemoCommandHandler(demoCatalog);
-    CLIRequest request = new CLIRequest("demo", List.of("circle"), Set.of());
+    CommandRequest request = new CommandRequest("demo", List.of("circle"), Set.of());
 
     // When
     handler.handle(request);

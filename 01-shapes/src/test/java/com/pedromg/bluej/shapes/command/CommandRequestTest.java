@@ -1,4 +1,4 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,7 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-class CLIRequestTest {
+class CommandRequestTest {
 
   @Test
   void shouldConstructWithValidSetup() {
@@ -22,7 +22,7 @@ class CLIRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    CLIRequest request = new CLIRequest(action, params, flags);
+    CommandRequest request = new CommandRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -38,7 +38,7 @@ class CLIRequestTest {
     Set<String> flags = Set.of("verbose");
 
     // When
-    CLIRequest request = new CLIRequest(action, params, flags);
+    CommandRequest request = new CommandRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -54,7 +54,7 @@ class CLIRequestTest {
     Set<String> flags = Set.of();
 
     // When
-    CLIRequest request = new CLIRequest(action, params, flags);
+    CommandRequest request = new CommandRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -70,7 +70,7 @@ class CLIRequestTest {
     Set<String> flags = Set.of();
 
     // When
-    CLIRequest request = new CLIRequest(action, params, flags);
+    CommandRequest request = new CommandRequest(action, params, flags);
 
     // Then
     assertEquals(action, request.action());
@@ -87,7 +87,7 @@ class CLIRequestTest {
 
     // When
     PreConditionsException exception =
-        assertThrows(PreConditionsException.class, () -> new CLIRequest(action, params, flags));
+        assertThrows(PreConditionsException.class, () -> new CommandRequest(action, params, flags));
 
     // Then
     assertEquals(expectedViolation, exception.getMessage());
@@ -109,7 +109,7 @@ class CLIRequestTest {
 
     // When
     PreConditionsException exception =
-        assertThrows(PreConditionsException.class, () -> new CLIRequest(action, params, flags));
+        assertThrows(PreConditionsException.class, () -> new CommandRequest(action, params, flags));
 
     // Then
     assertEquals("params must not be null", exception.getMessage());
@@ -124,7 +124,7 @@ class CLIRequestTest {
 
     // When
     PreConditionsException exception =
-        assertThrows(PreConditionsException.class, () -> new CLIRequest(action, params, flags));
+        assertThrows(PreConditionsException.class, () -> new CommandRequest(action, params, flags));
 
     // Then
     assertEquals("flags must not be null", exception.getMessage());
@@ -134,7 +134,7 @@ class CLIRequestTest {
   @MethodSource("flagsProvider")
   void shouldDetectFlag(Set<String> flags, String flagName, boolean expectedResult) {
     // Given
-    CLIRequest commandRequest = new CLIRequest("demo", List.of("circle"), flags);
+    CommandRequest commandRequest = new CommandRequest("demo", List.of("circle"), flags);
 
     // When
     boolean actualResult = commandRequest.hasFlag(flagName);

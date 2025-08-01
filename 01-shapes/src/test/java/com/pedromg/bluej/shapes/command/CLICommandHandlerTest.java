@@ -1,9 +1,8 @@
-package com.pedromg.bluej.shapes.cli;
+package com.pedromg.bluej.shapes.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import com.pedromg.bluej.shapes.command.CommandPalette;
 import com.pedromg.bluej.shapes.mocks.MockCommandHandler;
 import com.pedromg.bluej.shapes.mocks.MockCommandPalette;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
@@ -21,7 +20,7 @@ class CLICommandHandlerTest {
     CLICommandHandler handler = new CLICommandHandler(palette);
 
     // When
-    handler.handle(new CLIRequest("mock", List.of(), Set.of()));
+    handler.handle(new CommandRequest("mock", List.of(), Set.of()));
 
     // Then
     assertEquals(1, mockCommandHandler.numCalls());
@@ -39,7 +38,7 @@ class CLICommandHandlerTest {
     CLICommandHandler handler = new CLICommandHandler(palette);
 
     // When
-    handler.handle(new CLIRequest("mock", List.of(), Set.of()));
+    handler.handle(new CommandRequest("mock", List.of(), Set.of()));
 
     // Then
     assertEquals(1, palette.helpCalls());

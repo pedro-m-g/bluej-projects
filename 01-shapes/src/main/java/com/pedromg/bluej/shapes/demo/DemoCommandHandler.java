@@ -1,7 +1,7 @@
 package com.pedromg.bluej.shapes.demo;
 
-import com.pedromg.bluej.shapes.cli.CLIRequest;
 import com.pedromg.bluej.shapes.command.CommandHandler;
+import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
@@ -29,7 +29,7 @@ public class DemoCommandHandler implements CommandHandler {
    * @param request command line request containing {@code shape} param
    * @throws PreConditionsException if the arguments are invalid
    */
-  public void handle(CLIRequest request) {
+  public void handle(CommandRequest request) {
     validatePreConditions(request);
 
     String shape = request.params().get(0);
@@ -46,7 +46,7 @@ public class DemoCommandHandler implements CommandHandler {
         "Runs the requested demo. Available demos: %s", demoCatalog.availableDemos());
   }
 
-  private void validatePreConditions(CLIRequest request) {
+  private void validatePreConditions(CommandRequest request) {
     PreConditions.requireNotNull(request, "request must not be null")
         .and(request.params().size() == 1, USAGE_MESSAGE)
         .andNotNull(request.params().get(0), USAGE_MESSAGE)
