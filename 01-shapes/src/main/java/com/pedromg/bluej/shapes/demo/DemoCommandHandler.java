@@ -13,7 +13,7 @@ public class DemoCommandHandler implements CommandHandler {
   private final DemoCatalog demoCatalog;
 
   /**
-   * Creates a DemoConmandHandler
+   * Creates a DemoCommandHandler
    *
    * @param demoCatalog the demo catalog
    * @throws PreConditionsException if demoCatalog is null
