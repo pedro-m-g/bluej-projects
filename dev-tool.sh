@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Fail fast & bubble up errors
+set -Eeuo pipefail
+
 BOLD="\033[1m"
 CYAN="\033[36m"
 GRAY="\033[90m"
@@ -19,9 +22,12 @@ OLD_PS1=$PS1
 export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
 
 _modules_raw() {
+  # suppress literal pattern when no match
+  shopt -s nullglob
   for d in [0-9][0-9]-*/ ; do
     [[ -d "$d" && -f "$d/pom.xml" ]] && printf '%s\n' "${d%/}"
   done
+  shopt -u nullglob
 }
 
 # List available modules
@@ -84,7 +90,7 @@ _inject_style_into_report() {
     cp "$css_file" "$(dirname "$html")/$css_name"
   fi
 
-  if ! grep -q "$css_name" "$html"; then
+  if ! grep -qF "$css_name" "$html"; then
     awk -v link="<link rel=\"stylesheet\" href=\"$css_name\">" '
       /<\/head>/ {
         print link
