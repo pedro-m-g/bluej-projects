@@ -1,10 +1,8 @@
 #!/bin/bash
 
 BOLD="\033[1m"
-BLUE="\033[34m"
 CYAN="\033[36m"
 GRAY="\033[90m"
-YELLOW="\033[33m"
 GREEN="\033[32m"
 RESET="\033[0m"
 
