@@ -18,9 +18,15 @@ ACTIVE_MODULE=""
 OLD_PS1=$PS1
 export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
 
+_modules_raw() {
+  for d in [0-9][0-9]-*/ ; do
+    [[ -d "$d" && -f "$d/pom.xml" ]] && printf '%s\n' "${d%/}"
+  done
+}
+
 # List available modules
 list() {
-  for d in [0-9][0-9]-*/ ; do
+  for name in $(_modules_raw); do
     [[ -d "$d" && -f "$d/pom.xml" ]] || continue
     name="${d%/}"
     if [[ "$name" == "$ACTIVE_MODULE" ]]; then
@@ -75,7 +81,7 @@ _inject_style_into_report() {
 
   [[ -f "$html" ]] || { echo "Report not found: $html" >&2; return; }
 
-  if [[ -f "$css_file" ]]; then
+  if [[ -f "$css_file" && ! -f "$(dirname "$html")/$css_name" ]]; then
     cp "$css_file" "$(dirname "$html")/$css_name"
   fi
 
@@ -131,7 +137,7 @@ _choose_completion() {
   local cur opts
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
-  opts=$(list)
+  opts=$(opts=$(_modules_raw))
 
   if [ ${COMP_CWORD} -eq 1 ]; then
     mapfile -t COMPREPLY < <(compgen -W "${opts}" -- "${cur}")
