@@ -17,7 +17,7 @@ class CLICommandHandlerTest {
     // Given
     MockCommandHandler mockCommandHandler = new MockCommandHandler();
     CommandPalette palette = new CommandPalette().add("mock", mockCommandHandler);
-    CLICommandHandler handler = new CLICommandHandler(palette);
+    CommandDispatcher handler = new CommandDispatcher(palette);
 
     // When
     handler.handle(new CommandRequest("mock", List.of(), Set.of()));
@@ -28,14 +28,14 @@ class CLICommandHandlerTest {
 
   @Test
   void shouldRejectNullCommandPalette() {
-    assertThrows(PreConditionsException.class, () -> new CLICommandHandler(null));
+    assertThrows(PreConditionsException.class, () -> new CommandDispatcher(null));
   }
 
   @Test
   void shouldCallHelpWhenCommandIsUnknown() {
     // Given
     MockCommandPalette palette = new MockCommandPalette();
-    CLICommandHandler handler = new CLICommandHandler(palette);
+    CommandDispatcher handler = new CommandDispatcher(palette);
 
     // When
     handler.handle(new CommandRequest("mock", List.of(), Set.of()));
