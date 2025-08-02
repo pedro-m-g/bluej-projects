@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Fail fast & bubble up errors
-set -Eeuo pipefail
-
 BOLD="\033[1m"
 CYAN="\033[36m"
 GRAY="\033[90m"
