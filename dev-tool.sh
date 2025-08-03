@@ -16,7 +16,7 @@ echo -e "${GREEN}└────────────────────
 
 ACTIVE_MODULE=""
 OLD_PS1=$PS1
-export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
+export PS1="${CYAN}[dev-tools:${GREEN}root${CYAN}]${RESET} $ "
 
 _modules_raw() {
   # suppress literal pattern when no match – remember prior state
@@ -52,7 +52,7 @@ choose() {
 
   if [ -d "$1" ] && [ -f "$1/pom.xml" ]; then
     ACTIVE_MODULE="$1"
-    export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]$ACTIVE_MODULE\[\033[1;36m\]]\[\033[0m\] > "
+    export PS1="${CYAN}[dev-tools:${GREEN}${ACTIVE_MODULE}${CYAN}]${RESET} $ "
   else
     echo "Invalid module: $1" >&2
     return 1
@@ -66,7 +66,7 @@ back() {
   else
     echo "Exiting module: $ACTIVE_MODULE"
     unset ACTIVE_MODULE
-    export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
+    export PS1="${CYAN}[dev-tools:${GREEN}root${CYAN}]${RESET} $ "
   fi
 }
 
