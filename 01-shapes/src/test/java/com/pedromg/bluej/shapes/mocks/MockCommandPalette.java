@@ -7,7 +7,7 @@ public class MockCommandPalette extends CommandPalette {
   private int helpCalls = 0;
 
   @Override
-  public String help() {
+  public String helpMessage() {
     helpCalls++;
     return "Mock Command";
   }

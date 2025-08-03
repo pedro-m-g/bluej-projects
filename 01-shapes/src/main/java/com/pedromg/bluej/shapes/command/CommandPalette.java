@@ -45,7 +45,7 @@ public class CommandPalette {
     return handlers.get(name);
   }
 
-  public String help() {
+  public String helpMessage() {
     StringBuilder builder = new StringBuilder();
     if (usageMessage != null) {
       builder.append("Usage: " + usageMessage + "\n");

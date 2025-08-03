@@ -24,12 +24,12 @@ public class CommandDispatcher implements CommandHandler {
       CommandHandler handler = commandPalette.find(action);
       handler.handle(request);
     } else {
-      commandPalette.help();
+      commandPalette.helpMessage();
     }
   }
 
   @Override
   public String helpMessage() {
-    return commandPalette.help();
+    return commandPalette.helpMessage();
   }
 }
