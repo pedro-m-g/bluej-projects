@@ -30,6 +30,6 @@ public class CommandDispatcher implements CommandHandler {
 
   @Override
   public String helpMessage() {
-    return "App entry point";
+    return commandPalette.help();
   }
 }

@@ -45,21 +45,26 @@ public class CommandPalette {
     return handlers.get(name);
   }
 
-  public void help() {
+  public String help() {
+    StringBuilder builder = new StringBuilder();
     if (usageMessage != null) {
-      System.out.println("Usage: " + usageMessage + "\n");
+      builder.append("Usage: " + usageMessage + "\n");
     }
 
     if (handlers.entrySet().isEmpty()) {
-      System.out.println("No commands registered");
-      return;
+      builder.append("No commands registered");
+      return builder.toString();
     }
 
     System.out.println("Available commands:\n");
-    handlers.entrySet().forEach(entry -> printHelpEntry(entry.getKey(), entry.getValue()));
+    handlers
+        .entrySet()
+        .forEach(entry -> builder.append(helpEntry(entry.getKey(), entry.getValue())));
+
+    return builder.toString();
   }
 
-  private void printHelpEntry(String name, CommandHandler handler) {
-    System.out.println("    " + name + ": " + handler.helpMessage());
+  private String helpEntry(String name, CommandHandler handler) {
+    return "    " + name + ": " + handler.helpMessage();
   }
 }

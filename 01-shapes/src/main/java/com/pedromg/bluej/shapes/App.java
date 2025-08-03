@@ -1,5 +1,7 @@
 package com.pedromg.bluej.shapes;
 
+import com.pedromg.bluej.shapes.config.CommandConfiguration;
+import com.pedromg.bluej.shapes.parser.CommandParser;
 import javax.swing.SwingUtilities;
 
 public class App {
@@ -10,7 +12,9 @@ public class App {
    * @param args command-line arguments
    */
   public static void main(String[] args) {
-    Launcher launcher = new Launcher();
+    Launcher launcher =
+        new Launcher(new CommandParser(), new CommandConfiguration().commandDispatcher());
+
     SwingUtilities.invokeLater(() -> launcher.launchApp(args));
   }
 }

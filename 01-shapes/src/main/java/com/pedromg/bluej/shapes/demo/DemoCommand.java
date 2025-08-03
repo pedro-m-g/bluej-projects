@@ -8,8 +8,6 @@ import com.pedromg.bluej.shapes.ui.Canvas;
 
 public class DemoCommand implements CommandHandler {
 
-  private static final String USAGE_MESSAGE = "Usage: start demo <shape>";
-
   private final DemoCatalog demoCatalog;
 
   /**
@@ -49,8 +47,7 @@ public class DemoCommand implements CommandHandler {
 
   private void validatePreConditions(CommandRequest request) {
     PreConditions.requireNotNull(request, "request must not be null")
-        .and(request.params().size() == 1, USAGE_MESSAGE)
-        .andNotNull(request.params().get(0), USAGE_MESSAGE)
-        .andNot(request.params().get(0).isBlank(), USAGE_MESSAGE);
+        .and(request.params().size() == 1, "request must have exactly one argument")
+        .andNotBlank(request.params().get(0), "requested demo must not be blank");
   }
 }

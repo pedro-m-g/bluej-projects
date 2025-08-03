@@ -1,31 +1,30 @@
 package com.pedromg.bluej.shapes;
 
 import com.pedromg.bluej.shapes.command.CommandDispatcher;
-import com.pedromg.bluej.shapes.command.CommandPalette;
 import com.pedromg.bluej.shapes.command.CommandRequest;
-import com.pedromg.bluej.shapes.demo.CircleDemo;
-import com.pedromg.bluej.shapes.demo.DemoCatalog;
-import com.pedromg.bluej.shapes.demo.DemoCommand;
-import com.pedromg.bluej.shapes.demo.SquareDemo;
-import com.pedromg.bluej.shapes.demo.TriangleDemo;
 import com.pedromg.bluej.shapes.parser.CommandParser;
+import com.pedromg.bluej.shapes.preconditions.PreConditions;
+import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 
 public class Launcher {
 
+  private final CommandParser commandParser;
+  private final CommandDispatcher dispatcher;
+
+  public Launcher(CommandParser commandParser, CommandDispatcher dispatcher) {
+    PreConditions.requireNotNull(commandParser, "commandParser must not be null")
+        .andNotNull(dispatcher, "commandConfiguration must not be null");
+
+    this.commandParser = commandParser;
+    this.dispatcher = dispatcher;
+  }
+
   public void launchApp(String[] args) {
-    CommandParser parser = new CommandParser();
-    CommandRequest request = parser.parse(args);
-
-    DemoCatalog demoCatalog =
-        new DemoCatalog()
-            .register("circle", new CircleDemo())
-            .register("square", new SquareDemo())
-            .register("triangle", new TriangleDemo());
-    DemoCommand demoCommand = new DemoCommand(demoCatalog);
-
-    CommandPalette commandPalette = new CommandPalette("start <action>").add("demo", demoCommand);
-
-    CommandDispatcher dispatcher = new CommandDispatcher(commandPalette);
-    dispatcher.handle(request);
+    try {
+      CommandRequest request = commandParser.parse(args);
+      dispatcher.handle(request);
+    } catch (PreConditionsException exception) {
+      System.err.println(dispatcher.helpMessage());
+    }
   }
 }
