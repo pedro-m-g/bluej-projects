@@ -49,7 +49,7 @@ class DemoCommandHandlerTest {
     DemoCommand command = new DemoCommand(new DemoCatalog().register("circle", new MockDemo()));
     CommandRequest request = new CommandRequest("demo", List.of("pentagon"), Set.of());
 
-    // When
+    // Then
     assertThrows(PreConditionsException.class, () -> command.handle(request));
   }
 

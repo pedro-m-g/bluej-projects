@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
-class CLICommandHandlerTest {
+class CommandDispatcherTest {
 
   @Test
   void shouldExecuteCommandSuccessfully() {

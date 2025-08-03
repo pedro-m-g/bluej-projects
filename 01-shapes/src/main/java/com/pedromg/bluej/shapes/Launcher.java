@@ -1,8 +1,8 @@
 package com.pedromg.bluej.shapes;
 
 import com.pedromg.bluej.shapes.command.CommandDispatcher;
+import com.pedromg.bluej.shapes.command.CommandParser;
 import com.pedromg.bluej.shapes.command.CommandRequest;
-import com.pedromg.bluej.shapes.parser.CommandParser;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 

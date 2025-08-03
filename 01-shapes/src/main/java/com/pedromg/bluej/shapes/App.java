@@ -1,7 +1,7 @@
 package com.pedromg.bluej.shapes;
 
+import com.pedromg.bluej.shapes.command.CommandParser;
 import com.pedromg.bluej.shapes.config.CommandConfiguration;
-import com.pedromg.bluej.shapes.parser.CommandParser;
 import javax.swing.SwingUtilities;
 
 public class App {

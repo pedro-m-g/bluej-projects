@@ -1,6 +1,5 @@
-package com.pedromg.bluej.shapes.parser;
+package com.pedromg.bluej.shapes.command;
 
-import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.ArrayList;
