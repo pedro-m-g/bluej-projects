@@ -56,7 +56,7 @@ public class CommandPalette {
       return builder.toString();
     }
 
-    System.out.println("Available commands:\n");
+    builder.append("Available commands:\n");
     handlers
         .entrySet()
         .forEach(entry -> builder.append(helpEntry(entry.getKey(), entry.getValue())));

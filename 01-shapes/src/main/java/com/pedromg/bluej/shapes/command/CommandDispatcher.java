@@ -24,7 +24,7 @@ public class CommandDispatcher implements CommandHandler {
       CommandHandler handler = commandPalette.find(action);
       handler.handle(request);
     } else {
-      commandPalette.helpMessage();
+      System.err.println(helpMessage());
     }
   }
 

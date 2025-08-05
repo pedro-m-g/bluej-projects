@@ -13,7 +13,7 @@ public class Launcher {
 
   public Launcher(CommandParser commandParser, CommandDispatcher dispatcher) {
     PreConditions.requireNotNull(commandParser, "commandParser must not be null")
-        .andNotNull(dispatcher, "commandConfiguration must not be null");
+        .andNotNull(dispatcher, "dispatcher must not be null");
 
     this.commandParser = commandParser;
     this.dispatcher = dispatcher;

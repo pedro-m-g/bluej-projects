@@ -162,7 +162,7 @@ current() {
 }
 
 # Commits current changes and opens editor for commit message
-save() {
+commit() {
     git add .
     if ! git diff --cached --quiet; then
         git commit
@@ -178,7 +178,11 @@ branch() {
 
 # Initialize a new branch
 init() {
-    git checkout -b $1
+    if [ -z "$1" ]; then
+        echo "Usage: init <branch>" >&2
+        return 1
+    fi
+    git checkout -b "$1"
 }
 
 # Help function
@@ -192,7 +196,7 @@ help() {
     echo -e "  🛠️  ${BOLD}build${RESET}        ${GRAY}Build the project / selected module.${RESET}"
     echo -e "  ✅  ${BOLD}report${RESET}       ${GRAY}Run tests and open results in the browser.${RESET}"
     echo -e "  🚀  ${BOLD}run [args]${RESET}   ${GRAY}Run the selected module, passing [args].${RESET}"
-    echo -e "  💾  ${BOLD}save${RESET}         ${GRAY}Commit current changes and open editor.${RESET}"
+    echo -e "  💾  ${BOLD}commit${RESET}       ${GRAY}Commit current changes and open editor.${RESET}"
     echo -e "  🌿  ${BOLD}branch${RESET}       ${GRAY}Show the current Git branch.${RESET}"
     echo -e "  ➕  ${BOLD}init${RESET}         ${GRAY}Initialize a new branch.${RESET}"
     echo -e "  ❌  ${BOLD}exit${RESET}         ${GRAY}Exit the console.${RESET}"
@@ -204,9 +208,9 @@ exit() {
 
     unset ACTIVE_MODULE
     unset OLD_PS1
-    unset -f help list choose current back build report run save branch init exit _choose_completion \
+    unset -f help list choose current back build report run commit branch init exit _choose_completion \
       _modules_raw _inject_style_into_report
-      
+
     complete -r choose
 
     echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"
