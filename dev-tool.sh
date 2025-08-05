@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Fail fast & bubble up errors
-set -Eeuo pipefail
-
 BOLD="\033[1m"
 CYAN="\033[36m"
 GRAY="\033[90m"
@@ -19,7 +16,7 @@ echo -e "${GREEN}└────────────────────
 
 ACTIVE_MODULE=""
 OLD_PS1=$PS1
-export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
+export PS1="${CYAN}[dev-tools:${GREEN}root${CYAN}]${RESET} $ "
 
 _modules_raw() {
   # suppress literal pattern when no match – remember prior state
@@ -55,7 +52,7 @@ choose() {
 
   if [ -d "$1" ] && [ -f "$1/pom.xml" ]; then
     ACTIVE_MODULE="$1"
-    export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]$ACTIVE_MODULE\[\033[1;36m\]]\[\033[0m\] > "
+    export PS1="${CYAN}[dev-tools:${GREEN}${ACTIVE_MODULE}${CYAN}]${RESET} $ "
   else
     echo "Invalid module: $1" >&2
     return 1
@@ -69,7 +66,7 @@ back() {
   else
     echo "Exiting module: $ACTIVE_MODULE"
     unset ACTIVE_MODULE
-    export PS1="\[\033[1;36m\][dev-tools:\[\033[0;32m\]root\[\033[1;36m\]]\[\033[0m\] > "
+    export PS1="${CYAN}[dev-tools:${GREEN}root${CYAN}]${RESET} $ "
   fi
 }
 
@@ -165,7 +162,7 @@ current() {
 }
 
 # Commits current changes and opens editor for commit message
-save() {
+commit() {
     git add .
     if ! git diff --cached --quiet; then
         git commit
@@ -179,20 +176,29 @@ branch() {
     git branch --show-current
 }
 
+# Initialize a new branch
+init() {
+    if [ -z "$1" ]; then
+        echo "Usage: init <branch>" >&2
+        return 1
+    fi
+    git checkout -b "$1"
+}
+
 # Help function
 help() {
     echo -e "${BOLD}${CYAN}Available Commands:${RESET}"
     echo -e "  🆘  ${BOLD}help${RESET}         ${GRAY}Show this help message.${RESET}"
     echo -e "  📦  ${BOLD}list${RESET}         ${GRAY}List available modules.${RESET}"
-    echo -e "  🎯  ${BOLD}choose <mod>${RESET} ${GRAY}Select a module (e.g., 'choose 01-shapes').${RESET}"
-    echo -e "                   ${GRAY}Tab-completion is enabled.${RESET}"
+    echo -e "  🎯  ${BOLD}choose <mod>${RESET} ${GRAY}Select a module (e.g., 'choose 01-shapes'). Tab-completion is enabled.${RESET}"
     echo -e "  📍  ${BOLD}current${RESET}      ${GRAY}Show the current module.${RESET}"
     echo -e "  ⬅️  ${BOLD}back${RESET}         ${GRAY}Go back to root module.${RESET}"
     echo -e "  🛠️  ${BOLD}build${RESET}        ${GRAY}Build the project / selected module.${RESET}"
     echo -e "  ✅  ${BOLD}report${RESET}       ${GRAY}Run tests and open results in the browser.${RESET}"
     echo -e "  🚀  ${BOLD}run [args]${RESET}   ${GRAY}Run the selected module, passing [args].${RESET}"
-    echo -e "  💾  ${BOLD}save${RESET}         ${GRAY}Commit current changes and open editor.${RESET}"
+    echo -e "  💾  ${BOLD}commit${RESET}       ${GRAY}Commit current changes and open editor.${RESET}"
     echo -e "  🌿  ${BOLD}branch${RESET}       ${GRAY}Show the current Git branch.${RESET}"
+    echo -e "  ➕  ${BOLD}init${RESET}         ${GRAY}Initialize a new branch.${RESET}"
     echo -e "  ❌  ${BOLD}exit${RESET}         ${GRAY}Exit the console.${RESET}"
 }
 
@@ -202,9 +208,9 @@ exit() {
 
     unset ACTIVE_MODULE
     unset OLD_PS1
-    unset -f help list choose current back build report run save branch\
-      exit _choose_completion _modules_raw _inject_style_into_report
-      
+    unset -f help list choose current back build report run commit branch init exit _choose_completion \
+      _modules_raw _inject_style_into_report
+
     complete -r choose
 
     echo -e "${GREEN}┌──────────────────────────────────────────────┐${RESET}"

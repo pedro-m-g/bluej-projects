@@ -2,11 +2,11 @@ package com.pedromg.bluej.shapes.command;
 
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 
-public class CLICommandHandler implements CommandHandler {
+public class CommandDispatcher implements CommandHandler {
 
   private final CommandPalette commandPalette;
 
-  public CLICommandHandler(CommandPalette commandPalette) {
+  public CommandDispatcher(CommandPalette commandPalette) {
     PreConditions.requireNotNull(commandPalette, "commandPalette must not be null");
 
     this.commandPalette = commandPalette;
@@ -24,12 +24,12 @@ public class CLICommandHandler implements CommandHandler {
       CommandHandler handler = commandPalette.find(action);
       handler.handle(request);
     } else {
-      commandPalette.help();
+      System.err.println(helpMessage());
     }
   }
 
   @Override
   public String helpMessage() {
-    return "App entry point";
+    return commandPalette.helpMessage();
   }
 }

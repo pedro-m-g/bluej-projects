@@ -6,9 +6,7 @@ import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
 
-public class DemoCommandHandler implements CommandHandler {
-
-  private static final String USAGE_MESSAGE = "Usage: start demo <shape>";
+public class DemoCommand implements CommandHandler {
 
   private final DemoCatalog demoCatalog;
 
@@ -18,7 +16,7 @@ public class DemoCommandHandler implements CommandHandler {
    * @param demoCatalog the demo catalog
    * @throws PreConditionsException if demoCatalog is null
    */
-  public DemoCommandHandler(DemoCatalog demoCatalog) {
+  public DemoCommand(DemoCatalog demoCatalog) {
     PreConditions.requireNotNull(demoCatalog, "demoCatalog must not be null");
     this.demoCatalog = demoCatalog;
   }
@@ -49,8 +47,7 @@ public class DemoCommandHandler implements CommandHandler {
 
   private void validatePreConditions(CommandRequest request) {
     PreConditions.requireNotNull(request, "request must not be null")
-        .and(request.params().size() == 1, USAGE_MESSAGE)
-        .andNotNull(request.params().get(0), USAGE_MESSAGE)
-        .andNot(request.params().get(0).isBlank(), USAGE_MESSAGE);
+        .and(request.params().size() == 1, "request must have exactly one argument")
+        .andNotBlank(request.params().get(0), "requested demo must not be blank");
   }
 }

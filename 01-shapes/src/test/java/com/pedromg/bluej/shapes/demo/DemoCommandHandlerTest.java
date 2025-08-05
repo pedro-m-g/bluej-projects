@@ -19,7 +19,7 @@ class DemoCommandHandlerTest {
   @Test
   void shouldThrowWhenRequestIsNull() {
     // Given
-    DemoCommandHandler command = new DemoCommandHandler(new DemoCatalog());
+    DemoCommand command = new DemoCommand(new DemoCatalog());
 
     // Then
     assertThrows(PreConditionsException.class, () -> command.handle(null));
@@ -29,7 +29,7 @@ class DemoCommandHandlerTest {
   @MethodSource("invalidArgumentsProvider")
   void shouldThrowWhenRequestIsInvalid(List<String> params, Set<String> flags) {
     // Given
-    DemoCommandHandler command = new DemoCommandHandler(new DemoCatalog());
+    DemoCommand command = new DemoCommand(new DemoCatalog());
     CommandRequest request = new CommandRequest("demo", params, flags);
 
     // Then
@@ -46,11 +46,10 @@ class DemoCommandHandlerTest {
   @Test
   void shouldThrowWhenDemoIsNotRecognized() {
     // Given
-    DemoCommandHandler command =
-        new DemoCommandHandler(new DemoCatalog().register("circle", new MockDemo()));
+    DemoCommand command = new DemoCommand(new DemoCatalog().register("circle", new MockDemo()));
     CommandRequest request = new CommandRequest("demo", List.of("pentagon"), Set.of());
 
-    // When
+    // Then
     assertThrows(PreConditionsException.class, () -> command.handle(request));
   }
 
@@ -59,7 +58,7 @@ class DemoCommandHandlerTest {
     // Given
     MockDemo mockDemo = new MockDemo();
     DemoCatalog demoCatalog = new DemoCatalog().register("circle", mockDemo);
-    DemoCommandHandler handler = new DemoCommandHandler(demoCatalog);
+    DemoCommand handler = new DemoCommand(demoCatalog);
     CommandRequest request = new CommandRequest("demo", List.of("circle"), Set.of());
 
     // When

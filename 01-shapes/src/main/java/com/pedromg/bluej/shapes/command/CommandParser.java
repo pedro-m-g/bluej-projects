@@ -1,6 +1,5 @@
-package com.pedromg.bluej.shapes.parser;
+package com.pedromg.bluej.shapes.command;
 
-import com.pedromg.bluej.shapes.command.CommandRequest;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import java.util.ArrayList;
@@ -10,8 +9,6 @@ import java.util.Set;
 
 public class CommandParser {
 
-  private static final String USAGE_MESSAGE = "Usage: java -jar 01-shapes.jar <action> [<args>]";
-
   /**
    * Parses the given args into a CommandRequest instance
    *
@@ -20,7 +17,7 @@ public class CommandParser {
    * @return the parse command request
    */
   public CommandRequest parse(String[] args) {
-    PreConditions.require(args.length >= 1, USAGE_MESSAGE);
+    PreConditions.require(args.length >= 1, "<action> argument must be present");
 
     String action = args[0];
     List<String> arguments = List.of(args).subList(1, args.length);
