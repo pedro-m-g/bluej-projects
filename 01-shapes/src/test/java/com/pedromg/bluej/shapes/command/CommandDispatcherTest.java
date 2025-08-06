@@ -20,7 +20,7 @@ class CommandDispatcherTest {
     CommandDispatcher handler = new CommandDispatcher(palette);
 
     // When
-    handler.handle(new CommandRequest("mock", List.of(), Set.of()));
+    handler.dispatch(new CommandRequest("mock", List.of(), Set.of()));
 
     // Then
     assertEquals(1, mockCommandHandler.numCalls());
@@ -38,7 +38,7 @@ class CommandDispatcherTest {
     CommandDispatcher handler = new CommandDispatcher(palette);
 
     // When
-    handler.handle(new CommandRequest("mock", List.of(), Set.of()));
+    handler.dispatch(new CommandRequest("mock", List.of(), Set.of()));
 
     // Then
     assertEquals(1, palette.helpCalls());

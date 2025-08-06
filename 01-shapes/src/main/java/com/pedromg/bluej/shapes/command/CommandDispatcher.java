@@ -8,23 +8,21 @@ public class CommandDispatcher {
 
   public CommandDispatcher(CommandPalette commandPalette) {
     PreConditions.requireNotNull(commandPalette, "commandPalette must not be null");
-
     this.commandPalette = commandPalette;
   }
 
-  /**
-   * Handles the given CLIRequest
-   *
-   * @param request the command line request
-   */
-  public void handle(CommandRequest request) {
+  public void dispatch(CommandRequest request) {
     String action = request.action();
-    if (commandPalette.hasCommand(action)) {
-      CommandHandler handler = commandPalette.find(action);
-      handler.handle(request);
-    } else {
+    if (!commandPalette.hasCommand(action)) {
       System.err.println(helpMessage());
+      return;
     }
+    CommandHandler handler = commandPalette.find(action);
+    if (!handler.signature().canHandle(request)) {
+      System.err.println(helpMessage());
+      return;
+    }
+    handler.handle(request);
   }
 
   public String helpMessage() {
