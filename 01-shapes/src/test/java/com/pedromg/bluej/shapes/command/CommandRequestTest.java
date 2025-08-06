@@ -143,6 +143,7 @@ class CommandRequestTest {
     assertEquals(expectedResult, actualResult);
   }
 
+  @SuppressWarnings("unused")
   static Stream<Arguments> flagsProvider() {
     return Stream.of(
         Arguments.of(Set.of("verbose"), "verbose", true),

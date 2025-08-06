@@ -22,7 +22,7 @@ public class Launcher {
   public void launchApp(String[] args) {
     try {
       CommandRequest request = commandParser.parse(args);
-      dispatcher.handle(request);
+      dispatcher.dispatch(request);
     } catch (PreConditionsException exception) {
       System.err.println(dispatcher.helpMessage());
     }
