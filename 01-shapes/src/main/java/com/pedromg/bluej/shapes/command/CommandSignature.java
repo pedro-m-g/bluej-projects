@@ -36,9 +36,9 @@ public class CommandSignature {
     for (int index = 1; index < tokens.length; index++) {
       String token = tokens[index];
       if (PARAM_REGEX.matcher(token).matches()) {
-        params.add(token);
+        params.add(token.substring(1, token.length() - 1));
       } else if (FLAG_REGEX.matcher(token).matches()) {
-        flags.add(token);
+        flags.add(token.substring(3, token.length() - 1));
       } else {
         throw new CommandSignatureParseException(signature, token);
       }

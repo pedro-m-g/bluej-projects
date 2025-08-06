@@ -18,7 +18,7 @@ public class Canvas {
   private static final int MIN_WIDTH = 400;
   private static final int MIN_HEIGHT = 720;
 
-  private JFrame window;
+  private final JFrame window;
 
   /**
    * Initializes the canvas with a title, size, minimum size, centered position, and a flow layout.
