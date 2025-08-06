@@ -185,6 +185,16 @@ init() {
     git checkout -b "$1"
 }
 
+push() {
+    git push -u origin $(branch)
+}
+
+finish() {
+    local current_branch
+    current_branch=$(branch)
+    git checkout main && git pull -u origin main && git branch -d $current_branch
+}
+
 # Help function
 help() {
     echo -e "${BOLD}${CYAN}Available Commands:${RESET}"
@@ -199,6 +209,8 @@ help() {
     echo -e "  💾  ${BOLD}commit${RESET}       ${GRAY}Commit current changes and open editor.${RESET}"
     echo -e "  🌿  ${BOLD}branch${RESET}       ${GRAY}Show the current Git branch.${RESET}"
     echo -e "  ➕  ${BOLD}init${RESET}         ${GRAY}Initialize a new branch.${RESET}"
+    echo -e "  🌐  ${BOLD}push${RESET}         ${GRAY}Pushes changes to GitHub.${RESET}"
+    echo -e "  🏁  ${BOLD}finish${RESET}       ${GRAY}Updates main and deletes previous branch.${RESET}"
     echo -e "  ❌  ${BOLD}exit${RESET}         ${GRAY}Exit the console.${RESET}"
 }
 
@@ -209,7 +221,7 @@ exit() {
     unset ACTIVE_MODULE
     unset OLD_PS1
     unset -f help list choose current back build report run commit branch init exit _choose_completion \
-      _modules_raw _inject_style_into_report
+      push finish _modules_raw _inject_style_into_report
 
     complete -r choose
 
