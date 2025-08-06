@@ -2,11 +2,12 @@ package com.pedromg.bluej.shapes.demo;
 
 import com.pedromg.bluej.shapes.command.CommandHandler;
 import com.pedromg.bluej.shapes.command.CommandRequest;
+import com.pedromg.bluej.shapes.command.CommandSignature;
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 import com.pedromg.bluej.shapes.preconditions.PreConditionsException;
 import com.pedromg.bluej.shapes.ui.Canvas;
 
-public class DemoCommand implements CommandHandler {
+public class DemoCommand extends CommandHandler {
 
   private final DemoCatalog demoCatalog;
 
@@ -28,6 +29,7 @@ public class DemoCommand implements CommandHandler {
    * @throws PreConditionsException if the arguments are invalid or the shape param is not in demo
    *     catalog
    */
+  @Override
   public void handle(CommandRequest request) {
     validatePreConditions(request);
 
@@ -43,6 +45,11 @@ public class DemoCommand implements CommandHandler {
   public String helpMessage() {
     return String.format(
         "Runs the requested demo. Available demos: %s", demoCatalog.availableDemos());
+  }
+
+  @Override
+  public CommandSignature signature() {
+    return new CommandSignature("demo <name>");
   }
 
   private void validatePreConditions(CommandRequest request) {

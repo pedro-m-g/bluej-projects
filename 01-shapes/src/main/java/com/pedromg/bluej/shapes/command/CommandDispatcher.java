@@ -2,7 +2,7 @@ package com.pedromg.bluej.shapes.command;
 
 import com.pedromg.bluej.shapes.preconditions.PreConditions;
 
-public class CommandDispatcher implements CommandHandler {
+public class CommandDispatcher {
 
   private final CommandPalette commandPalette;
 
@@ -17,7 +17,6 @@ public class CommandDispatcher implements CommandHandler {
    *
    * @param request the command line request
    */
-  @Override
   public void handle(CommandRequest request) {
     String action = request.action();
     if (commandPalette.hasCommand(action)) {
@@ -28,8 +27,11 @@ public class CommandDispatcher implements CommandHandler {
     }
   }
 
-  @Override
   public String helpMessage() {
     return commandPalette.helpMessage();
+  }
+
+  public CommandSignature signature() {
+    return new CommandSignature("<action>");
   }
 }

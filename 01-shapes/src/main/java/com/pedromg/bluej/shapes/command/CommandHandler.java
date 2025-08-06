@@ -1,8 +1,10 @@
 package com.pedromg.bluej.shapes.command;
 
-public interface CommandHandler {
+public abstract class CommandHandler {
 
-  void handle(CommandRequest request);
+  public abstract String helpMessage();
 
-  String helpMessage();
+  protected abstract void handle(CommandRequest request);
+
+  protected abstract CommandSignature signature();
 }
